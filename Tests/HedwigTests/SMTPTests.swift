@@ -10,16 +10,16 @@ import XCTest
 @testable import Hedwig
 
 class SMTPTests: XCTestCase {
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        XCTAssertEqual(try! SMTP().connect(), true)
+    func testSMTPConnect() {
+        var smtp = SMTP(hostName: "smtp.zoho.com", user: nil, password: nil)
+        XCTAssertNoThrows(try smtp.connect())
+        XCTAssertNoThrows(try smtp.close())
     }
     
     
     static var allTests : [(String, (SMTPTests) -> () throws -> Void)] {
         return [
-            ("testExample", testExample),
+            ("testExample", testSMTPConnect),
         ]
     }
 }

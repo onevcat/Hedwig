@@ -10,6 +10,8 @@
 		4B31EDF11E123D40008B803C /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B31EDF01E123D40008B803C /* Constant.swift */; };
 		4B31EDF21E123D44008B803C /* SMTP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B31EDEE1E123D07008B803C /* SMTP.swift */; };
 		4B31EDF41E123DB0008B803C /* SMTPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B31EDF31E123DB0008B803C /* SMTPTests.swift */; };
+		4B31EDF81E12486A008B803C /* AssertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B31EDF71E12486A008B803C /* AssertHelper.swift */; };
+		4B31EDFA1E1250B1008B803C /* SMTPCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B31EDF91E1250B1008B803C /* SMTPCommand.swift */; };
 		OBJ_1000 /* e_aes_cbc_hmac_sha1.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_203 /* e_aes_cbc_hmac_sha1.c */; };
 		OBJ_1001 /* e_bf.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_204 /* e_bf.c */; };
 		OBJ_1002 /* e_camellia.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_205 /* e_camellia.c */; };
@@ -1170,6 +1172,8 @@
 		4B31EDEE1E123D07008B803C /* SMTP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMTP.swift; sourceTree = "<group>"; };
 		4B31EDF01E123D40008B803C /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		4B31EDF31E123DB0008B803C /* SMTPTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMTPTests.swift; sourceTree = "<group>"; };
+		4B31EDF71E12486A008B803C /* AssertHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssertHelper.swift; sourceTree = "<group>"; };
+		4B31EDF91E1250B1008B803C /* SMTPCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMTPCommand.swift; sourceTree = "<group>"; };
 		OBJ_10 /* a_bool.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = a_bool.c; sourceTree = "<group>"; };
 		OBJ_100 /* bn_x931p.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = bn_x931p.c; sourceTree = "<group>"; };
 		OBJ_101 /* bs_ber.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = bs_ber.c; sourceTree = "<group>"; };
@@ -2389,6 +2393,7 @@
 				OBJ_781 /* Hedwig.swift */,
 				4B31EDEE1E123D07008B803C /* SMTP.swift */,
 				4B31EDF01E123D40008B803C /* Constant.swift */,
+				4B31EDF91E1250B1008B803C /* SMTPCommand.swift */,
 			);
 			name = Hedwig;
 			path = Sources;
@@ -2407,6 +2412,7 @@
 			children = (
 				OBJ_784 /* HedwigTests.swift */,
 				4B31EDF31E123DB0008B803C /* SMTPTests.swift */,
+				4B31EDF71E12486A008B803C /* AssertHelper.swift */,
 			);
 			name = HedwigTests;
 			path = Tests/HedwigTests;
@@ -3553,6 +3559,7 @@
 				4B31EDF21E123D44008B803C /* SMTP.swift in Sources */,
 				OBJ_1629 /* Hedwig.swift in Sources */,
 				4B31EDF11E123D40008B803C /* Constant.swift in Sources */,
+				4B31EDFA1E1250B1008B803C /* SMTPCommand.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3560,6 +3567,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				4B31EDF81E12486A008B803C /* AssertHelper.swift in Sources */,
 				OBJ_1660 /* HedwigTests.swift in Sources */,
 				4B31EDF41E123DB0008B803C /* SMTPTests.swift in Sources */,
 			);
