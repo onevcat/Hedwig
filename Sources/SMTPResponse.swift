@@ -12,7 +12,7 @@ struct SMTPResponse {
     
     static let matcher = try! NSRegularExpression(pattern: "^(\\d+)\\s+(.*)$", options: [])
     
-    let code: Int
+    let code: SMTPReplyCode
     let message: String
     let data: String
     
@@ -29,12 +29,12 @@ struct SMTPResponse {
             throw SMTP.SMTPError.badResponse
         }
         
-        self.code = code
+        self.code = SMTPReplyCode(code)
         message = parsed[1]
         data = string
     }
     
-    init(code: Int, data: String) {
+    init(code: SMTPReplyCode, data: String) {
         self.code = code
         self.data = data
         self.message = ""

@@ -18,7 +18,7 @@ class SMTPTests: XCTestCase {
             try? smtp.close()
         }
         let ssl: Validation = (enabled: true, certificate: .defaults, cipher: .compat, protocols: [.all])
-        smtp = try! SMTP(hostName: "smtp.zoho.com", user: nil, password: nil, ssl: ssl)
+        smtp = try! SMTP(hostName: "smtp.zoho.com", user: nil, password: nil, ssl: ssl, domainName: "onevcat.com")
     }
     
     func testSMTPConnect() {
@@ -26,7 +26,7 @@ class SMTPTests: XCTestCase {
         do {
             let res = try smtp.connect()
             
-            XCTAssertEqual(res.code, 220)
+            XCTAssertEqual(res.code, .serviceReady)
             XCTAssertTrue(res.message.contains("mx.zohomail.com"))
         } catch {
             XCTFail("Should not catch an error, but got \(error)")
@@ -45,8 +45,8 @@ class SMTPTests: XCTestCase {
     func testSMTPSendHelo() {
         do {
             _ = try smtp.connect()
-            let res = try smtp.helo(domain: "onevcat.com")
-            XCTAssertEqual(res.code, 250)
+            let res = try smtp.helo()
+            XCTAssertEqual(res.code, .commandOK)
             XCTAssertTrue(res.message.contains("onevcat.com"))
         } catch {
             XCTFail("Should not catch an error, but got \(error)")
@@ -56,8 +56,8 @@ class SMTPTests: XCTestCase {
     func testSMTPSendEhlo() {
         do {
             _ = try smtp.connect()
-            let res = try smtp.ehlo(domain: "onevcat.com")
-            XCTAssertEqual(res.code, 250)
+            let res = try smtp.ehlo()
+            XCTAssertEqual(res.code, .commandOK)
             XCTAssertTrue(res.data.contains("onevcat.com"))
         } catch {
             XCTFail("Should not catch an error, but got \(error)")

@@ -28,28 +28,71 @@ enum SMTPCommand {
     case verify(String)
     /// expn(String)
     case expn(String)
+    /// auth(method: String, body: String)
+    case auth(SMTP.AuthMethod, String)
+    case authResponse(SMTP.AuthMethod, String)
 }
 
 extension SMTPCommand {
+    
     var text: String {
         switch self {
         case .helo(let domain):
-            return "helo \(domain)"
+            return "HELO \(domain)"
         case .ehlo(let domain):
-            return "ehlo \(domain)"
+            return "EHLO \(domain)"
         case .starttls:
-            return "starttls"
+            return "STARTTLS"
+        case .auth(let method, let body):
+            return "AUTH \(method.rawValue) \(body)"
+        case .authResponse(let method, let body):
+            switch method {
+            case .cramMD5: return body
+            case .login: return body
+            default: fatalError("Can not response to a challenge.")
+            }
         default:
             return ""
         }
     }
     
-    var expectedCodes: [Int] {
+    var expectedCodes: [SMTPReplyCode] {
         switch self {
         case .starttls:
-            return [220]
+            return [.serviceReady]
+        case .auth(let method, _):
+            switch method {
+            case .cramMD5: return [.containingChallenge]
+            case .login:   return [.containingChallenge]
+            case .plain:   return [.authSucceeded, .authNotPermitted]
+            case .xOauth2: return [.authSucceeded, .authNotPermitted]
+            }
+        case .authResponse(let method, _):
+            switch method {
+            case .cramMD5: return [.authSucceeded, .authNotPermitted]
+            case .login:   return [.authSucceeded, .authNotPermitted]
+            default: fatalError("Can not response to a challenge.")
+            }
         default:
-            return [250]
+            return [.commandOK]
         }
+    }
+}
+
+struct SMTPReplyCode: Equatable {
+    
+    let rawValue: Int
+    init(_ value: Int) {
+        rawValue = value
+    }
+
+    static let serviceReady = SMTPReplyCode(220)
+    static let authSucceeded = SMTPReplyCode(235)
+    static let commandOK = SMTPReplyCode(250)
+    static let containingChallenge = SMTPReplyCode(334)
+    static let authNotPermitted = SMTPReplyCode(503)
+    
+    public static func ==(lhs: SMTPReplyCode, rhs: SMTPReplyCode) -> Bool {
+        return lhs.rawValue == rhs.rawValue
     }
 }

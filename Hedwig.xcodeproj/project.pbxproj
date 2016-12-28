@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		4B9215E11E1358D90016AA72 /* SMTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9215E01E1358D90016AA72 /* SMTPResponse.swift */; };
 		4B9215E61E1398FD0016AA72 /* RegularExpressionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9215E51E1398FD0016AA72 /* RegularExpressionExtensions.swift */; };
+		4B9215E81E13B0FC0016AA72 /* CryptoEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9215E71E13B0FC0016AA72 /* CryptoEncoder.swift */; };
+		4B9215EA1E13B1790016AA72 /* CryptoEncoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9215E91E13B1790016AA72 /* CryptoEncoderTests.swift */; };
 		OBJ_1000 /* dso_dlfcn.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_197 /* dso_dlfcn.c */; };
 		OBJ_1001 /* dso_err.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_198 /* dso_err.c */; };
 		OBJ_1002 /* dso_lib.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_199 /* dso_lib.c */; };
@@ -1174,6 +1176,8 @@
 /* Begin PBXFileReference section */
 		4B9215E01E1358D90016AA72 /* SMTPResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMTPResponse.swift; sourceTree = "<group>"; };
 		4B9215E51E1398FD0016AA72 /* RegularExpressionExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegularExpressionExtensions.swift; sourceTree = "<group>"; };
+		4B9215E71E13B0FC0016AA72 /* CryptoEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoEncoder.swift; sourceTree = "<group>"; };
+		4B9215E91E13B1790016AA72 /* CryptoEncoderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoEncoderTests.swift; sourceTree = "<group>"; };
 		OBJ_10 /* a_bool.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = a_bool.c; sourceTree = "<group>"; };
 		OBJ_100 /* bn_x931p.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = bn_x931p.c; sourceTree = "<group>"; };
 		OBJ_101 /* bs_ber.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = bs_ber.c; sourceTree = "<group>"; };
@@ -2406,6 +2410,7 @@
 			children = (
 				4B9215E41E1398DD0016AA72 /* Extensions */,
 				OBJ_781 /* Constant.swift */,
+				4B9215E71E13B0FC0016AA72 /* CryptoEncoder.swift */,
 				OBJ_782 /* Hedwig.swift */,
 				OBJ_783 /* SMTP.swift */,
 				4B9215E01E1358D90016AA72 /* SMTPResponse.swift */,
@@ -2430,6 +2435,7 @@
 				OBJ_788 /* AssertHelper.swift */,
 				OBJ_789 /* HedwigTests.swift */,
 				OBJ_790 /* SMTPTests.swift */,
+				4B9215E91E13B1790016AA72 /* CryptoEncoderTests.swift */,
 			);
 			name = HedwigTests;
 			path = Tests/HedwigTests;
@@ -3575,6 +3581,7 @@
 				4B9215E11E1358D90016AA72 /* SMTPResponse.swift in Sources */,
 				4B9215E61E1398FD0016AA72 /* RegularExpressionExtensions.swift in Sources */,
 				OBJ_1639 /* SMTPSocket.swift in Sources */,
+				4B9215E81E13B0FC0016AA72 /* CryptoEncoder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3585,6 +3592,7 @@
 				OBJ_1670 /* AssertHelper.swift in Sources */,
 				OBJ_1671 /* HedwigTests.swift in Sources */,
 				OBJ_1672 /* SMTPTests.swift in Sources */,
+				4B9215EA1E13B1790016AA72 /* CryptoEncoderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
