@@ -15,3 +15,5 @@ extension Port {
     static let ssl: Port = 465
     static let tls: Port = 587
 }
+
+let CRLF = "\r\n"

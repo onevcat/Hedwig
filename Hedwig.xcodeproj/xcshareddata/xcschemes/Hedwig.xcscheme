@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_800"
+               BlueprintIdentifier = "OBJ_806"
                BuildableName = "CLibreSSL.framework"
                BlueprintName = "CLibreSSL"
                ReferencedContainer = "container:Hedwig.xcodeproj">
@@ -28,7 +28,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_1423"
+               BlueprintIdentifier = "OBJ_1429"
                BuildableName = "Core.framework"
                BlueprintName = "Core"
                ReferencedContainer = "container:Hedwig.xcodeproj">
@@ -42,7 +42,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_1459"
+               BlueprintIdentifier = "OBJ_1465"
                BuildableName = "libc.framework"
                BlueprintName = "libc"
                ReferencedContainer = "container:Hedwig.xcodeproj">
@@ -56,7 +56,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_1466"
+               BlueprintIdentifier = "OBJ_1472"
                BuildableName = "Socks.framework"
                BlueprintName = "Socks"
                ReferencedContainer = "container:Hedwig.xcodeproj">
@@ -70,7 +70,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_1479"
+               BlueprintIdentifier = "OBJ_1485"
                BuildableName = "SocksCore.framework"
                BlueprintName = "SocksCore"
                ReferencedContainer = "container:Hedwig.xcodeproj">
@@ -84,7 +84,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_1500"
+               BlueprintIdentifier = "OBJ_1506"
                BuildableName = "TLS.framework"
                BlueprintName = "TLS"
                ReferencedContainer = "container:Hedwig.xcodeproj">
@@ -98,7 +98,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_1523"
+               BlueprintIdentifier = "OBJ_1529"
                BuildableName = "BCrypt.framework"
                BlueprintName = "BCrypt"
                ReferencedContainer = "container:Hedwig.xcodeproj">
@@ -112,7 +112,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_1542"
+               BlueprintIdentifier = "OBJ_1548"
                BuildableName = "Cipher.framework"
                BlueprintName = "Cipher"
                ReferencedContainer = "container:Hedwig.xcodeproj">
@@ -126,7 +126,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_1539"
+               BlueprintIdentifier = "OBJ_1545"
                BuildableName = "Essentials.framework"
                BlueprintName = "Essentials"
                ReferencedContainer = "container:Hedwig.xcodeproj">
@@ -140,7 +140,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_1571"
+               BlueprintIdentifier = "OBJ_1577"
                BuildableName = "Hash.framework"
                BlueprintName = "Hash"
                ReferencedContainer = "container:Hedwig.xcodeproj">
@@ -154,7 +154,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_1590"
+               BlueprintIdentifier = "OBJ_1596"
                BuildableName = "HMAC.framework"
                BlueprintName = "HMAC"
                ReferencedContainer = "container:Hedwig.xcodeproj">
@@ -168,7 +168,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_1541"
+               BlueprintIdentifier = "OBJ_1547"
                BuildableName = "Random.framework"
                BlueprintName = "Random"
                ReferencedContainer = "container:Hedwig.xcodeproj">
@@ -182,7 +182,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_1624"
+               BlueprintIdentifier = "OBJ_1630"
                BuildableName = "Hedwig.framework"
                BlueprintName = "Hedwig"
                ReferencedContainer = "container:Hedwig.xcodeproj">
@@ -200,7 +200,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_1655"
+               BlueprintIdentifier = "OBJ_1665"
                BuildableName = "HedwigTests.xctest"
                BlueprintName = "HedwigTests"
                ReferencedContainer = "container:Hedwig.xcodeproj">
@@ -223,7 +223,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "OBJ_800"
+            BlueprintIdentifier = "OBJ_806"
             BuildableName = "CLibreSSL.framework"
             BlueprintName = "CLibreSSL"
             ReferencedContainer = "container:Hedwig.xcodeproj">
