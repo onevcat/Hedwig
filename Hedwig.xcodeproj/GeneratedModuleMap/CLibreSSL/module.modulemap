@@ -1,5 +1,0 @@
-module CLibreSSL {
-    umbrella header "/Users/JP20028/Dropbox/github/Hedwig/Packages/CLibreSSL-1.0.0/Sources/CLibreSSL/include/CLibreSSL.h"
-    link "CLibreSSL"
-    export *
-}
