@@ -33,3 +33,9 @@ struct SMTPResponse {
         self.message = ""
     }
 }
+
+extension SMTPResponse: CustomStringConvertible {
+    var description: String {
+        return "S: \(data)\n"
+    }
+}

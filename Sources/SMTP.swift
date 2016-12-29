@@ -14,30 +14,85 @@ private func logError(error: SMTP.SMTPError, message: String? = nil) {
     print("[Hedwig] SMTP Error: \(error). \(message)")
 }
 
-typealias Validation = (enabled: Bool, certificate: Certificates, cipher: Config.Cipher, protocols: [Config.TLSProtocol])
-let defaultValidation: Validation = (enabled: false, certificate: .defaults, cipher: .compat, protocols: [.all])
+private func logWarning(message: String? = nil) {
+    print("[Hedwig] SMTP Warning: \(message)")
+}
+
+
+typealias Port = UInt16
 
 class SMTP {
-    
     fileprivate let hostName: String
     fileprivate let port: Port
     fileprivate let user: String?
     fileprivate let password: String?
     fileprivate let preferredAuthMethods: [AuthMethod]
     fileprivate let domainName: String
-    
-    fileprivate let ssl: Validation
-    fileprivate let tls: Validation
-    
+    fileprivate let secure: Secure
     fileprivate var socket: SMTPSocket
-    
     fileprivate var state: State
     fileprivate var loggedIn: Bool
-    
-    fileprivate var secure: Bool = false
-    
     fileprivate var features: Feature?
+    fileprivate let validation: Validation
+
+    fileprivate var secureConnected = false
     
+    struct Feature {
+        let data: [String: Any]
+        init(_ data: [String: Any]) {
+            self.data = data
+        }
+    }
+    
+    init(hostName: String, user: String?, password: String?,
+         port: Port? = nil, secure: Secure = .tls, validation: Validation = .default,
+         domainName: String = Host.current().name ?? "localhost",
+         authMethods: [AuthMethod] = [.plain, .cramMD5, .login, .xOauth2]) throws
+    {
+        self.hostName = hostName
+        self.user = user
+        self.password = password
+        self.preferredAuthMethods = authMethods
+        self.domainName = domainName
+        
+        self.port = port ?? secure.port
+        self.secure = secure
+        
+        self.loggedIn = (user != nil && password != nil) ? false : true
+        self.state = .notConnected
+        self.validation = validation
+        
+        if secure == .plain || secure == .tls {
+            let address = InternetAddress(hostname: hostName, port: self.port)
+            let sock = try TCPClient(address: address)
+            self.socket = SMTPSocket(sock: sock)
+        } else {
+            let sock = try TLS.Socket(mode: .client,
+                                      hostname: hostName,
+                                      port: self.port,
+                                      certificates: validation.certificate,
+                                      cipher: validation.cipher,
+                                      proto: validation.protocols)
+            self.socket = SMTPSocket(sock: sock)
+        }
+    }
+    
+    func updateFeatures(_ s: String) {
+        features = s.featureDictionary()
+    }
+}
+
+extension SMTP {
+    struct Validation {
+        let certificate: Certificates
+        let cipher: Config.Cipher
+        let protocols: [Config.TLSProtocol]
+        
+        static let `default` = Validation(certificate: .defaults, cipher: .compat, protocols: [.all])
+    }
+}
+
+extension SMTP {
     enum SMTPError: Error, CustomStringConvertible {
         case couldNotConnect
         case timeOut
@@ -67,75 +122,41 @@ class SMTP {
             return message
         }
     }
-    
+}
+
+extension SMTP {
+    enum Secure {
+        case plain
+        case ssl
+        case tls
+        
+        var port: Port {
+            switch self {
+            case .plain: return 25
+            case .ssl: return 465
+            case .tls: return 587
+            }
+        }
+    }
+}
+
+extension SMTP {
     enum State {
         case notConnected
         case connecting
         case connected
     }
-    
+}
+
+extension SMTP {
     enum AuthMethod: String {
         case plain = "PLAIN"
         case cramMD5 = "CRAM-MD5"
         case login = "LOGIN"
         case xOauth2 = "XOAUTH2"
     }
-    
-    struct Feature {
-        let data: [String: Any]
-        init(_ data: [String: Any]) {
-            self.data = data
-        }
-    }
-    
-    init(hostName: String, user: String?, password: String?,
-         port: Port? = nil, ssl: Validation = defaultValidation, tls: Validation = defaultValidation,
-         domainName: String = Host.current().name ?? "localhost",
-         authMethods: [AuthMethod] = [.plain, .cramMD5, .login, .xOauth2]) throws
-    {
-        self.hostName = hostName
-        self.user = user
-        self.password = password
-        self.preferredAuthMethods = authMethods
-        self.domainName = domainName
-        
-        self.port = {
-            if let port = port {
-                return port
-            } else {
-                switch (ssl.enabled, tls.enabled) {
-                case (true, _):      return .ssl
-                case (false, true):  return .tls
-                case (false, false): return .regular
-                }
-            }
-        }()
-        
-        self.ssl = ssl
-        self.tls = tls
-        
-        self.loggedIn = (user != nil && password != nil) ? false : true
-        self.state = .notConnected
-        
-        if ssl.enabled {
-            let sock = try TLS.Socket(mode: .client,
-                                      hostname: hostName,
-                                      port: self.port,
-                                      certificates: ssl.certificate,
-                                      cipher: ssl.cipher,
-                                      proto: ssl.protocols)
-            self.socket = SMTPSocket(sock: sock)
-        } else {
-            let address = InternetAddress(hostname: hostName, port: self.port)
-            let sock = try TCPClient(address: address)
-            self.socket = SMTPSocket(sock: sock)
-        }
-    }
-    
-    func updateFeatures(_ s: String) {
-        features = s.featureDictionary()
-    }
 }
+
 
 /// SMTP Operation
 extension SMTP {
@@ -150,10 +171,9 @@ extension SMTP {
         }
         
         self.state = .connected
-        if ssl.enabled && !tls.enabled {
-            secure = true
+        if secure == .ssl {
+            secureConnected = true
         }
-        
         return response
     }
     
@@ -238,7 +258,7 @@ extension SMTP {
         try socket.close()
         state = .notConnected
         loggedIn = (user != nil && password != nil) ? false : true
-        secure = false
+        secureConnected = false
     }
 }
 
@@ -253,9 +273,15 @@ extension SMTP {
     func ehlo() throws -> SMTPResponse {
         let response = try send(.ehlo(domainName))
         updateFeatures(response.data)
-        if tls.enabled && !secure {
-            try starttls()
-            return try ehlo()
+        
+        if !secureConnected {
+            if features?.canStartTLS ?? false {
+                try starttls()
+                secureConnected = true
+                return try ehlo()
+            } else {
+                logWarning(message: "Using plain SMTP and server does not support STARTTLS command. It is not recommended to submit information to this server!")
+            }
         }
         
         return response
@@ -263,15 +289,13 @@ extension SMTP {
     
     func starttls() throws {
         _ = try send(.starttls)
-        let sock = try TLS.Socket(mode: .client,
-                                  hostname: hostName,
-                                  port: self.port,
-                                  certificates: tls.certificate,
-                                  cipher: tls.cipher,
-                                  proto: tls.protocols)
+        let sock = try TLS.Socket(existing: socket.sock.internalSocket,
+                               certificates: validation.certificate,
+                               cipher: validation.cipher,
+                               proto: validation.protocols,
+                               hostName: hostName)
         socket = SMTPSocket(sock: sock)
-        _ = try connect()
-        secure = true
+        secureConnected = true
     }
 }
 
@@ -312,5 +336,9 @@ extension SMTP.Feature {
     
     func value(for key: String) -> String? {
         return data[key.lowercased()] as? String
+    }
+    
+    var canStartTLS: Bool {
+        return supported("STARTTLS")
     }
 }

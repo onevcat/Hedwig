@@ -19,10 +19,9 @@ class SMTPTests: XCTestCase {
                 try? $0.close()
             }
         }
-        let ssl: Validation = (enabled: true, certificate: .defaults, cipher: .compat, protocols: [.all])
         
-        let smtp1 = try! SMTP(hostName: "smtp.mailgun.org", user: nil, password: nil, ssl: ssl, domainName: "onevcat.com")
-        let smtp2 = try! SMTP(hostName: "smtp.zoho.com", user: nil, password: nil, ssl: ssl, domainName: "onevcat.com")
+        let smtp1 = try! SMTP(hostName: "smtp.mailgun.org", user: nil, password: nil, secure: .tls, domainName: "onevcat.com")
+        let smtp2 = try! SMTP(hostName: "smtp.zoho.com", user: nil, password: nil, secure: .ssl, domainName: "onevcat.com")
         
         smtps = [smtp1, smtp2]
     }
