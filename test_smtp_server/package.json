@@ -1,0 +1,10 @@
+{
+  "name": "test_smtp_server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+      "start": "node index.js &",
+      "stop": "pkill -9 test_smtp"
+  }
+}

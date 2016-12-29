@@ -11,10 +11,12 @@ import TLS
 import Socks
 
 private func logError(error: SMTP.SMTPError, message: String? = nil) {
+    let message = message ?? ""
     print("[Hedwig] SMTP Error: \(error). \(message)")
 }
 
 private func logWarning(message: String? = nil) {
+    let message = message ?? ""
     print("[Hedwig] SMTP Warning: \(message)")
 }
 
@@ -46,8 +48,7 @@ class SMTP {
     
     init(hostName: String, user: String?, password: String?,
          port: Port? = nil, secure: Secure = .tls, validation: Validation = .default,
-         domainName: String = Host.current().name ?? "localhost",
-         authMethods: [AuthMethod] = [.plain, .cramMD5, .login, .xOauth2]) throws
+         domainName: String = "", authMethods: [AuthMethod] = [.plain, .cramMD5, .login, .xOauth2]) throws
     {
         self.hostName = hostName
         self.user = user
@@ -185,7 +186,7 @@ extension SMTP {
             throw error
         }
         
-        let response = try socket.send(string + CRLF)
+        let response = try socket.send(string)
         guard expectedCodes.contains(response.code) else {
             let error = SMTPError.badResponse
             logError(error: error, message: "\(error.description) on command: \(string), response: \(response.message)")

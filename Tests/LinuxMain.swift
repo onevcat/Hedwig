@@ -3,5 +3,6 @@ import XCTest
 
 XCTMain([
      testCase(HedwigTests.allTests),
-     testCase(SMTPTests.allTests)
+     testCase(SMTPTests.allTests),
+     testCase(CryptoEncoderTests.allTests)
 ])

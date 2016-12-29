@@ -25,6 +25,18 @@ class SMTPTests: XCTestCase {
         let smtp3 = try! SMTP(hostName: "smtp.gmail.com", user: nil, password: nil, secure: .plain, domainName: "onevcat.com")
         
         smtps = [smtp1, smtp2, smtp3]
+        
+        // Only test on local smtp server when accessible. 
+        // Use `sudo npm start` in the test_smtp_server to start the test server.
+        // After testing, use `sudo npm stop` to free the listened port.
+        do {
+            let smtp4 = try SMTP(hostName: "127.0.0.1", user: nil, password: nil, secure: .plain, domainName: "onevcat.com")
+            smtps.append(smtp4)
+        } catch {
+            print("----------------------------------------------------------------------------------")
+            print("| WARNING: Local test server is not up. Local server test will not be performed! |")
+            print("----------------------------------------------------------------------------------")
+        }
     }
     
     func testSMTPConnect() {

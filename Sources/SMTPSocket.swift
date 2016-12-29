@@ -35,8 +35,8 @@ struct SMTPSocket {
     }
     
     func send(_ string: String) throws -> SMTPResponse {
-        print("C: \(string)")
-        try sock.send(bytes: string.toBytes())
+        logInTest("C: \(string)")
+        try sock.send(bytes: (string + CRLF).toBytes())
         
         var parsed: SMTPResponse? = nil
         var response = try sock.receive()
@@ -74,7 +74,7 @@ struct SMTPSocket {
             r = parsed!
         }
         
-        print(r.description)
+        logInTest("S: \(r.data)")
         return r
     }
     
