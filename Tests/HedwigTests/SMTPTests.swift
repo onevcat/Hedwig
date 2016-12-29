@@ -22,8 +22,9 @@ class SMTPTests: XCTestCase {
         
         let smtp1 = try! SMTP(hostName: "smtp.mailgun.org", user: nil, password: nil, secure: .tls, domainName: "onevcat.com")
         let smtp2 = try! SMTP(hostName: "smtp.zoho.com", user: nil, password: nil, secure: .ssl, domainName: "onevcat.com")
+        let smtp3 = try! SMTP(hostName: "smtp.gmail.com", user: nil, password: nil, secure: .plain, domainName: "onevcat.com")
         
-        smtps = [smtp1, smtp2]
+        smtps = [smtp1, smtp2, smtp3]
     }
     
     func testSMTPConnect() {
