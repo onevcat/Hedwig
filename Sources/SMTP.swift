@@ -186,6 +186,12 @@ extension SMTP {
             logError(error: error, message: "\(error.description) Unknown error happens when login. EHLO and HELO failed.")
             throw error
         }
+        
+        guard let user = user, let password = password else {
+            let error = SMTPError.authFailed
+            logError(error: error, message: "\(error.description) User name or password is not supplied.")
+            throw error
+        }
 
         guard let method = (preferredAuthMethods.first { features.supported(auth: $0) }) else {
             let error = SMTPError.authNotSupported
@@ -198,11 +204,17 @@ extension SMTP {
         case .cramMD5:
             let response = try send(.auth(.cramMD5, ""))
             let challenge = response.message
-            let responseToChallenge = try CryptoEncoder.cramMD5(challenge: challenge, user: user ?? "", password: password ?? "")
+            let responseToChallenge = try CryptoEncoder.cramMD5(challenge: challenge, user: user, password: password)
             loginResult = try send(.authResponse(.cramMD5, responseToChallenge))
-        case .login: break
-        case .plain: break
-        case .xOauth2: break
+        case .login:
+            _ = try send(.auth(.login, ""))
+            let identify = CryptoEncoder.login(user: user, password: password)
+            _ = try send(.authUser(identify.encodedUser))
+            loginResult = try send(.authResponse(.login, identify.encodedPassword))
+        case .plain:
+            loginResult = try send(.auth(.plain, CryptoEncoder.plain(user: user, password: password)))
+        case .xOauth2:
+            loginResult = try send(.auth(.xOauth2, CryptoEncoder.xOath2(user: user, password: password)))
         }
         
         if loginResult.code == .authSucceeded {
@@ -289,5 +301,16 @@ extension SMTP.Feature {
             return supported.contains(auth.rawValue)
         }
         return false
+    }
+    
+    func supported(_ key: String) -> Bool {
+        guard let result = data[key.lowercased()] else {
+            return false
+        }
+        return result as? Bool ?? false
+    }
+    
+    func value(for key: String) -> String? {
+        return data[key.lowercased()] as? String
     }
 }

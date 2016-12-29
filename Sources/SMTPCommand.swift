@@ -31,6 +31,7 @@ enum SMTPCommand {
     /// auth(method: String, body: String)
     case auth(SMTP.AuthMethod, String)
     case authResponse(SMTP.AuthMethod, String)
+    case authUser(String)
 }
 
 extension SMTPCommand {
@@ -45,6 +46,8 @@ extension SMTPCommand {
             return "STARTTLS"
         case .auth(let method, let body):
             return "AUTH \(method.rawValue) \(body)"
+        case .authUser(let body):
+            return body
         case .authResponse(let method, let body):
             switch method {
             case .cramMD5: return body
@@ -67,6 +70,8 @@ extension SMTPCommand {
             case .plain:   return [.authSucceeded, .authNotPermitted]
             case .xOauth2: return [.authSucceeded, .authNotPermitted]
             }
+        case .authUser(_):
+            return [.containingChallenge]
         case .authResponse(let method, _):
             switch method {
             case .cramMD5: return [.authSucceeded, .authNotPermitted]

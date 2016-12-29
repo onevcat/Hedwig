@@ -16,7 +16,10 @@ extension NSRegularExpression {
         let s = string as NSString
         var mid = [String]()
         for i in 1 ..< matches[0].numberOfRanges {
-            mid.append(s.substring(with: matches[0].rangeAt(i)))
+            let range = matches[0].rangeAt(i)
+            if range.location != NSNotFound {
+                mid.append(s.substring(with: range))
+            }
         }
         return mid
     }

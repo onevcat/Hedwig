@@ -11,28 +11,33 @@ import XCTest
 
 class SMTPTests: XCTestCase {
     
-    var smtp: SMTP!
+    var smtps: [SMTP]!
     
     override func setUp() {
-        if smtp != nil {
-            try? smtp.close()
+        if smtps != nil {
+            smtps.forEach {
+                try? $0.close()
+            }
         }
         let ssl: Validation = (enabled: true, certificate: .defaults, cipher: .compat, protocols: [.all])
-        smtp = try! SMTP(hostName: "smtp.zoho.com", user: nil, password: nil, ssl: ssl, domainName: "onevcat.com")
+        
+        let smtp1 = try! SMTP(hostName: "smtp.mailgun.org", user: nil, password: nil, ssl: ssl, domainName: "onevcat.com")
+        let smtp2 = try! SMTP(hostName: "smtp.zoho.com", user: nil, password: nil, ssl: ssl, domainName: "onevcat.com")
+        
+        smtps = [smtp1, smtp2]
     }
     
     func testSMTPConnect() {
-        
-        do {
-            let res = try smtp.connect()
+        try! smtps.forEach { smtp in
+            do {
+                let res = try smtp.connect()
+                XCTAssertEqual(res.code, .serviceReady)
+            } catch {
+                XCTFail("Should not catch an error, but got \(error)")
+            }
             
-            XCTAssertEqual(res.code, .serviceReady)
-            XCTAssertTrue(res.message.contains("mx.zohomail.com"))
-        } catch {
-            XCTFail("Should not catch an error, but got \(error)")
+            XCTAssertNoThrows(try smtp.close())
         }
-
-        XCTAssertNoThrows(try smtp.close())
     }
     
     func testSMTPCannotConnect() {
@@ -43,25 +48,42 @@ class SMTPTests: XCTestCase {
     }
     
     func testSMTPSendHelo() {
-        do {
-            _ = try smtp.connect()
-            let res = try smtp.helo()
-            XCTAssertEqual(res.code, .commandOK)
-            XCTAssertTrue(res.message.contains("onevcat.com"))
-        } catch {
-            XCTFail("Should not catch an error, but got \(error)")
+        smtps.forEach { smtp in
+            do {
+                _ = try smtp.connect()
+                let res = try smtp.helo()
+                XCTAssertEqual(res.code, .commandOK)
+            } catch {
+                XCTFail("Should not catch an error, but got \(error)")
+            }
         }
     }
     
     func testSMTPSendEhlo() {
-        do {
-            _ = try smtp.connect()
-            let res = try smtp.ehlo()
-            XCTAssertEqual(res.code, .commandOK)
-            XCTAssertTrue(res.data.contains("onevcat.com"))
-        } catch {
-            XCTFail("Should not catch an error, but got \(error)")
+        smtps.forEach { smtp in
+            do {
+                _ = try smtp.connect()
+                let res = try smtp.ehlo()
+                XCTAssertEqual(res.code, .commandOK)
+            } catch {
+                XCTFail("Should not catch an error, but got \(error)")
+            }
         }
+    }
+    
+    func testSMTPParseFeature() {
+        let response = "250-ak47\n250-AUTH PLAIN LOGIN\n250-SIZE 52428800\n250-8BITMIME\n250-ENHANCEDSTATUSCODES\n250 STARTTLS"
+        let feature = response.featureDictionary()
+        XCTAssertTrue(feature.supported("ak47"))
+        XCTAssertTrue(feature.supported(auth: .plain))
+        XCTAssertTrue(feature.supported(auth: .login))
+        XCTAssertFalse(feature.supported(auth: .cramMD5))
+        
+        XCTAssertTrue(feature.supported("ak47"))
+        XCTAssertEqual(feature.value(for: "SIZE"), "52428800")
+        XCTAssertTrue(feature.supported("8BITMIME"))
+        XCTAssertTrue(feature.supported("ENHANCEDSTATUSCODES"))
+        XCTAssertTrue(feature.supported("STARTTLS"))
     }
     
     static var allTests : [(String, (SMTPTests) -> () throws -> Void)] {
@@ -69,7 +91,8 @@ class SMTPTests: XCTestCase {
             ("testSMTPConnect", testSMTPConnect),
             ("testSMTPCannotConnect", testSMTPCannotConnect),
             ("testSMTPSendHelo", testSMTPSendHelo),
-            ("testSMTPSendEhlo", testSMTPSendEhlo)
+            ("testSMTPSendEhlo", testSMTPSendEhlo),
+            ("testSMTPParseFeature", testSMTPParseFeature)
         ]
     }
 }

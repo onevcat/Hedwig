@@ -17,14 +17,7 @@ struct SMTPResponse {
     let data: String
     
     init(string: String) throws {
-        let line = string.replacingOccurrences(of: "\r", with: "")
-        guard let lastLine = line.trimmingCharacters(in: .whitespaces)
-            .components(separatedBy: .newlines).first else
-        {
-            throw SMTP.SMTPError.badResponse
-        }
-        
-        let parsed = SMTPResponse.matcher.groups(in: lastLine)
+        let parsed = SMTPResponse.matcher.groups(in: string)
         guard parsed.count == 2, let code = Int(parsed[0]) else {
             throw SMTP.SMTPError.badResponse
         }

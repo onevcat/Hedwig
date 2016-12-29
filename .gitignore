@@ -155,3 +155,4 @@ iOSInjectionProject/
 ### Objective-C Patch ###
 
 # End of https://www.gitignore.io/api/ios,swift,xcode,osx,objective-c
+/Hedwig.xcodeproj
