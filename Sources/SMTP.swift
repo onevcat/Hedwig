@@ -101,6 +101,7 @@ extension SMTP {
         case noConnection
         case authFailed
         case authNotSupported
+        case authUnadvertised
         case connectionClosed
         case connectionEnded
         case connectionAuth
@@ -114,6 +115,7 @@ extension SMTP {
             case .badResponse: message = "bad response"
             case .noConnection: message = "no connection has been established"
             case .authFailed: message = "authorization failed"
+            case .authUnadvertised: message = "can not authorizate since target server not support EHLO"
             case .authNotSupported: message = "no form of authorization supported"
             case .connectionClosed: message = ""
             case .connectionEnded: message = ""
@@ -235,15 +237,19 @@ extension SMTP {
         case .plain:
             loginResult = try send(.auth(.plain, CryptoEncoder.plain(user: user, password: password)))
         case .xOauth2:
-            loginResult = try send(.auth(.xOauth2, CryptoEncoder.xOath2(user: user, password: password)))
+            loginResult = try send(.auth(.xOauth2, CryptoEncoder.xOauth2(user: user, password: password)))
         }
         
         if loginResult.code == .authSucceeded {
             loggedIn = true
-        } else {
+        } else if loginResult.code == .authFailed {
             let error = SMTPError.authFailed
             logError(error: error, message: "\(error.description)")
             throw error
+        } else {
+            let error = SMTPError.authUnadvertised
+            logError(error: error, message: "\(error.description)")
+            throw error   
         }
     }
     

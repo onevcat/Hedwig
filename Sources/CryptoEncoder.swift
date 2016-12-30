@@ -17,7 +17,7 @@ struct CryptoEncoder {
     }
     
     static func login(user: String, password: String) -> (encodedUser: String, encodedPassword: String) {
-        return (user.base64DecodedString, password.base64EncodedString)
+        return (user.base64EncodedString, password.base64EncodedString)
     }
     
     static func plain(user: String, password: String) -> String {
@@ -25,7 +25,7 @@ struct CryptoEncoder {
         return text.base64EncodedString
     }
     
-    static func xOath2(user: String, password: String) -> String {
+    static func xOauth2(user: String, password: String) -> String {
         let text = "user=\(user)\u{0001}auth=Bearer \(password)\u{0001}\u{0001}"
         return text.base64EncodedString
     }

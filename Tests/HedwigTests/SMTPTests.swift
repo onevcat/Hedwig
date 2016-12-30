@@ -9,17 +9,17 @@
 import XCTest
 @testable import Hedwig
 
+private func logLocalServerNotUp() {
+    print("----------------------------------------------------------------------------------")
+    print("| WARNING: Local test server is not up. Local server test will not be performed! |")
+    print("----------------------------------------------------------------------------------")
+}
+
 class SMTPTests: XCTestCase {
     
     var smtps: [SMTP]!
     
     override func setUp() {
-        if smtps != nil {
-            smtps.forEach {
-                try? $0.close()
-            }
-        }
-        
         let smtp1 = try! SMTP(hostName: "smtp.mailgun.org", user: nil, password: nil, secure: .tls, domainName: "onevcat.com")
         let smtp2 = try! SMTP(hostName: "smtp.zoho.com", user: nil, password: nil, secure: .ssl, domainName: "onevcat.com")
         let smtp3 = try! SMTP(hostName: "smtp.gmail.com", user: nil, password: nil, secure: .plain, domainName: "onevcat.com")
@@ -33,9 +33,15 @@ class SMTPTests: XCTestCase {
             let smtp4 = try SMTP(hostName: "127.0.0.1", user: nil, password: nil, secure: .plain, domainName: "onevcat.com")
             smtps.append(smtp4)
         } catch {
-            print("----------------------------------------------------------------------------------")
-            print("| WARNING: Local test server is not up. Local server test will not be performed! |")
-            print("----------------------------------------------------------------------------------")
+            logLocalServerNotUp()
+        }
+    }
+    
+    override func tearDown() {
+        if smtps != nil {
+            smtps.forEach {
+                try? $0.close()
+            }
         }
     }
     
@@ -96,6 +102,50 @@ class SMTPTests: XCTestCase {
         XCTAssertTrue(feature.supported("8BITMIME"))
         XCTAssertTrue(feature.supported("ENHANCEDSTATUSCODES"))
         XCTAssertTrue(feature.supported("STARTTLS"))
+    }
+    
+    func testSMTPAuth() {
+        
+        let methods: [SMTP.AuthMethod] = [.plain, .login, .cramMD5, .xOauth2]
+        for method in methods {
+            guard let smtp = try? SMTP(
+                hostName: "127.0.0.1",
+                user: "foo@bar.com",
+                password: "password",
+                secure: .plain,
+                domainName: "onevcat.com",
+                authMethods: [method]) else
+            {
+                logLocalServerNotUp()
+                return
+            }
+            
+            XCTAssertNoThrows(try smtp.connect())
+            XCTAssertNoThrows(try smtp.login())
+        }
+    }
+    
+    func testSMTPAuthPlainErrorPassword() {
+        guard let smtp = try? SMTP(
+            hostName: "127.0.0.1",
+            user: "foo@bar.com",
+            password: "wrong_password",
+            secure: .plain,
+            domainName: "onevcat.com",
+            authMethods: [.plain]) else
+        {
+            logLocalServerNotUp()
+            return
+        }
+        XCTAssertNoThrows(try smtp.connect())
+        do {
+            try smtp.login()
+            XCTFail("The login should fail due to wrong password")
+        } catch SMTP.SMTPError.authFailed {
+            
+        } catch {
+            XCTFail("The error type is not corrected. Expect \(SMTP.SMTPError.authFailed), but got \(error)")
+        }
     }
     
     static var allTests : [(String, (SMTPTests) -> () throws -> Void)] {

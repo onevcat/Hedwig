@@ -36,6 +36,8 @@ enum SMTPCommand {
 
 extension SMTPCommand {
     
+    static let validAuthCodes: [SMTPReplyCode] = [.authSucceeded, .authNotAdvertised, .authFailed]
+    
     var text: String {
         switch self {
         case .helo(let domain):
@@ -67,15 +69,15 @@ extension SMTPCommand {
             switch method {
             case .cramMD5: return [.containingChallenge]
             case .login:   return [.containingChallenge]
-            case .plain:   return [.authSucceeded, .authNotPermitted]
-            case .xOauth2: return [.authSucceeded, .authNotPermitted]
+            case .plain:   return SMTPCommand.validAuthCodes
+            case .xOauth2: return SMTPCommand.validAuthCodes
             }
         case .authUser(_):
             return [.containingChallenge]
         case .authResponse(let method, _):
             switch method {
-            case .cramMD5: return [.authSucceeded, .authNotPermitted]
-            case .login:   return [.authSucceeded, .authNotPermitted]
+            case .cramMD5: return SMTPCommand.validAuthCodes
+            case .login:   return SMTPCommand.validAuthCodes
             default: fatalError("Can not response to a challenge.")
             }
         default:
@@ -95,7 +97,8 @@ struct SMTPReplyCode: Equatable {
     static let authSucceeded = SMTPReplyCode(235)
     static let commandOK = SMTPReplyCode(250)
     static let containingChallenge = SMTPReplyCode(334)
-    static let authNotPermitted = SMTPReplyCode(503)
+    static let authNotAdvertised = SMTPReplyCode(503)
+    static let authFailed = SMTPReplyCode(535)
     
     public static func ==(lhs: SMTPReplyCode, rhs: SMTPReplyCode) -> Bool {
         return lhs.rawValue == rhs.rawValue
