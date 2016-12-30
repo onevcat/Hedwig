@@ -118,13 +118,20 @@ extension TLS.Socket {
 }
 
 extension TCPClient: Sock {
+    
+    convenience init(hostName: String, port: Port) throws {
+        let address = InternetAddress(hostname: hostName, port: port)
+        let socket = try TCPInternetSocket(address: address)
+        try self.init(alreadyConnectedSocket: socket)
+    }
+    
     func receive() throws -> [String] {
         let text = try receive(maxBytes: 65_535).toString()
         return text.seperated
     }
     
     func connect(servername: String) throws {
-        // Intended empty.
+        try socket.connect()
     }
     
     var internalSocket: TCPInternetSocket {

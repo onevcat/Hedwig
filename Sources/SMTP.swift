@@ -64,8 +64,7 @@ class SMTP {
         self.validation = validation
         
         if secure == .plain || secure == .tls {
-            let address = InternetAddress(hostname: hostName, port: self.port)
-            let sock = try TCPClient(address: address)
+            let sock = try TCPClient(hostName: hostName, port: self.port)
             self.socket = SMTPSocket(sock: sock)
         } else {
             let sock = try TLS.Socket(mode: .client,
