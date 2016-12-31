@@ -13,9 +13,9 @@ enum SMTPCommand {
     case helo(String)
     /// ehlo(domain: String)
     case ehlo(String)
-    /// help(args: String)
     case starttls
-    case help(String)
+    /// help(args: String)
+    case help(String?)
     case rset
     case noop
     /// mail(from: String)
@@ -25,13 +25,14 @@ enum SMTPCommand {
     case data
     case dataEnd
     /// verify(address: String)
-    case verify(String)
+    case vrfy(String)
     /// expn(String)
     case expn(String)
     /// auth(method: String, body: String)
     case auth(SMTP.AuthMethod, String)
     case authResponse(SMTP.AuthMethod, String)
     case authUser(String)
+    case quit
 }
 
 extension SMTPCommand {
@@ -46,6 +47,24 @@ extension SMTPCommand {
             return "EHLO \(domain)"
         case .starttls:
             return "STARTTLS"
+        case .help(let args):
+            return args != nil ? "HELP \(args!)" : "HELP"
+        case .rset:
+            return "RSET"
+        case .noop:
+            return "NOOP"
+        case .mail(let from):
+            return "MAIL FROM: \(from)"
+        case .rcpt(let to):
+            return "RCPT TO: \(to)"
+        case .data:
+            return "DATA"
+        case .dataEnd:
+            return "\(CRLF)."
+        case .vrfy(let address):
+            return "VRFY \(address)"
+        case .expn(let address):
+            return "EXPN \(address)"
         case .auth(let method, let body):
             return "AUTH \(method.rawValue) \(body)"
         case .authUser(let body):
@@ -56,8 +75,8 @@ extension SMTPCommand {
             case .login: return body
             default: fatalError("Can not response to a challenge.")
             }
-        default:
-            return ""
+        case .quit:
+            return "QUIT"
         }
     }
     
@@ -80,6 +99,14 @@ extension SMTPCommand {
             case .login:   return SMTPCommand.validAuthCodes
             default: fatalError("Can not response to a challenge.")
             }
+        case .help(_):
+            return [.systemStatus, .helpMessage]
+        case .rcpt(_):
+            return [.commandOK, .willForward]
+        case .vrfy(_):
+            return [.commandOK, .willForward, .forAttempt]
+        case .quit:
+            return [.connectionClosing, .commandOK]
         default:
             return [.commandOK]
         }
@@ -93,9 +120,14 @@ struct SMTPReplyCode: Equatable {
         rawValue = value
     }
 
+    static let systemStatus = SMTPReplyCode(211)
+    static let helpMessage = SMTPReplyCode(214)
     static let serviceReady = SMTPReplyCode(220)
+    static let connectionClosing = SMTPReplyCode(221)
     static let authSucceeded = SMTPReplyCode(235)
     static let commandOK = SMTPReplyCode(250)
+    static let willForward = SMTPReplyCode(251)
+    static let forAttempt = SMTPReplyCode(252)
     static let containingChallenge = SMTPReplyCode(334)
     static let authNotAdvertised = SMTPReplyCode(503)
     static let authFailed = SMTPReplyCode(535)

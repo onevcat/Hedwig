@@ -77,6 +77,12 @@ class SMTP {
         }
     }
     
+    deinit {
+        if state != .notConnected {
+            try? close()
+        }
+    }
+    
     func updateFeatures(_ s: String) {
         features = s.featureDictionary()
     }
@@ -163,6 +169,12 @@ extension SMTP {
 /// SMTP Operation
 extension SMTP {
     func connect() throws -> SMTPResponse {
+        
+        guard state == .notConnected else {
+            _ = try quit()
+            return try connect()
+        }
+        
         self.state = .connecting
         
         let response = try socket.connect(servername: hostName)
@@ -260,6 +272,10 @@ extension SMTP {
         catch { _ = try helo() }
     }
     
+    func message(string: String) throws {
+        try socket.sock.send(bytes: string.toBytes())
+    }
+    
     func close() throws {
         try socket.close()
         state = .notConnected
@@ -302,6 +318,48 @@ extension SMTP {
                                hostName: hostName)
         socket = SMTPSocket(sock: sock)
         secureConnected = true
+    }
+    
+    func help(args: String? = nil) throws -> SMTPResponse {
+        return try send(.help(args))
+    }
+    
+    func rset() throws -> SMTPResponse {
+        return try send(.rset)
+    }
+    
+    func noop() throws -> SMTPResponse {
+        return try send(.noop)
+    }
+    
+    func mail(from: String) throws -> SMTPResponse {
+        return try send(.mail(from))
+    }
+    
+    func rcpt(to: String) throws -> SMTPResponse {
+        return try send(.rcpt(to))
+    }
+    
+    func data() throws -> SMTPResponse {
+        return try send(.data)
+    }
+    
+    func dataEnd() throws -> SMTPResponse {
+        return try send(.dataEnd)
+    }
+    
+    func vrfy(address: String) throws -> SMTPResponse {
+        return try send(.vrfy(address))
+    }
+    
+    func expn(address: String) throws -> SMTPResponse {
+        return try send(.expn(address))
+    }
+    
+    func quit() throws -> SMTPResponse {
+        let response = try send(.quit)
+        try close()
+        return response
     }
 }
 
