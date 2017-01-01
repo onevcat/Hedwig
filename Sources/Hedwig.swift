@@ -1,5 +1,11 @@
+//
+//  Hedwig.swift
+//  Hedwig
+//
+//  Created by WANG WEI on 16/12/27.
+//
+//
 
-struct Hedwig {
-
-    var text = "Hello, World!"
+class Hedwig {
+    
 }
