@@ -23,7 +23,6 @@ class SMTPTests: XCTestCase {
         let smtp1 = try! SMTP(hostName: "smtp.mailgun.org", user: nil, password: nil, secure: .tls, domainName: "onevcat.com")
         let smtp2 = try! SMTP(hostName: "smtp.zoho.com", user: nil, password: nil, secure: .ssl, domainName: "onevcat.com")
         let smtp3 = try! SMTP(hostName: "smtp.gmail.com", user: nil, password: nil, secure: .plain, domainName: "onevcat.com")
-        
         smtps = [smtp1, smtp2, smtp3]
         
         // Only test on local smtp server when accessible. 
@@ -31,7 +30,12 @@ class SMTPTests: XCTestCase {
         // After testing, use `sudo npm stop` to free the listened port.
         do {
             let smtp4 = try SMTP(hostName: "127.0.0.1", user: nil, password: nil, secure: .plain, domainName: "onevcat.com")
+            defer { try? smtp4.close() }
+            _ = try smtp4.connect()
+
+            // Only add when local server is on
             smtps.append(smtp4)
+            
         } catch {
             logLocalServerNotUp()
         }
@@ -119,8 +123,14 @@ class SMTPTests: XCTestCase {
                 logLocalServerNotUp()
                 return
             }
+
+            do {
+                _ = try smtp.connect()
+            } catch {
+                logLocalServerNotUp()
+                return
+            }
             
-            XCTAssertNoThrows(try smtp.connect())
             XCTAssertNoThrows(try smtp.login())
         }
     }
@@ -137,7 +147,14 @@ class SMTPTests: XCTestCase {
             logLocalServerNotUp()
             return
         }
-        XCTAssertNoThrows(try smtp.connect())
+
+        do {
+            _ = try smtp.connect()
+        } catch {
+            logLocalServerNotUp()
+            return
+        }
+
         do {
             try smtp.login()
             XCTFail("The login should fail due to wrong password")
@@ -154,7 +171,9 @@ class SMTPTests: XCTestCase {
             ("testSMTPCannotConnect", testSMTPCannotConnect),
             ("testSMTPSendHelo", testSMTPSendHelo),
             ("testSMTPSendEhlo", testSMTPSendEhlo),
-            ("testSMTPParseFeature", testSMTPParseFeature)
+            ("testSMTPParseFeature", testSMTPParseFeature),
+            ("testSMTPAuth", testSMTPAuth),
+            ("testSMTPAuthPlainErrorPassword", testSMTPAuthPlainErrorPassword)
         ]
     }
 }

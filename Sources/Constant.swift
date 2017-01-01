@@ -12,7 +12,7 @@ let CRLF = "\r\n"
 
 var isTesting: Bool {
     for arg in ProcessInfo.processInfo.arguments {
-        return arg.hasSuffix("usr/bin/xctest") || arg.hasSuffix("Xcode/Agents/xctest")
+        return arg.hasSuffix("xctest")
     }
     return false
 }

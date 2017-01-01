@@ -141,8 +141,6 @@ extension TCPClient: Sock {
 
 extension String {
     var seperated: [String] {
-        return replacingOccurrences(of: "\r", with: "")
-            .components(separatedBy: "\n")
-            .filter { $0 != "" }
+        return components(separatedBy: CRLF).filter { $0 != "" }
     }
 }
