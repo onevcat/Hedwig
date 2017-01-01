@@ -19,10 +19,14 @@ extension Regex {
         let matches = self.matches(in: string, options: [], range: NSRange(location: 0, length: string.utf16.count))
         guard matches.count == 1 else { return [] }
 
-        let s = string as NSString
+        let s = NSString(string: string)
         var mid = [String]()
         for i in 1 ..< matches[0].numberOfRanges {
+            #if os(Linux)
+            let range = matches[0].range(at: i)
+            #else
             let range = matches[0].rangeAt(i)
+            #endif
             if range.location != NSNotFound {
                 mid.append(s.substring(with: range))
             }
