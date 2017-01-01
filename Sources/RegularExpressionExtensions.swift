@@ -8,7 +8,13 @@
 
 import Foundation
 
-extension NSRegularExpression {
+#if os(Linux)
+    typealias Regex = RegularExpression
+#else
+    typealias Regex = NSRegularExpression
+#endif
+
+extension Regex {
     func groups(in string: String) -> [String] {
         let matches = self.matches(in: string, options: [], range: NSRange(location: 0, length: string.utf16.count))
         guard matches.count == 1 else { return [] }

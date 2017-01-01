@@ -10,7 +10,7 @@ import Foundation
 
 struct SMTPResponse {
     
-    static let matcher = try! NSRegularExpression(pattern: "^(\\d+)\\s+(.*)$", options: [])
+    static let matcher = try! Regex(pattern: "^(\\d+)\\s+(.*)$", options: [])
     
     let code: SMTPReplyCode
     let message: String

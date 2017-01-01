@@ -364,7 +364,7 @@ extension SMTP {
 }
 
 extension String {
-    static let featureMather = try! NSRegularExpression(pattern: "^(?:\\d+[\\-=]?)\\s*?([^\\s]+)(?:\\s+(.*)\\s*?)?$", options: [])
+    static let featureMather = try! Regex(pattern: "^(?:\\d+[\\-=]?)\\s*?([^\\s]+)(?:\\s+(.*)\\s*?)?$", options: [])
     
     func featureDictionary() -> SMTP.Feature {
         
