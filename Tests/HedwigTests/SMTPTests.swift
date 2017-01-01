@@ -17,7 +17,7 @@ private func logLocalServerNotUp() {
 
 class SMTPTests: XCTestCase {
     
-    var smtps: [SMTP]!
+    var smtps: [SMTP]! = []
     
     override func setUp() {
         let smtp1 = try! SMTP(hostName: "smtp.mailgun.org", user: nil, password: nil, secure: .tls, domainName: "onevcat.com")
@@ -29,10 +29,11 @@ class SMTPTests: XCTestCase {
         // Use `sudo npm start` in the test_smtp_server to start the test server.
         // After testing, use `sudo npm stop` to free the listened port.
         do {
-            let smtp4 = try SMTP(hostName: "127.0.0.1", user: nil, password: nil, secure: .plain, domainName: "onevcat.com")
-            defer { try? smtp4.close() }
-            _ = try smtp4.connect()
+            let testLocal = try SMTP(hostName: "127.0.0.1", user: nil, password: nil, secure: .plain, domainName: "onevcat.com")
+            _ = try testLocal.connect()
+            try testLocal.close()
 
+            let smtp4 = try SMTP(hostName: "127.0.0.1", user: nil, password: nil, secure: .plain, domainName: "onevcat.com")
             // Only add when local server is on
             smtps.append(smtp4)
             
@@ -55,7 +56,7 @@ class SMTPTests: XCTestCase {
                 let res = try smtp.connect()
                 XCTAssertEqual(res.code, .serviceReady)
             } catch {
-                XCTFail("Should not catch an error, but got \(error)")
+                XCTFail("Should not catch an error, but got \(error), for host: \(smtp.hostName)")
             }
             
             XCTAssertNoThrows(try smtp.close())
@@ -76,7 +77,7 @@ class SMTPTests: XCTestCase {
                 let res = try smtp.helo()
                 XCTAssertEqual(res.code, .commandOK)
             } catch {
-                XCTFail("Should not catch an error, but got \(error)")
+                XCTFail("Should not catch an error, but got \(error), for host: \(smtp.hostName)")
             }
         }
     }
@@ -88,7 +89,7 @@ class SMTPTests: XCTestCase {
                 let res = try smtp.ehlo()
                 XCTAssertEqual(res.code, .commandOK)
             } catch {
-                XCTFail("Should not catch an error, but got \(error)")
+                XCTFail("Should not catch an error, but got \(error), for host: \(smtp.hostName)")
             }
         }
     }

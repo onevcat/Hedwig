@@ -24,7 +24,7 @@ private func logWarning(message: String? = nil) {
 typealias Port = UInt16
 
 class SMTP {
-    fileprivate let hostName: String
+    let hostName: String
     fileprivate let port: Port
     fileprivate let user: String?
     fileprivate let password: String?
