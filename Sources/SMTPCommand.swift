@@ -37,7 +37,8 @@ enum SMTPCommand {
 
 extension SMTPCommand {
     
-    static let validAuthCodes: [SMTPReplyCode] = [.authSucceeded, .authNotAdvertised, .authFailed]
+    static let validAuthCodes: [SMTPReplyCode] =
+        [.authSucceeded, .authNotAdvertised, .authFailed]
     
     var text: String {
         switch self {

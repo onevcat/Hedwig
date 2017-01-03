@@ -10,7 +10,7 @@ import Foundation
 import TLS
 import Socks
 
-private func logError(error: SMTP.SMTPError, message: String? = nil) {
+private func logError(_ error: SMTP.SMTPError, message: String? = nil) {
     let message = message ?? ""
     print("[Hedwig] SMTP Error: \(error). \(message)")
 }
@@ -180,7 +180,7 @@ extension SMTP {
         let response = try socket.connect(servername: hostName)
         guard response.code == .serviceReady else {
             let error = SMTPError.badResponse
-            logError(error: error, message: "\(error.description) on connecting: \(response.message)")
+            logError(error, message: "\(error.description) on connecting: \(response.message)")
             throw error
         }
         
@@ -195,14 +195,14 @@ extension SMTP {
         guard state == .connected else {
             try close()
             let error = SMTPError.noConnection
-            logError(error: error, message: "no connection has been established")
+            logError(error, message: "no connection has been established")
             throw error
         }
         
         let response = try socket.send(string)
         guard expectedCodes.contains(response.code) else {
             let error = SMTPError.badResponse
-            logError(error: error, message: "\(error.description) on command: \(string), response: \(response.message)")
+            logError(error, message: "\(error.description) on command: \(string), response: \(response.message)")
             throw error
         }
         
@@ -217,19 +217,19 @@ extension SMTP {
         try sayHello()
         guard let features = features else {
             let error = SMTPError.unknown
-            logError(error: error, message: "\(error.description) Unknown error happens when login. EHLO and HELO failed.")
+            logError(error, message: "\(error.description) Unknown error happens when login. EHLO and HELO failed.")
             throw error
         }
         
         guard let user = user, let password = password else {
             let error = SMTPError.authFailed
-            logError(error: error, message: "\(error.description) User name or password is not supplied.")
+            logError(error, message: "\(error.description) User name or password is not supplied.")
             throw error
         }
 
         guard let method = (preferredAuthMethods.first { features.supported(auth: $0) }) else {
             let error = SMTPError.authNotSupported
-            logError(error: error, message: "\(error.description)")
+            logError(error, message: "\(error.description)")
             throw error
         }
         
@@ -255,11 +255,11 @@ extension SMTP {
             loggedIn = true
         } else if loginResult.code == .authFailed {
             let error = SMTPError.authFailed
-            logError(error: error, message: "\(error.description)")
+            logError(error, message: "\(error.description)")
             throw error
         } else {
             let error = SMTPError.authUnadvertised
-            logError(error: error, message: "\(error.description)")
+            logError(error, message: "\(error.description)")
             throw error   
         }
     }

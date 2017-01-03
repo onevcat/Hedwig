@@ -44,7 +44,8 @@ struct SMTPSocket {
         var result = [String]()
         
         // Workaround for different socket buffer implementation.
-        // Some server prefer to buffer one line a time, while some other buffer all lines.
+        // Some server prefer to buffer one line a time, while some 
+        // other buffer all lines.
         if response.count == 1 {
             // One line case. Keep getting until can be parsed correctly.
             repeat {
@@ -69,7 +70,8 @@ struct SMTPSocket {
         let r: SMTPResponse
         
         if multiple {
-            r = SMTPResponse(code: parsed!.code, data: result.joined(separator: "\n"))
+            r = SMTPResponse(code: parsed!.code,
+                             data: result.joined(separator: "\n"))
         } else {
             r = parsed!
         }
@@ -107,7 +109,10 @@ extension TLS.Socket {
                      hostName: String) throws
     {
         let context = try Context(mode: .client)
-        let config = try Config(context: context, certificates: certificates, cipher: cipher, proto: proto)
+        let config = try Config(context: context,
+                                certificates: certificates,
+                                cipher: cipher,
+                                proto: proto)
 
         try self.init(config: config, socket: socket)
         tls_connect_socket(config.context.cContext, socket.descriptor, hostName)
