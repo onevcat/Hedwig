@@ -7,5 +7,9 @@
 //
 
 class Hedwig {
+    var sendingQueue = [Mail]()
     
+    func send(_ mail: [Mail]) {
+        
+    }
 }
