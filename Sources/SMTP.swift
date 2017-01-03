@@ -32,8 +32,8 @@ class SMTP {
     fileprivate let domainName: String
     fileprivate let secure: Secure
     fileprivate var socket: SMTPSocket
-    fileprivate var state: State
-    fileprivate var loggedIn: Bool
+    fileprivate(set) var state: State
+    fileprivate(set) var loggedIn: Bool
     fileprivate var features: Feature?
     fileprivate let validation: Validation
 
@@ -272,8 +272,8 @@ extension SMTP {
         catch { _ = try helo() }
     }
     
-    func message(string: String) throws {
-        try socket.sock.send(bytes: string.toBytes())
+    func message(bytes: [UInt8]) throws {
+        try socket.sock.send(bytes: bytes)
     }
     
     func close() throws {

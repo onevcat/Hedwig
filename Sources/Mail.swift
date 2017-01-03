@@ -10,35 +10,45 @@ import Foundation
 import AddressParser
 
 enum MailError: Error {
+    case noSender
     case noRecipient
 }
 
 struct Mail {
     let text: String
-    let from: String
-    let to: String?
-    let cc: String?
-    let bcc: String?
+    let from: NameAddressPair
+    let to: [NameAddressPair]?
+    let cc: [NameAddressPair]?
+    let bcc: [NameAddressPair]?
     let subject: String?
     let attachment: [Attachment]?
+    let additionalHeaders: [String: String]?
     
     init(text: String, from: String, to: String? = nil, cc: String? = nil,
-          bcc: String? = nil, subject: String?, attachment: [Attachment]? = nil)
+         bcc: String? = nil, subject: String?, attachment: [Attachment]? = nil,
+         additionalHeaders: [String: String]? = nil)
         throws
     {
-        self.text = text
-        self.from = from.parsedAddress
+        guard let fromAddress = from.parsedAddresses.last else {
+            throw MailError.noSender
+        }
+        self.from = fromAddress
         
         guard let _ = to ?? cc ?? bcc else {
             throw MailError.noRecipient
         }
+        self.to = to?.parsedAddresses
+        self.cc = cc?.parsedAddresses
+        self.bcc = bcc?.parsedAddresses
         
-        self.to = to?.parsedAddress
-        self.cc = cc?.parsedAddress
-        self.bcc = bcc?.parsedAddress
-        
+        self.text = text
         self.subject = subject
         self.attachment = attachment
+        self.additionalHeaders = additionalHeaders
+    }
+    
+    var headers: [String: String] {
+        return [:]
     }
 }
 
@@ -55,8 +65,10 @@ struct Attachment {
     let charSet: String?
 }
 
+
+typealias NameAddressPair = (name: String, address: String)
 extension Address {
-    var allMails: [(name: String, address: String)] {
+    var allMails: [NameAddressPair] {
         var result = [(name: String, address: String)]()
         switch entry {
         case .mail(let address):
@@ -70,13 +82,9 @@ extension Address {
 }
 
 extension String {
-    var parsedAddress: String {
-        return AddressParser.parse(self).map { address in
-            address.allMails.map { mail in
-                mail.name.isEmpty ?
-                    mail.address : "\(mail.name.mimeEncoded) <\(mail.address)>"
-            }.joined(separator: ", ")
-        }.joined(separator: ", ")
+    var parsedAddresses: [NameAddressPair] {
+        let a = AddressParser.parse(self).flatMap { $0.allMails }
+        return a
     }
 }
 

@@ -55,9 +55,9 @@ extension SMTPCommand {
         case .noop:
             return "NOOP"
         case .mail(let from):
-            return "MAIL FROM: \(from)"
+            return "MAIL FROM: <\(from)>"
         case .rcpt(let to):
-            return "RCPT TO: \(to)"
+            return "RCPT TO: <\(to)>"
         case .data:
             return "DATA"
         case .dataEnd:
@@ -104,6 +104,8 @@ extension SMTPCommand {
             return [.systemStatus, .helpMessage]
         case .rcpt(_):
             return [.commandOK, .willForward]
+        case .data:
+            return [.startMailInput]
         case .vrfy(_):
             return [.commandOK, .willForward, .forAttempt]
         case .quit:
@@ -130,6 +132,7 @@ struct SMTPReplyCode: Equatable {
     static let willForward = SMTPReplyCode(251)
     static let forAttempt = SMTPReplyCode(252)
     static let containingChallenge = SMTPReplyCode(334)
+    static let startMailInput = SMTPReplyCode(354)
     static let authNotAdvertised = SMTPReplyCode(503)
     static let authFailed = SMTPReplyCode(535)
     
