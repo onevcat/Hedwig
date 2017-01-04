@@ -48,7 +48,7 @@ class SMTP {
     
     init(hostName: String, user: String?, password: String?,
          port: Port? = nil, secure: Secure = .tls, validation: Validation = .default,
-         domainName: String = "", authMethods: [AuthMethod] = [.plain, .cramMD5, .login, .xOauth2]) throws
+         domainName: String = "localhost", authMethods: [AuthMethod] = [.plain, .cramMD5, .login, .xOauth2]) throws
     {
         self.hostName = hostName
         self.user = user
@@ -273,6 +273,7 @@ extension SMTP {
     }
     
     func message(bytes: [UInt8]) throws {
+        print("sending: \(bytes)")
         try socket.sock.send(bytes: bytes)
     }
     
@@ -357,8 +358,8 @@ extension SMTP {
     }
     
     func quit() throws -> SMTPResponse {
+        defer { try? close() }
         let response = try send(.quit)
-        try close()
         return response
     }
 }

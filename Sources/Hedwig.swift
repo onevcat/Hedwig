@@ -11,7 +11,7 @@ class Hedwig {
     var sendingQueue = DispatchQueue(label: "com.onevcat.Hedwig.sendingQueue")
     
     var pendings = [Mail]()
-    var smtp: SMTP
+    fileprivate var smtp: SMTP
     var sending = false
     
     fileprivate var progress: ((Mail) -> Void)?
@@ -19,7 +19,7 @@ class Hedwig {
     
     init?(hostName: String, user: String?, password: String?,
          port: Port? = nil, secure: SMTP.Secure = .tls, validation: SMTP.Validation = .default,
-         domainName: String = "", authMethods: [SMTP.AuthMethod] = [.plain, .cramMD5, .login, .xOauth2], progress: ((Mail) -> Void)? = nil, completion: ((Error?) -> Void)? = nil)
+         domainName: String = "localhost", authMethods: [SMTP.AuthMethod] = [.plain, .cramMD5, .login, .xOauth2], progress: ((Mail) -> Void)? = nil, completion: ((Error?) -> Void)? = nil)
     {
         do {
             smtp = try SMTP(hostName: hostName, user: user, password: password, port: port, secure: secure, validation: validation, domainName: domainName, authMethods: authMethods)
@@ -43,6 +43,7 @@ class Hedwig {
                 self.pendings.append(contentsOf: mails)
                 if self.sending { return }
                 
+                self.sending = true
                 if self.smtp.state != .connected {
                     _ = try self.smtp.connect()
                 }
@@ -56,16 +57,21 @@ class Hedwig {
                 
             } catch {
                 self.pendings.removeAll()
-                self.sending = true
                 try? self.smtp.close()
+                self.sending = false
                 self.completion?(error)
             }
         }
     }
     
-    func sendNext() throws {
+    private func sendNext() throws {
         if self.pendings.isEmpty {
+            
+            _ = try smtp.quit()
+            
             completion?(nil)
+            progress = nil
+            completion = nil
             return
         }
         
@@ -78,12 +84,12 @@ class Hedwig {
         try sendNext()
     }
     
-    func sendFrom(_ mail: Mail) throws {
+    private func sendFrom(_ mail: Mail) throws {
         let fromAddress = mail.from.address
         _ = try smtp.send(.mail(fromAddress))
     }
     
-    func sendTo(_ mail: Mail) throws {
+    private func sendTo(_ mail: Mail) throws {
         let to = mail.to ?? []
         let cc = mail.cc ?? []
         let bcc = mail.bcc ?? []
@@ -94,7 +100,7 @@ class Hedwig {
         }
     }
     
-    func sendData(_ mail: Mail) throws {
+    private func sendData(_ mail: Mail) throws {
         _ = try smtp.send(.data)
         
         var messageError: Error? = nil
@@ -110,7 +116,7 @@ class Hedwig {
         }
     }
     
-    func sendDone() throws {
+    private func sendDone() throws {
         _ = try smtp.send(.dataEnd)
     }
 }

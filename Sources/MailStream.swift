@@ -14,7 +14,8 @@ let bufferLength = 76 * 24 * 7
 
 enum MailStreamError: Error {
     case streamNotExist
-    case streamReadingErrored
+    case streamReadingFailed
+    case encoding
 }
 
 class MailStream: NSObject {
@@ -34,15 +35,35 @@ class MailStream: NSObject {
     func stream() throws {
         try streamHeader()
         
+        if let attachments = mail.attachments, !attachments.isEmpty {
+            
+        } else {
+            try streamText()
+        }
     }
     
     func streamHeader() throws {
-        inputStream = InputStream(data: Data())
+        let header = mail.headersString + CRLF
+        guard let data =  header.data(using: .utf8, allowLossyConversion: false) else {
+            throw MailStreamError.encoding
+        }
+        
+        inputStream = InputStream(data: data)
         try loadBytes()
     }
     
-    func streamText(string: String) throws {
+    func streamText() throws {
+        let text = mail.text.embededForText()
+        guard let data =  text.data(using: .utf8, allowLossyConversion: false) else {
+            throw MailStreamError.encoding
+        }
         
+        inputStream = InputStream(data: data)
+        try loadBytes()
+    }
+    
+    func streamMixed() throws {
+        let mixHeader = ""
     }
     
     func streamFile(path: String) throws {
@@ -65,7 +86,16 @@ class MailStream: NSObject {
         }
         
         guard stream.streamStatus == .atEnd else {
-            throw MailStreamError.streamReadingErrored
+            throw MailStreamError.streamReadingFailed
         }
+    }
+}
+
+extension String {
+    
+    static let plainTextHeader = ""
+    
+    func embededForText() -> String {
+        return "Content-Type: text/plain; charset=utf-8\(CRLF)Content-Transfer-Encoding: 7bit\(CRLF)Content-Disposition: inline\(CRLF)\(CRLF)\(self)\(CRLF)\(CRLF)"
     }
 }

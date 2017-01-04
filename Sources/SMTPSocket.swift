@@ -31,6 +31,7 @@ struct SMTPSocket {
             throw SMTP.SMTPError.badResponse
         }
         
+    
         return try SMTPResponse(string: result[0])
     }
     

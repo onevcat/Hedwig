@@ -3,9 +3,26 @@ import XCTest
 
 class HedwigTests: XCTestCase {
     func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-//        XCTAssertEqual(Hedwig().text, "Hello, World!")
+        
+        let e = expectation(description: "wait")
+
+        let hedwig = Hedwig(hostName: "127.0.0.1", user: "foo@bar.com", password: "password", secure: .plain, completion: { err in
+            e.fulfill()
+            if err != nil {
+                XCTFail()
+            }
+        })
+        
+        if let hedwig = hedwig {
+            do {
+                let mail = try Mail(text: "Hello", from: "onevcat@gmail.com", to: "onev@onevcat.com", subject: "Hello world.")
+                hedwig.send([mail])
+            } catch {
+                
+            }
+        }
+        
+        waitForExpectations(timeout: 10)
     }
 
 
