@@ -23,8 +23,6 @@ struct Mail {
     let text: String
     let attachments: [Attachment]?
     let additionalHeaders: [String: String]?
-    
-    let boundary = UUID().uuidString
 
     fileprivate let messageId = UUID().uuidString
     fileprivate let date = Date()
@@ -61,28 +59,28 @@ struct Mail {
 extension Mail {
     private var headers: [String: String] {
         var fields = [String: String]()
-        fields["Message-Id"] = messageId
-        fields["Date"] = date.smtpFormatted
-        fields["From"] = from.mime
+        fields["MESSAGE-ID"] = messageId
+        fields["DATE"] = date.smtpFormatted
+        fields["FROM"] = from.mime
     
         if let to = to {
-            fields["To"] = to.map { $0.mime }.joined(separator: ", ")
+            fields["TO"] = to.map { $0.mime }.joined(separator: ", ")
         }
     
         if let cc = cc {
-            fields["Cc"] = cc.map { $0.mime }.joined(separator: ", ")
+            fields["CC"] = cc.map { $0.mime }.joined(separator: ", ")
         }
         
         if let bcc = bcc {
-            fields["Bcc"] = bcc.map { $0.mime }.joined(separator: ", ")
+            fields["BCC"] = bcc.map { $0.mime }.joined(separator: ", ")
         }
         
-        fields["Subject"] = (subject ?? "").mimeEncoded ?? ""
-        fields["MIME-Version"] = "1.0 (Hedwig)"
+        fields["SUBJECT"] = (subject ?? "").mimeEncoded ?? ""
+        fields["MIME-VERSION"] = "1.0 (Hedwig)"
         
         if let additionalHeaders = additionalHeaders {
             for (key, value) in additionalHeaders {
-                fields[key] = value
+                fields[key.uppercased()] = value
             }
         }
 
@@ -94,23 +92,6 @@ extension Mail {
             return "\(key.uppercased()): \(value)"
         }.joined(separator: CRLF)
     }
-}
-
-struct Attachment {
-    enum AttachmentType {
-        case filePath(String)
-        case html(String)
-    }
-    
-    let type: AttachmentType
-    let mimeType: String? = nil
-    let name: String? = nil
-    let method: String?
-    let charSet: String?
-    let alternative = false
-    let inline = false
-    let headers: [String: String]? = nil
-    let related: [Attachment]? = nil
 }
 
 struct NameAddressPair {
