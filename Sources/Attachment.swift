@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import CoreServices
+import MimeType
 
 struct Attachment {
     
@@ -35,7 +35,7 @@ struct Attachment {
     
     init(filePath: String, mime: String? = nil, name: String? = nil, inline: Bool = false, additionalHeaders: [String: String] = [:], related: [Attachment] = []) {
         
-        let mime = mime ?? filePath.guessedMimeType
+        let mime = mime ??  MimeType(path: filePath).value
         let name = name ?? NSString(string: filePath).lastPathComponent
         let fileProperty = FileProperty(path: filePath, mime: mime, name: name, inline: inline)
         self.init(type: .file(fileProperty), additionalHeaders: additionalHeaders, related: related)
@@ -114,18 +114,5 @@ extension Attachment {
         return headers.map { (key, value) in
             return "\(key): \(value)"
             }.joined(separator: CRLF)
-    }
-}
-
-extension String {
-    var guessedMimeType: String {
-        guard let UTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, NSString(string: self).pathExtension as CFString, nil) else {
-            return "application/octet-stream"
-        }
-        
-        guard let mimeType = UTTypeCopyPreferredTagWithClass (UTI.takeUnretainedValue(), kUTTagClassMIMEType) else {
-            return "application/octet-stream"
-        }
-        return mimeType.takeUnretainedValue() as String
     }
 }
