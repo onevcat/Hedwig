@@ -30,8 +30,9 @@ struct Attachment {
     
     let type: AttachmentType
     let additionalHeaders: [String: String]
+    let related: [Attachment]
     
-    init(filePath: String, mime: String? = nil, name: String? = nil, inline: Bool = false, additionalHeaders: [String: String] = [:]) {
+    init(filePath: String, mime: String? = nil, name: String? = nil, inline: Bool = false, additionalHeaders: [String: String] = [:], related: [Attachment] = []) {
         
         let mime = mime ?? filePath.guessedMimeType
         let name = name ?? NSString(string: filePath).lastPathComponent
@@ -39,14 +40,15 @@ struct Attachment {
         self.init(type: .file(fileProperty), additionalHeaders: additionalHeaders)
     }
     
-    init(htmlContent: String, characterSet: String = "utf-8", alternative: Bool = false, inline: Bool = false, additionalHeaders: [String: String] = [:]) {
+    init(htmlContent: String, characterSet: String = "utf-8", alternative: Bool = false, inline: Bool = false, additionalHeaders: [String: String] = [:], related: [Attachment] = []) {
         let htmlProperty = HTMLProperty(content: htmlContent, characterSet: characterSet, alternative: alternative)
         self.init(type: .html(htmlProperty), additionalHeaders: additionalHeaders)
     }
     
-    init(type: AttachmentType, additionalHeaders: [String: String] = [:]) {
+    init(type: AttachmentType, additionalHeaders: [String: String] = [:], related: [Attachment] = []) {
         self.type = type
         self.additionalHeaders = additionalHeaders
+        self.related = related
     }
 }
 

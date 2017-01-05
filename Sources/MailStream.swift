@@ -57,15 +57,17 @@ class MailStream: NSObject {
     
     func streamMixed() throws {
         let boundary = String.createBoundary()
-        let mixHeader = String.mixedHeader(boundary: boundary)
-        send(mixHeader)
-
+        let mixedHeader = String.mixedHeader(boundary: boundary)
+        
+        send(mixedHeader)
+        
+        send(boundary.startLine)
         if mail.alternative != nil {
             try streamAlternative()
         } else {
             try streamText()
         }
-        try streamAttachments(boundary: boundary)
+        try streamAttachments(mail.attachments, boundary: boundary)
     }
     
     func streamAlternative() throws {
@@ -73,12 +75,22 @@ class MailStream: NSObject {
         let alternativeHeader = String.alternativeHeader(boundary: boundary)
         send(alternativeHeader)
         
+        send(boundary.startLine)
         try streamText()
         
+        let alternative = mail.alternative!
         send(boundary.startLine)
+        try streamAttachment(attachment: alternative)
         
-        try streamAttachment(attachment: mail.alternative!)
+        send(boundary.endLine)
+    }
+    
+    func streamRelated(_ related: [Attachment]) throws {
+        let boundary = String.createBoundary()
+        let relatedHeader = String.relatedHeader(boundary: boundary)
+        send(relatedHeader)
         
+        try streamAttachments(related, boundary: boundary)
         send(boundary.endLine)
     }
     
@@ -90,10 +102,14 @@ class MailStream: NSObject {
         case .file(let file): try streamFile(at: file.path)
         case .html(let html): try streamHTML(text: html.content)
         }
+        
+        if !attachment.related.isEmpty {
+            try streamRelated(attachment.related)
+        }
     }
     
-    func streamAttachments(boundary: String) throws {
-        for attachement in mail.attachments {
+    func streamAttachments(_ attachments: [Attachment], boundary: String) throws {
+        for attachement in attachments {
             send(boundary.startLine)
             try streamAttachment(attachment: attachement)
         }
@@ -169,11 +185,15 @@ extension String {
     static let plainTextHeader = "Content-Type: text/plain; charset=utf-8\(CRLF)Content-Transfer-Encoding: 7bit\(CRLF)Content-Disposition: inline\(CRLF)\(CRLF)"
     
     static func mixedHeader(boundary: String) -> String {
-        return "Content-Type: multipart/mixed; boundary=\"\(boundary)\"\(CRLF)\(CRLF)--\(boundary)\(CRLF)"
+        return "Content-Type: multipart/mixed; boundary=\"\(boundary)\"\(CRLF)\(CRLF)"
     }
     
     static func alternativeHeader(boundary: String) -> String {
-        return "Content-Type: multipart/alternative; boundary=\"\(boundary)\"\(CRLF)\(CRLF)--\(boundary)\(CRLF)"
+        return "Content-Type: multipart/alternative; boundary=\"\(boundary)\"\(CRLF)\(CRLF)"
+    }
+    
+    static func relatedHeader(boundary: String) -> String {
+        return "Content-Type: multipart/related; boundary=\"\(boundary)\"\(CRLF)\(CRLF)"
     }
     
     func embededForText() -> String {

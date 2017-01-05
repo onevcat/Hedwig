@@ -78,6 +78,8 @@ extension Mail {
         fields["DATE"] = date.smtpFormatted
         fields["FROM"] = from.mime
     
+        fields["TO"] = to.map { $0.mime }.joined(separator: ", ")
+        
         if let cc = cc {
             fields["CC"] = cc.map { $0.mime }.joined(separator: ", ")
         }
