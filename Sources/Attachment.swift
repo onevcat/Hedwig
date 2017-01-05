@@ -29,9 +29,9 @@ struct Attachment {
     }
     
     let type: AttachmentType
-    let additionalHeaders: [String: String]?
+    let additionalHeaders: [String: String]
     
-    init(filePath: String, mime: String? = nil, name: String? = nil, inline: Bool = false, additionalHeaders: [String: String]? = nil) {
+    init(filePath: String, mime: String? = nil, name: String? = nil, inline: Bool = false, additionalHeaders: [String: String] = [:]) {
         
         let mime = mime ?? filePath.guessedMimeType
         let name = name ?? NSString(string: filePath).lastPathComponent
@@ -39,14 +39,44 @@ struct Attachment {
         self.init(type: .file(fileProperty), additionalHeaders: additionalHeaders)
     }
     
-    init(htmlContent: String, characterSet: String = "utf-8", alternative: Bool = false, inline: Bool = false, additionalHeaders: [String: String]? = nil) {
+    init(htmlContent: String, characterSet: String = "utf-8", alternative: Bool = false, inline: Bool = false, additionalHeaders: [String: String] = [:]) {
         let htmlProperty = HTMLProperty(content: htmlContent, characterSet: characterSet, alternative: alternative)
         self.init(type: .html(htmlProperty), additionalHeaders: additionalHeaders)
     }
     
-    init(type: AttachmentType, additionalHeaders: [String: String]? = nil) {
+    init(type: AttachmentType, additionalHeaders: [String: String] = [:]) {
         self.type = type
         self.additionalHeaders = additionalHeaders
+    }
+}
+
+extension Attachment.FileProperty: Equatable {
+    static func ==(lhs: Attachment.FileProperty, rhs: Attachment.FileProperty) -> Bool {
+        return lhs.path == rhs.path &&
+            lhs.mime == rhs.mime &&
+            lhs.name == rhs.name &&
+            lhs.inline == rhs.inline
+    }
+}
+
+extension Attachment.HTMLProperty: Equatable {
+    static func ==(lhs: Attachment.HTMLProperty, rhs: Attachment.HTMLProperty) -> Bool {
+        return lhs.content == rhs.content &&
+            lhs.characterSet == rhs.characterSet &&
+            lhs.alternative == rhs.alternative
+    }
+}
+
+extension Attachment: Equatable {
+    static func ==(lhs: Attachment, rhs: Attachment) -> Bool {
+        switch (lhs.type, rhs.type) {
+        case (.file(let p1), .file(let p2)):
+            return p1 == p2 && lhs.additionalHeaders == rhs.additionalHeaders
+        case (.html(let p1), .html(let p2)):
+            return p1 == p2 && lhs.additionalHeaders == rhs.additionalHeaders
+        default:
+            return false
+        }
     }
 }
 
@@ -70,10 +100,8 @@ extension Attachment {
         }
         
         result["CONTENT-TRANSFER-ENCODING"] = "BASE64"
-        if let additionalHeaders = additionalHeaders {
-            for (key, value) in additionalHeaders {
-                result[key.uppercased()] = value
-            }
+        for (key, value) in additionalHeaders {
+            result[key.uppercased()] = value
         }
         
         return result

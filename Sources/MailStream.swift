@@ -26,6 +26,8 @@ class MailStream: NSObject {
     var inputStream: InputStream?
     var buffer = Array<UInt8>(repeating: 0, count: bufferLength)
     
+    var shouldEncode = false
+    
     let mail: Mail
     
     init(mail: Mail, onData: DataHandler?) {
@@ -86,7 +88,7 @@ class MailStream: NSObject {
         
         switch attachment.type {
         case .file(let file): try streamFile(at: file.path)
-        case .html(let html): try streamText(text: html.content.base64EncodedString)
+        case .html(let html): try streamHTML(text: html.content)
         }
     }
     
@@ -106,8 +108,16 @@ class MailStream: NSObject {
             throw MailStreamError.fileNotExist
         }
         
+        shouldEncode = true
         inputStream = InputStream(fileAtPath: path)!
         try loadBytes()
+        shouldEncode = false
+    }
+    
+    func streamHTML(text: String) throws {
+        shouldEncode = true
+        try streamText(text: text)
+        shouldEncode = false
     }
     
     func streamText(text: String) throws {
@@ -130,7 +140,8 @@ class MailStream: NSObject {
         while stream.streamStatus != .atEnd && stream.streamStatus != .error {
             let count = stream.read(&buffer, maxLength: bufferLength)
             if count != 0 {
-                onData?(Array(buffer.dropLast(bufferLength - count)))
+                let toSend = Array(buffer.dropLast(bufferLength - count))
+                onData?( shouldEncode ? toSend.base64Data : toSend )
             }
         }
         

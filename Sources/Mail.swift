@@ -22,7 +22,7 @@ struct Mail {
     let subject: String?
     let text: String
     let attachments: [Attachment]
-    let additionalHeaders: [String: String]?
+    let additionalHeaders: [String: String]
 
     let alternative: Attachment?
     
@@ -36,7 +36,7 @@ struct Mail {
          bcc: String? = nil,
          subject: String?,
          attachments: [Attachment]? = nil,
-         additionalHeaders: [String: String]? = nil)
+         additionalHeaders: [String: String] = [:])
         throws
     {
         guard let fromAddress = from.parsedAddresses.last else {
@@ -47,6 +47,13 @@ struct Mail {
         self.to = to.parsedAddresses
         self.cc = cc?.parsedAddresses
         self.bcc = bcc?.parsedAddresses
+        
+        if self.to.count +
+            (self.cc?.count ?? 0) +
+            (self.bcc?.count ?? 0) == 0
+        {
+            throw MailError.noRecipient
+        }
         
         self.text = text
         self.subject = subject
@@ -82,12 +89,10 @@ extension Mail {
         fields["SUBJECT"] = (subject ?? "").mimeEncoded ?? ""
         fields["MIME-VERSION"] = "1.0 (Hedwig)"
         
-        if let additionalHeaders = additionalHeaders {
-            for (key, value) in additionalHeaders {
-                fields[key.uppercased()] = value
-            }
+        for (key, value) in additionalHeaders {
+            fields[key.uppercased()] = value
         }
-
+    
         return fields
     }
     
@@ -174,7 +179,7 @@ extension Date {
 extension Array {
     func takeLast(where condition: (Element) -> Bool) -> (Element?, Array) {
         var index: Int? = nil
-        for i in count - 1 ... 0 {
+        for i in (0 ..< count).reversed() {
             if condition(self[i]) {
                 index = i
                 break
