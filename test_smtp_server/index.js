@@ -34,6 +34,10 @@ var SMTPServer = require('smtp-server').SMTPServer;
 var server = new SMTPServer({
     disabledCommands: ['STARTTLS'],
     authMethods: ['PLAIN', 'LOGIN', 'XOAUTH2', 'CRAM-MD5'],
-    onAuth: onAuth
+    onAuth: onAuth,
+    onData: function(stream, session, callback){
+        stream.pipe(process.stdout); // print message to console 
+        stream.on('end', callback);
+    }
 });
 server.listen(25);

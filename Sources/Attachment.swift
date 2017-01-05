@@ -12,15 +12,15 @@ struct Attachment {
     
     struct FileProperty {
         let path: String
-        let mime: String?
-        let name: String?
+        let mime: String
+        let name: String
         let inline: Bool
     }
     
     struct HTMLProperty {
         let content: String
+        let characterSet: String
         let alternative: Bool
-        let inline: Bool
     }
     
     enum AttachmentType {
@@ -39,8 +39,8 @@ struct Attachment {
         self.init(type: .file(fileProperty), additionalHeaders: additionalHeaders)
     }
     
-    init(htmlContent: String, alternative: Bool = false, inline: Bool = false, additionalHeaders: [String: String]? = nil) {
-        let htmlProperty = HTMLProperty(content: htmlContent, alternative: alternative, inline: inline)
+    init(htmlContent: String, characterSet: String = "utf-8", alternative: Bool = false, inline: Bool = false, additionalHeaders: [String: String]? = nil) {
+        let htmlProperty = HTMLProperty(content: htmlContent, characterSet: characterSet, alternative: alternative)
         self.init(type: .html(htmlProperty), additionalHeaders: additionalHeaders)
     }
     
@@ -56,6 +56,33 @@ extension Attachment {
             return true
         }
         return false
+    }
+    
+    private var headers: [String: String] {
+        var result = [String: String]()
+        switch type {
+        case .file(let fileProperty):
+            result["CONTENT-TYPE"] = fileProperty.mime
+            result["CONTENT-DISPOSITION"] = fileProperty.inline ? "inline" : "attachment; filename=\"\(fileProperty.name.mimeEncoded ?? "attachment")\""
+        case .html(let htmlProperty):
+            result["CONTENT-TYPE"] = "text/html; charset=\(htmlProperty.characterSet)"
+            result["CONTENT-DISPOSITION"] = "inline"
+        }
+        
+        result["CONTENT-TRANSFER-ENCODING"] = "BASE64"
+        if let additionalHeaders = additionalHeaders {
+            for (key, value) in additionalHeaders {
+                result[key.uppercased()] = value
+            }
+        }
+        
+        return result
+    }
+
+    var headerString: String {
+        return headers.map { (key, value) in
+            return "\(key): \(value)"
+            }.joined(separator: CRLF)
     }
 }
 

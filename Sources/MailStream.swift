@@ -36,10 +36,8 @@ class MailStream: NSObject {
     func stream() throws {
         try streamHeader()
         
-        if let attachments = mail.attachments, !attachments.isEmpty {
-            
-            let containsAlternative = attachments.contains { $0.isAlternative }
-            try streamMixed(alternative: containsAlternative)
+        if mail.hasAttachment {
+            try streamMixed()
         } else {
             try streamText()
         }
@@ -47,8 +45,7 @@ class MailStream: NSObject {
     
     func streamHeader() throws {
         let header = mail.headersString + CRLF
-        inputStream = try InputStream(text: header)
-        try loadBytes()
+        send(header)
     }
     
     func streamText() throws {
@@ -56,13 +53,12 @@ class MailStream: NSObject {
         try streamText(text: text)
     }
     
-    func streamMixed(alternative: Bool) throws {
+    func streamMixed() throws {
         let boundary = String.createBoundary()
         let mixHeader = String.mixedHeader(boundary: boundary)
-        inputStream = try InputStream(text: mixHeader)
-        try loadBytes()
+        send(mixHeader)
 
-        if alternative {
+        if mail.alternative != nil {
             try streamAlternative()
         } else {
             try streamText()
@@ -73,35 +69,36 @@ class MailStream: NSObject {
     func streamAlternative() throws {
         let boundary = String.createBoundary()
         let alternativeHeader = String.alternativeHeader(boundary: boundary)
-        inputStream = try InputStream(text: alternativeHeader)
-        try loadBytes()
+        send(alternativeHeader)
         
         try streamText()
         
         send(boundary.startLine)
         
-        let alternativeTarget = (mail.attachments?.last { $0.isAlternative })!
-        try streamAttachment(attachment: alternativeTarget)
+        try streamAttachment(attachment: mail.alternative!)
         
         send(boundary.endLine)
     }
     
     func streamAttachment(attachment: Attachment) throws {
+        let attachmentHeader = attachment.headerString  + CRLF
+        send(attachmentHeader)
+        
         switch attachment.type {
-        case .file(let file): try streamFileContent(at: file.path)
+        case .file(let file): try streamFile(at: file.path)
         case .html(let html): try streamText(text: html.content.base64EncodedString)
         }
     }
     
     func streamAttachments(boundary: String) throws {
-        for attachement in mail.attachments! {
+        for attachement in mail.attachments {
             send(boundary.startLine)
             try streamAttachment(attachment: attachement)
         }
         send(boundary.endLine)
     }
     
-    func streamFileContent(at path: String) throws {
+    func streamFile(at path: String) throws {
         var isDirectory: ObjCBool = false
         let fileExist = FileManager.default.fileExists(atPath: path, isDirectory: &isDirectory)
         
@@ -183,8 +180,3 @@ extension String {
     }
 }
 
-extension Array {
-    func last(where condition: (Element) -> Bool) -> Element? {
-        return reversed().first(where: condition)
-    }
-}

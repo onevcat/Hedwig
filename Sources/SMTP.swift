@@ -273,7 +273,6 @@ extension SMTP {
     }
     
     func message(bytes: [UInt8]) throws {
-        print("sending: \(bytes)")
         try socket.sock.send(bytes: bytes)
     }
     

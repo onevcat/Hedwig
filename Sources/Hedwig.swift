@@ -17,17 +17,13 @@ class Hedwig {
     fileprivate var progress: ((Mail) -> Void)?
     fileprivate var completion: ((Error?) -> Void)?
     
-    init?(hostName: String, user: String?, password: String?,
+    init(hostName: String, user: String?, password: String?,
          port: Port? = nil, secure: SMTP.Secure = .tls, validation: SMTP.Validation = .default,
-         domainName: String = "localhost", authMethods: [SMTP.AuthMethod] = [.plain, .cramMD5, .login, .xOauth2], progress: ((Mail) -> Void)? = nil, completion: ((Error?) -> Void)? = nil)
+         domainName: String = "localhost", authMethods: [SMTP.AuthMethod] = [.plain, .cramMD5, .login, .xOauth2], progress: ((Mail) -> Void)? = nil, completion: ((Error?) -> Void)? = nil) throws
     {
-        do {
-            smtp = try SMTP(hostName: hostName, user: user, password: password, port: port, secure: secure, validation: validation, domainName: domainName, authMethods: authMethods)
-            self.progress = progress
-            self.completion = completion
-        } catch {
-            return nil
-        }
+        smtp = try SMTP(hostName: hostName, user: user, password: password, port: port, secure: secure, validation: validation, domainName: domainName, authMethods: authMethods)
+        self.progress = progress
+        self.completion = completion
     }
     
     deinit {
@@ -90,7 +86,7 @@ class Hedwig {
     }
     
     private func sendTo(_ mail: Mail) throws {
-        let to = mail.to ?? []
+        let to = mail.to
         let cc = mail.cc ?? []
         let bcc = mail.bcc ?? []
         

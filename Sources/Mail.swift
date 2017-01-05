@@ -16,20 +16,22 @@ enum MailError: Error {
 
 struct Mail {
     let from: NameAddressPair
-    let to: [NameAddressPair]?
+    let to: [NameAddressPair]
     let cc: [NameAddressPair]?
     let bcc: [NameAddressPair]?
     let subject: String?
     let text: String
-    let attachments: [Attachment]?
+    let attachments: [Attachment]
     let additionalHeaders: [String: String]?
 
+    let alternative: Attachment?
+    
     fileprivate let messageId = UUID().uuidString
     fileprivate let date = Date()
     
     init(text: String,
          from: String,
-         to: String? = nil,
+         to: String,
          cc: String? = nil,
          bcc: String? = nil,
          subject: String?,
@@ -42,16 +44,22 @@ struct Mail {
         }
         self.from = fromAddress
         
-        guard let _ = to ?? cc ?? bcc else {
-            throw MailError.noRecipient
-        }
-        self.to = to?.parsedAddresses
+        self.to = to.parsedAddresses
         self.cc = cc?.parsedAddresses
         self.bcc = bcc?.parsedAddresses
         
         self.text = text
         self.subject = subject
-        self.attachments = attachments
+
+        if let attachments = attachments {
+            let result = attachments.takeLast { $0.isAlternative }
+            self.alternative = result.0
+            self.attachments = result.1
+        } else {
+            self.alternative = nil
+            self.attachments = []
+        }
+        
         self.additionalHeaders = additionalHeaders
     }
 }
@@ -62,10 +70,6 @@ extension Mail {
         fields["MESSAGE-ID"] = messageId
         fields["DATE"] = date.smtpFormatted
         fields["FROM"] = from.mime
-    
-        if let to = to {
-            fields["TO"] = to.map { $0.mime }.joined(separator: ", ")
-        }
     
         if let cc = cc {
             fields["CC"] = cc.map { $0.mime }.joined(separator: ", ")
@@ -89,8 +93,12 @@ extension Mail {
     
     var headersString: String {
         return headers.map { (key, value) in
-            return "\(key.uppercased()): \(value)"
+            return "\(key): \(value)"
         }.joined(separator: CRLF)
+    }
+    
+    var hasAttachment: Bool {
+        return alternative != nil || !attachments.isEmpty
     }
 }
 
@@ -160,5 +168,25 @@ extension DateFormatter {
 extension Date {
     var smtpFormatted: String {
         return DateFormatter.smtpDateFormatter.string(from: self)
+    }
+}
+
+extension Array {
+    func takeLast(where condition: (Element) -> Bool) -> (Element?, Array) {
+        var index: Int? = nil
+        for i in count - 1 ... 0 {
+            if condition(self[i]) {
+                index = i
+                break
+            }
+        }
+        
+        if let index = index {
+            var array = self
+            let ele = array.remove(at: index)
+            return (ele, array)
+        } else {
+            return (nil, self)
+        }
     }
 }
