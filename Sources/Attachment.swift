@@ -37,12 +37,12 @@ struct Attachment {
         let mime = mime ?? filePath.guessedMimeType
         let name = name ?? NSString(string: filePath).lastPathComponent
         let fileProperty = FileProperty(path: filePath, mime: mime, name: name, inline: inline)
-        self.init(type: .file(fileProperty), additionalHeaders: additionalHeaders)
+        self.init(type: .file(fileProperty), additionalHeaders: additionalHeaders, related: related)
     }
     
     init(htmlContent: String, characterSet: String = "utf-8", alternative: Bool = false, inline: Bool = false, additionalHeaders: [String: String] = [:], related: [Attachment] = []) {
         let htmlProperty = HTMLProperty(content: htmlContent, characterSet: characterSet, alternative: alternative)
-        self.init(type: .html(htmlProperty), additionalHeaders: additionalHeaders)
+        self.init(type: .html(htmlProperty), additionalHeaders: additionalHeaders, related: related)
     }
     
     init(type: AttachmentType, additionalHeaders: [String: String] = [:], related: [Attachment] = []) {

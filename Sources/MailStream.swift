@@ -85,16 +85,19 @@ class MailStream: NSObject {
         send(boundary.endLine)
     }
     
-    func streamRelated(_ related: [Attachment]) throws {
-        let boundary = String.createBoundary()
-        let relatedHeader = String.relatedHeader(boundary: boundary)
-        send(relatedHeader)
-        
-        try streamAttachments(related, boundary: boundary)
-        send(boundary.endLine)
-    }
-    
     func streamAttachment(attachment: Attachment) throws {
+        let relatedBoundary: String
+        let hasRelated = !attachment.related.isEmpty
+        
+        if hasRelated {
+            relatedBoundary = String.createBoundary()
+            let relatedHeader = String.relatedHeader(boundary: relatedBoundary)
+            send(relatedHeader)
+            send(relatedBoundary.startLine)
+        } else {
+            relatedBoundary = ""
+        }
+        
         let attachmentHeader = attachment.headerString  + CRLF
         send(attachmentHeader)
         
@@ -103,8 +106,9 @@ class MailStream: NSObject {
         case .html(let html): try streamHTML(text: html.content)
         }
         
-        if !attachment.related.isEmpty {
-            try streamRelated(attachment.related)
+        if hasRelated {
+            send("\(CRLF)\(CRLF)")
+            try streamAttachments(attachment.related, boundary: relatedBoundary)
         }
     }
     
