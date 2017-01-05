@@ -7,6 +7,10 @@
 //
 import Foundation
 
+#if os(Linux)
+import Dispatch
+#endif
+
 class Hedwig {
     var sendingQueue = DispatchQueue(label: "com.onevcat.Hedwig.sendingQueue")
     

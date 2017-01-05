@@ -124,7 +124,12 @@ class MailStream: NSObject {
         var isDirectory: ObjCBool = false
         let fileExist = FileManager.default.fileExists(atPath: path, isDirectory: &isDirectory)
         
-        guard fileExist && !isDirectory.boolValue else {
+        #if os(Linux)
+        let directory: Bool = isDirectory
+        #else
+        let directory: Bool = isDirectory.boolValue
+        #endif     
+        guard fileExist && !directory else {   
             throw MailStreamError.fileNotExist
         }
         
