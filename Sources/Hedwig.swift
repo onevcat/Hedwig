@@ -12,14 +12,11 @@ import Dispatch
 #endif
 
 class Hedwig {
-    let actorQueue = DispatchQueue(label: "com.onevcat.Hedwig.actorQueue")
-    
-    var actors: [SendingActor] = []
     let config: SMTPConfig
     
     init(hostName: String, user: String?, password: String?,
          port: Port? = nil, secure: SMTP.Secure = .tls, validation: SMTP.Validation = .default,
-         domainName: String = "localhost", authMethods: [SMTP.AuthMethod] = [.plain, .cramMD5, .login, .xOauth2]) throws
+         domainName: String = "localhost", authMethods: [SMTP.AuthMethod] = [.plain, .cramMD5, .login, .xOauth2])
     {
         config = SMTPConfig(hostName: hostName, user: user, password: password, port: port, secure: secure, validation: validation, domainName: domainName, authMethods: authMethods)
     }
@@ -28,23 +25,10 @@ class Hedwig {
     {
         do {
             let smtp = try SMTP(config: config)
-            actorQueue.async {
-                let actor = SendingActor(mails: mails, smtp: smtp, progress: progress, completion: completion)
-                actor.onFinish = self.actorFinished
-                self.actors.append(actor)
-                actor.resume()
-            }
+            let actor = SendingActor(mails: mails, smtp: smtp, progress: progress, completion: completion)
+            actor.resume()
         } catch {
             completion?(error)
-        }
-    }
-    
-    func actorFinished(actor: SendingActor) {
-        actor.onFinish = nil
-        actorQueue.async {
-            if let index = (self.actors.index { $0 === actor }) {
-                self.actors.remove(at: index)
-            }
         }
     }
 }
@@ -80,8 +64,6 @@ class SendingActor {
     
     var sending = false
     
-    var onFinish: ((SendingActor) -> Void)?
-    
     fileprivate var progress: ((Mail) -> Void)?
     fileprivate var completion: ((Error?) -> Void)?
     
@@ -115,19 +97,14 @@ class SendingActor {
                 try? self.smtp.close()
                 self.sending = false
                 self.completion?(error)
-                self.onFinish?(self)
             }
         }
     }
     
     private func sendNext() throws {
         if self.pendings.isEmpty {
-            
             _ = try smtp.quit()
-            
             completion?(nil)
-            self.onFinish?(self)
-            
             progress = nil
             completion = nil
             return
@@ -178,5 +155,9 @@ class SendingActor {
     
     private func sendDone() throws {
         _ = try smtp.send(.dataEnd)
+    }
+    
+    deinit {
+        try? smtp.close()
     }
 }
