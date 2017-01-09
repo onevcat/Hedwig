@@ -21,6 +21,10 @@ class Hedwig {
         config = SMTPConfig(hostName: hostName, user: user, password: password, port: port, secure: secure, validation: validation, domainName: domainName, authMethods: authMethods)
     }
     
+    func send(_ mail: Mail, progress: ((Mail) -> Void)? = nil, completion: ((Error?) -> Void)? = nil) {
+        send([mail], progress: progress, completion: completion)
+    }
+    
     func send(_ mails: [Mail], progress: ((Mail) -> Void)? = nil, completion: ((Error?) -> Void)? = nil)
     {
         do {

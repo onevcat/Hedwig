@@ -19,7 +19,7 @@ struct Mail {
     let to: [NameAddressPair]
     let cc: [NameAddressPair]?
     let bcc: [NameAddressPair]?
-    let subject: String?
+    let subject: String
     let text: String
     let attachments: [Attachment]
     let additionalHeaders: [String: String]
@@ -34,7 +34,7 @@ struct Mail {
          to: String,
          cc: String? = nil,
          bcc: String? = nil,
-         subject: String?,
+         subject: String = "",
          attachments: [Attachment]? = nil,
          additionalHeaders: [String: String] = [:])
         throws
@@ -88,7 +88,7 @@ extension Mail {
             fields["BCC"] = bcc.map { $0.mime }.joined(separator: ", ")
         }
         
-        fields["SUBJECT"] = (subject ?? "").mimeEncoded ?? ""
+        fields["SUBJECT"] = subject.mimeEncoded ?? ""
         fields["MIME-VERSION"] = "1.0 (Hedwig)"
         
         for (key, value) in additionalHeaders {

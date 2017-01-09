@@ -48,11 +48,11 @@ class MailTests: XCTestCase {
     }
     
     func testMailCreatingFail() {
-        XCTAssertThrowsError(try Mail(text: "", from: "onev@onevcat", to: "", subject: nil), "Should throw noRecipient error") { (error) in
+        XCTAssertThrowsError(try Mail(text: "", from: "onev@onevcat", to: "", subject: ""), "Should throw noRecipient error") { (error) in
             XCTAssertEqual(error as? MailError, MailError.noRecipient)
         }
         
-        XCTAssertThrowsError(try Mail(text: "", from: "", to: "onev@onevcat", subject: nil), "Should throw noSender error") { (error) in
+        XCTAssertThrowsError(try Mail(text: "", from: "", to: "onev@onevcat", subject: ""), "Should throw noSender error") { (error) in
             XCTAssertEqual(error as? MailError, MailError.noSender)
         }
     }
