@@ -26,8 +26,8 @@ struct Mail {
 
     let alternative: Attachment?
     
-    fileprivate let messageId = UUID().uuidString
-    fileprivate let date = Date()
+    let messageId = UUID().uuidString
+    let date = Date()
     
     init(text: String,
          from: String,
@@ -82,10 +82,6 @@ extension Mail {
         
         if let cc = cc {
             fields["CC"] = cc.map { $0.mime }.joined(separator: ", ")
-        }
-        
-        if let bcc = bcc {
-            fields["BCC"] = bcc.map { $0.mime }.joined(separator: ", ")
         }
         
         fields["SUBJECT"] = subject.mimeEncoded ?? ""
