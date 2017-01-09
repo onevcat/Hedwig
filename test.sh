@@ -1,7 +1,7 @@
 #!/bin/sh
 cd ./test_smtp_server
-sudo npm start
+npm start
 cd ..
 swift test
 cd ./test_smtp_server
-sudo npm stop
+npm stop

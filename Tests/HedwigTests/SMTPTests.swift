@@ -29,11 +29,11 @@ class SMTPTests: XCTestCase {
         // Use `sudo npm start` in the test_smtp_server to start the test server.
         // After testing, use `sudo npm stop` to free the listened port.
         do {
-            let testLocal = try SMTP(hostName: "127.0.0.1", user: nil, password: nil, secure: .plain, domainName: "onevcat.com")
+            let testLocal = try SMTP(hostName: "127.0.0.1", user: nil, password: nil, port: 2255, secure: .plain, domainName: "onevcat.com")
             _ = try testLocal.connect()
             try testLocal.close()
 
-            let smtp4 = try SMTP(hostName: "127.0.0.1", user: nil, password: nil, secure: .plain, domainName: "onevcat.com")
+            let smtp4 = try SMTP(hostName: "127.0.0.1", user: nil, password: nil, port: 2255, secure: .plain, domainName: "onevcat.com")
             // Only add when local server is on
             smtps.append(smtp4)
             

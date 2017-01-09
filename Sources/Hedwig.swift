@@ -12,38 +12,95 @@ import Dispatch
 #endif
 
 class Hedwig {
-    var sendingQueue = DispatchQueue(label: "com.onevcat.Hedwig.sendingQueue")
+    let actorQueue = DispatchQueue(label: "com.onevcat.Hedwig.actorQueue")
     
+    var actors: [SendingActor] = []
+    let config: SMTPConfig
+    
+    init(hostName: String, user: String?, password: String?,
+         port: Port? = nil, secure: SMTP.Secure = .tls, validation: SMTP.Validation = .default,
+         domainName: String = "localhost", authMethods: [SMTP.AuthMethod] = [.plain, .cramMD5, .login, .xOauth2]) throws
+    {
+        config = SMTPConfig(hostName: hostName, user: user, password: password, port: port, secure: secure, validation: validation, domainName: domainName, authMethods: authMethods)
+    }
+    
+    func send(_ mails: [Mail], progress: ((Mail) -> Void)? = nil, completion: ((Error?) -> Void)? = nil)
+    {
+        do {
+            let smtp = try SMTP(config: config)
+            actorQueue.async {
+                let actor = SendingActor(mails: mails, smtp: smtp, progress: progress, completion: completion)
+                actor.onFinish = self.actorFinished
+                self.actors.append(actor)
+                actor.resume()
+            }
+        } catch {
+            completion?(error)
+        }
+    }
+    
+    func actorFinished(actor: SendingActor) {
+        actor.onFinish = nil
+        actorQueue.async {
+            if let index = (self.actors.index { $0 === actor }) {
+                self.actors.remove(at: index)
+            }
+        }
+    }
+}
+
+struct SMTPConfig {
+    let hostName: String
+    let user: String?
+    let password: String?
+    let port: Port?
+    let secure: SMTP.Secure
+    let validation: SMTP.Validation
+    let domainName: String
+    let authMethods: [SMTP.AuthMethod]
+}
+
+extension SMTP {
+    convenience init(config: SMTPConfig) throws {
+        try self.init(hostName: config.hostName,
+                 user: config.user,
+                 password: config.password,
+                 port: config.port,
+                 secure: config.secure,
+                 validation: config.validation,
+                 domainName: config.domainName,
+                 authMethods: config.authMethods)
+    }
+}
+
+class SendingActor {
+    let sendingQueue = DispatchQueue(label: "com.onevcat.Hedwig.sendingQueue")
     var pendings = [Mail]()
-    fileprivate var smtp: SMTP
+    let smtp: SMTP
+    
     var sending = false
+    
+    var onFinish: ((SendingActor) -> Void)?
     
     fileprivate var progress: ((Mail) -> Void)?
     fileprivate var completion: ((Error?) -> Void)?
     
-    init(hostName: String, user: String?, password: String?,
-         port: Port? = nil, secure: SMTP.Secure = .tls, validation: SMTP.Validation = .default,
-         domainName: String = "localhost", authMethods: [SMTP.AuthMethod] = [.plain, .cramMD5, .login, .xOauth2], progress: ((Mail) -> Void)? = nil, completion: ((Error?) -> Void)? = nil) throws
-    {
-        smtp = try SMTP(hostName: hostName, user: user, password: password, port: port, secure: secure, validation: validation, domainName: domainName, authMethods: authMethods)
+    init(mails: [Mail], smtp: SMTP, progress: ((Mail) -> Void)?, completion: ((Error?) -> Void)?) {
+        self.pendings = mails
+        self.smtp = smtp
         self.progress = progress
         self.completion = completion
     }
     
-    deinit {
-        progress = nil
-        completion = nil
-        try? smtp.close()
-    }
-    
-    func send(_ mails: [Mail])
-    {
+    func resume() {
         sendingQueue.async {
+            
+            if self.sending {
+                return
+            }
+            self.sending = true
+            
             do {
-                self.pendings.append(contentsOf: mails)
-                if self.sending { return }
-                
-                self.sending = true
                 if self.smtp.state != .connected {
                     _ = try self.smtp.connect()
                 }
@@ -54,12 +111,11 @@ class Hedwig {
                 }
                 
                 try self.sendNext()
-                
             } catch {
-                self.pendings.removeAll()
                 try? self.smtp.close()
                 self.sending = false
                 self.completion?(error)
+                self.onFinish?(self)
             }
         }
     }
@@ -70,6 +126,8 @@ class Hedwig {
             _ = try smtp.quit()
             
             completion?(nil)
+            self.onFinish?(self)
+            
             progress = nil
             completion = nil
             return
@@ -80,6 +138,8 @@ class Hedwig {
         try sendTo(mail)
         try sendData(mail)
         try sendDone()
+        
+        progress?(mail)
         
         try sendNext()
     }
