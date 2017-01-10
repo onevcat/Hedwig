@@ -43,17 +43,18 @@ struct Mail {
             throw MailError.noSender
         }
         self.from = fromAddress
-        
+
         self.to = to.parsedAddresses
         self.cc = cc?.parsedAddresses
         self.bcc = bcc?.parsedAddresses
         
-        if self.to.count +
-            (self.cc?.count ?? 0) +
-            (self.bcc?.count ?? 0) == 0
-        {
+        let noCc = self.cc?.isEmpty ?? true
+        let noBcc = self.bcc?.isEmpty ?? true
+        
+        if self.to.isEmpty && noCc && noBcc {
             throw MailError.noRecipient
         }
+        
         
         self.text = text
         self.subject = subject
@@ -66,7 +67,7 @@ struct Mail {
             self.alternative = nil
             self.attachments = []
         }
-        
+    
         self.additionalHeaders = additionalHeaders
     }
 }
