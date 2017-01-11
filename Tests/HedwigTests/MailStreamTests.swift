@@ -25,8 +25,8 @@
 //  THE SOFTWARE.
 
 import XCTest
+import Foundation
 @testable import Hedwig
-
 
 class MailStreamTests: XCTestCase {
 
@@ -40,9 +40,9 @@ class MailStreamTests: XCTestCase {
     func testCanStreamMailWithHTMLAttachment() {
         let html = Attachment(htmlContent: "<html></html>", alternative: false)
         let mail = try! Mail(text: "Hello", from: "onev@onevcat.com", to: "foo@bar.com", subject: "Title", attachments: [html])
-        
         let streamed = mail.streamedContent()
         let expected = mail.concatHeader(with: htmlAttachmentMail)
+
         XCTAssertEqual(streamed.boundaryUnified, expected)
     }
     
@@ -152,22 +152,30 @@ extension String {
         for i in 0 ..< boundaries.count {
             replaces.append("X\(i)")
         }
-        
+        print(replaces)
         var s = self
         for (replace, boundary) in zip(replaces, boundaries) {
-            s = s.replacingOccurrences(of: boundary, with: replace)
+            let r = s.components(separatedBy: CRLF)
+            s = r.map {
+                $0.replacingOccurrences(of: boundary, with: replace)
+            }.joined(separator: CRLF)
         }
-        
         return s
     }
     
     var boundaries: [String] {
         var result = [String]()
-        let pattern = try! NSRegularExpression(pattern: "boundary=\"((.+?))\"", options: [])
+        let pattern = try! Regex(pattern: "boundary=\"((.+?))\"", options: [])
         let matches = pattern.matches(in: self, options: [], range: NSRange(location: 0, length: utf16.count))
         
         for match in matches {
-            let boundary = NSString(string: self).substring(with: (match.rangeAt(1)))
+            #if os(Linux)
+            let range = match.range(at: 1)
+            #else
+            let range = match.rangeAt(1)
+            #endif
+
+            let boundary = NSString(string: self).substring(with: range)
             result.append(boundary)
         }
         return result

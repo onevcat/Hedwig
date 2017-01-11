@@ -25,6 +25,7 @@
 //  THE SOFTWARE.
 
 import XCTest
+import Foundation
 @testable import Hedwig
 
 class MailTests: XCTestCase {
