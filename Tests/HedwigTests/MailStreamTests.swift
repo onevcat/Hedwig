@@ -152,7 +152,6 @@ extension String {
         for i in 0 ..< boundaries.count {
             replaces.append("X\(i)")
         }
-        print(replaces)
         var s = self
         for (replace, boundary) in zip(replaces, boundaries) {
             
