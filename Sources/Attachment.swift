@@ -54,7 +54,7 @@ struct Attachment {
         self.init(type: .data(dataProperty), additionalHeaders: additionalHeaders, related: related)
     }
     
-    init(htmlContent: String, characterSet: String = "utf-8", alternative: Bool = false, inline: Bool = false, additionalHeaders: [String: String] = [:], related: [Attachment] = []) {
+    init(htmlContent: String, characterSet: String = "utf-8", alternative: Bool = true, inline: Bool = true, additionalHeaders: [String: String] = [:], related: [Attachment] = []) {
         let htmlProperty = HTMLProperty(content: htmlContent, characterSet: characterSet, alternative: alternative)
         self.init(type: .html(htmlProperty), additionalHeaders: additionalHeaders, related: related)
     }

@@ -4,7 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-      "start": "node index.js &",
-      "stop": "pkill -9 test_smtp"
+    "start": "node index.js &",
+    "stop": "pkill -9 test_smtp"
+  },
+  "dependencies": {
+    "smtp-server": "^1.17.0"
   }
 }
