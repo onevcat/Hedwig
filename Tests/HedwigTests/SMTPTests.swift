@@ -25,6 +25,7 @@
 //  THE SOFTWARE.
 
 import XCTest
+import Foundation
 @testable import Hedwig
 
 private func logLocalServerNotUp() {
@@ -38,11 +39,19 @@ class SMTPTests: XCTestCase {
     var smtps: [SMTP]! = []
     
     override func setUp() {
+
         let smtp1 = try! SMTP(hostName: "smtp.mailgun.org", user: nil, password: nil, secure: .tls, domainName: "onevcat.com")
         let smtp2 = try! SMTP(hostName: "smtp.zoho.com", user: nil, password: nil, secure: .ssl, domainName: "onevcat.com")
         let smtp3 = try! SMTP(hostName: "smtp.gmail.com", user: nil, password: nil, secure: .tls, domainName: "onevcat.com")
+
+        #if os(Linux)
+        if ProcessInfo.processInfo.environment["TRAVIS"] == nil {
+            smtps = [smtp1, smtp2, smtp3]
+        }
+        #else
         smtps = [smtp1, smtp2, smtp3]
-        
+        #endif
+
         // Only test on local smtp server when accessible. 
         // Use `sudo npm start` in the test_smtp_server to start the test server.
         // After testing, use `sudo npm stop` to free the listened port.

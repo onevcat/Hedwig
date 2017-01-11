@@ -87,7 +87,8 @@ class MailTests: XCTestCase {
         return [
             ("testCanInitMail", testCanInitMail),
             ("testMailPropertiesCorrect", testMailPropertiesCorrect),
-            ("testMailCreatingFail", testMailCreatingFail)
+            ("testMailCreatingFail", testMailCreatingFail),
+            ("testHeaderDateFormat", testHeaderDateFormat)
         ]
     }
 }
