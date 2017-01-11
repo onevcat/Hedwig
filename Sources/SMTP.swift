@@ -388,6 +388,7 @@ extension String {
         
         var feature = [String: Any]()
         
+        // Linux replacingOccurrences will fail when there is \r in string.
         let entries = replacingOccurrences(of: "\r", with: "").components(separatedBy: "\n")
         entries.forEach {entry in
             let match = String.featureMather.groups(in: entry)
