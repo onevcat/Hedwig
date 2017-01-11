@@ -236,10 +236,11 @@ let fileAttachementMail = [
     "",
     "--X0",
     [
+    "CONTENT-TYPE": "application/json",
     "CONTENT-DISPOSITION": "attachment; filename=\"=?UTF-8?Q?attachment.json?=\"",
     "CONTENT-TRANSFER-ENCODING": "BASE64",
     "HEADER-KEY": "header-value",
-    "CONTENT-TYPE": "application/json"
+    
     ].toString(),
     "eyJrZXkiOiAiaGVsbG8gd29ybGQifQ==",
     "--X0--",
@@ -353,10 +354,10 @@ let relatedAttachementsMail = [
     "",
     "--X2",
     [
+    "CONTENT-TYPE": "image/jpg",
     "CONTENT-DISPOSITION": "inline; filename=\"=?UTF-8?Q?hedwig.jpg?=\"",
     "CONTENT-TRANSFER-ENCODING": "BASE64",
-    "CONTENT-ID": "hedwig-image",
-    "CONTENT-TYPE": "image/jpg"
+    "CONTENT-ID": "hedwig-image"
     ].toString(),
     imageInBase64,
     "--X2--",

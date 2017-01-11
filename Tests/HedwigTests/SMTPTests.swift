@@ -132,9 +132,10 @@ class SMTPTests: XCTestCase {
         let methods: [SMTP.AuthMethod] = [.plain, .login, .cramMD5, .xOauth2]
         for method in methods {
             guard let smtp = try? SMTP(
-                hostName: "127.0.0.1",
+                hostName: "onevcat.com",
                 user: "foo@bar.com",
                 password: "password",
+                port: 2255,
                 secure: .plain,
                 domainName: "onevcat.com",
                 authMethods: [method]) else
@@ -156,9 +157,10 @@ class SMTPTests: XCTestCase {
     
     func testSMTPAuthPlainErrorPassword() {
         guard let smtp = try? SMTP(
-            hostName: "127.0.0.1",
+            hostName: "onevcat.com",
             user: "foo@bar.com",
             password: "wrong_password",
+            port: 2255,
             secure: .plain,
             domainName: "onevcat.com",
             authMethods: [.plain]) else
