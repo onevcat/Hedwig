@@ -59,22 +59,27 @@ struct SMTPSocket {
                 }
             } while parsed == nil
         } else {
-            // Multiple lines. Parse until last.
+            // Multiple lines. Try parse until get a correct line.
             multiple = true
-            response.forEach {
-                result.append($0)
-                do { parsed = try SMTPResponse(string: $0) }
-                catch { }
-            }
+            for res in response {
+                result.append(res)
+                if parsed == nil {
+                    parsed = try? SMTPResponse(string: res)
+                }
+            } 
+        }
+        
+        guard let parsedRes = parsed else {
+            throw SMTP.SMTPError.badResponse
         }
 
         let r: SMTPResponse
         
         if multiple {
-            r = SMTPResponse(code: parsed!.code,
+            r = SMTPResponse(code: parsedRes.code,
                              data: result.joined(separator: "\n"))
         } else {
-            r = parsed!
+            r = parsedRes
         }
         
         logInTest("S: \(r.data)")

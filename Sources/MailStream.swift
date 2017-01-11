@@ -104,6 +104,7 @@ class MailStream: NSObject {
         switch attachment.type {
         case .file(let file): try streamFile(at: file.path)
         case .html(let html): try streamHTML(text: html.content)
+        case .data(let data): try streamData(data: data.data)
         }
         
         if hasRelated {
@@ -135,6 +136,13 @@ class MailStream: NSObject {
         
         shouldEncode = true
         inputStream = InputStream(fileAtPath: path)!
+        try loadBytes()
+        shouldEncode = false
+    }
+    
+    func streamData(data: Data) throws {
+        shouldEncode = true
+        inputStream = InputStream(data: data)
         try loadBytes()
         shouldEncode = false
     }
