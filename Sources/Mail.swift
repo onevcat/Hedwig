@@ -33,7 +33,7 @@ public enum MailError: Error {
 }
 
 public struct Mail {
-    public let from: NameAddressPair
+    public let from: NameAddressPair?
     public let to: [NameAddressPair]
     public let cc: [NameAddressPair]?
     public let bcc: [NameAddressPair]?
@@ -55,24 +55,12 @@ public struct Mail {
          subject: String = "",
          attachments: [Attachment]? = nil,
          additionalHeaders: [String: String] = [:])
-        throws
     {
-        guard let fromAddress = from.parsedAddresses.last else {
-            throw MailError.noSender
-        }
-        self.from = fromAddress
+        self.from = from.parsedAddresses.last
 
         self.to = to.parsedAddresses
         self.cc = cc?.parsedAddresses
         self.bcc = bcc?.parsedAddresses
-        
-        let noCc = self.cc?.isEmpty ?? true
-        let noBcc = self.bcc?.isEmpty ?? true
-        
-        if self.to.isEmpty && noCc && noBcc {
-            throw MailError.noRecipient
-        }
-        
         
         self.text = text
         self.subject = subject
@@ -88,6 +76,17 @@ public struct Mail {
     
         self.additionalHeaders = additionalHeaders
     }
+    
+    var hasSender: Bool {
+        return from != nil
+    }
+    
+    var hasRecipient: Bool {
+        let noCc = self.cc?.isEmpty ?? true
+        let noBcc = self.bcc?.isEmpty ?? true
+        let noRecipient = to.isEmpty && noCc && noBcc
+        return !noRecipient
+    }
 }
 
 extension Mail {
@@ -95,7 +94,7 @@ extension Mail {
         var fields = [String: String]()
         fields["MESSAGE-ID"] = messageId
         fields["DATE"] = date.smtpFormatted
-        fields["FROM"] = from.mime
+        fields["FROM"] = from?.mime ?? ""
     
         fields["TO"] = to.map { $0.mime }.joined(separator: ", ")
         

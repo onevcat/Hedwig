@@ -40,18 +40,28 @@ public struct Hedwig {
         config = SMTPConfig(hostName: hostName, user: user, password: password, port: port, secure: secure, validation: validation, domainName: domainName, authMethods: authMethods)
     }
     
-    public func send(_ mail: Mail, progress: ((Mail) -> Void)? = nil, completion: ((Error?) -> Void)? = nil) {
-        send([mail], progress: progress, completion: completion)
+    public func send(_ mail: Mail,
+                     completion: ((Error?) -> Void)? = nil)
+    {
+        send([mail], progress: nil) { (sent, failed) in
+            if sent.isEmpty {
+                completion?(failed.first!.1)
+            } else {
+                completion?(nil)
+            }
+        }
     }
     
-    public func send(_ mails: [Mail], progress: ((Mail) -> Void)? = nil, completion: ((Error?) -> Void)? = nil)
+    public func send(_ mails: [Mail],
+                     progress: ((Mail, Error?) -> Void)? = nil,
+                     completion: ((_ sent: [Mail], _ failed: [(Mail, Error)]) -> Void)? = nil)
     {
         do {
             let smtp = try SMTP(config: config)
             let actor = SendingActor(mails: mails, smtp: smtp, progress: progress, completion: completion)
             actor.resume()
         } catch {
-            completion?(error)
+            completion?([], mails.map { ($0, error) })
         }
     }
 }
@@ -83,14 +93,18 @@ extension SMTP {
 class SendingActor {
     let sendingQueue = DispatchQueue(label: "com.onevcat.Hedwig.sendingQueue")
     var pendings = [Mail]()
+    
+    var sent = [Mail]()
+    var failed = [(Mail, Error)]()
+    
     let smtp: SMTP
     
     var sending = false
     
-    fileprivate var progress: ((Mail) -> Void)?
-    fileprivate var completion: ((Error?) -> Void)?
+    fileprivate var progress: ((Mail, Error?) -> Void)?
+    fileprivate var completion: (([Mail], [(Mail, Error)]) -> Void)?
     
-    init(mails: [Mail], smtp: SMTP, progress: ((Mail) -> Void)?, completion: ((Error?) -> Void)?) {
+    init(mails: [Mail], smtp: SMTP, progress: ((Mail, Error?) -> Void)?, completion: (([Mail], [(Mail, Error)]) -> Void)?) {
         self.pendings = mails
         self.smtp = smtp
         self.progress = progress
@@ -114,38 +128,62 @@ class SendingActor {
                 if !self.smtp.loggedIn {
                     try self.smtp.login()
                 }
-                
-                try self.sendNext()
             } catch {
                 try? self.smtp.close()
                 self.sending = false
-                self.completion?(error)
+                self.completion?([], self.pendings.map { ($0, error) })
+            }
+            
+            if self.sending {
+                self.sendNext()
             }
         }
     }
     
-    private func sendNext() throws {
+    private func sendNext() {
+        
         if self.pendings.isEmpty {
-            _ = try smtp.quit()
-            completion?(nil)
+            _ = try? smtp.quit()
+            sending = false
+            completion?(sent, failed)
             progress = nil
             completion = nil
             return
         }
         
         let mail = pendings.removeFirst()
-        try sendFrom(mail)
-        try sendTo(mail)
-        try sendData(mail)
-        try sendDone()
+
+        do {
+            try checkMail(mail)
+            try sendFrom(mail)
+            try sendTo(mail)
+            try sendData(mail)
+            try sendDone()
+            sent.append(mail)
+            progress?(mail, nil)
+        } catch {
+            failed.append((mail, error))
+            progress?(mail, error)
+        }
         
-        progress?(mail)
+        // Avoid recursive.
+        sendingQueue.async {
+            self.sendNext()
+        }
+    }
+    
+    private func checkMail(_ mail: Mail) throws {
+        if !mail.hasSender {
+            throw MailError.noSender
+        }
         
-        try sendNext()
+        if !mail.hasRecipient {
+            throw MailError.noRecipient
+        }
     }
     
     private func sendFrom(_ mail: Mail) throws {
-        let fromAddress = mail.from.address
+        let fromAddress = mail.from?.address ?? ""
         _ = try smtp.send(.mail(fromAddress))
     }
     

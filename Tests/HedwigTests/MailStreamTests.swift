@@ -31,7 +31,7 @@ import Foundation
 class MailStreamTests: XCTestCase {
 
     func testCanStreamPlainMail() {
-        let mail = try! Mail(text: "Across the great wall we can reach every corner in the world.", from: "onev@onevcat.com", to: "foo@bar.com")
+        let mail = Mail(text: "Across the great wall we can reach every corner in the world.", from: "onev@onevcat.com", to: "foo@bar.com")
         let streamed = mail.streamedContent()
         let expected = mail.concatHeader(with: plainMail)
         XCTAssertEqual(streamed, expected)
@@ -39,7 +39,7 @@ class MailStreamTests: XCTestCase {
     
     func testCanStreamMailWithHTMLAttachment() {
         let html = Attachment(htmlContent: "<html></html>", alternative: false)
-        let mail = try! Mail(text: "Hello", from: "onev@onevcat.com", to: "foo@bar.com", subject: "Title", attachments: [html])
+        let mail = Mail(text: "Hello", from: "onev@onevcat.com", to: "foo@bar.com", subject: "Title", attachments: [html])
         let streamed = mail.streamedContent()
         let expected = mail.concatHeader(with: htmlAttachmentMail)
 
@@ -55,7 +55,7 @@ class MailStreamTests: XCTestCase {
         }
         
         let attachment = Attachment(filePath: path, inline: false, additionalHeaders: ["header-key": "header-value"])
-        let mail = try! Mail(text: "Hello", from: "onev@onevcat.com", to: "foo@bar.com", subject: "Title", attachments: [attachment])
+        let mail = Mail(text: "Hello", from: "onev@onevcat.com", to: "foo@bar.com", subject: "Title", attachments: [attachment])
         
         let streamed = mail.streamedContent()
         let expected = mail.concatHeader(with: fileAttachementMail)
@@ -65,7 +65,7 @@ class MailStreamTests: XCTestCase {
     func testCanStreamMailWithDataAttachment() {
         let data = "{\"key\": \"hello world\"}".data(using: .utf8)!
         let attachment = Attachment(data: data, mime: "application/zip", name: "file.zip", inline: true)
-        let mail = try! Mail(text: "Hello", from: "onev@onevcat.com", to: "foo@bar.com", subject: "Title", attachments: [attachment])
+        let mail = Mail(text: "Hello", from: "onev@onevcat.com", to: "foo@bar.com", subject: "Title", attachments: [attachment])
         
         let streamed = mail.streamedContent()
         let expected = mail.concatHeader(with: dataAttachementMail)
@@ -74,7 +74,7 @@ class MailStreamTests: XCTestCase {
     
     func testCanStreamAlternativeHTMLAttachment() {
         let html = Attachment(htmlContent: "<html></html>")
-        let mail = try! Mail(text: "Hello", from: "onev@onevcat.com", to: "foo@bar.com", subject: "Title", attachments: [html])
+        let mail = Mail(text: "Hello", from: "onev@onevcat.com", to: "foo@bar.com", subject: "Title", attachments: [html])
         
         let streamed = mail.streamedContent()
         let expected = mail.concatHeader(with: alternativeHtmlAttachmentMail)
@@ -87,7 +87,7 @@ class MailStreamTests: XCTestCase {
         let data = "{\"key\": \"hello world\"}".data(using: .utf8)!
         let dataAttachment = Attachment(data: data, mime: "application/json", name: "file.json")
         
-        let mail = try! Mail(text: "Hello", from: "onev@onevcat.com", to: "foo@bar.com", subject: "Title", attachments: [htmlAttachment, dataAttachment])
+        let mail = Mail(text: "Hello", from: "onev@onevcat.com", to: "foo@bar.com", subject: "Title", attachments: [htmlAttachment, dataAttachment])
         
         let streamed = mail.streamedContent()
         let expected = mail.concatHeader(with: multipleAttachementsMail)
@@ -99,14 +99,14 @@ class MailStreamTests: XCTestCase {
         let dataAttachemet = Attachment(data: data, mime: "image/jpg", name: "hedwig.jpg", inline: true, additionalHeaders: ["Content-ID": "hedwig-image"])
         let html = Attachment(htmlContent: "<html><body><h2>Hello Hedwig</h>A photo <img src=\"cid:hedwig-image\"/>. Send the mail to <a href=\"https://onevcat.com\">me</a> please.</body></html>", related: [dataAttachemet])
         
-        let mail = try! Mail(text: "Hello", from: "onev@onevcat.com", to: "foo@bar.com", subject: "Title", attachments: [html])
+        let mail = Mail(text: "Hello", from: "onev@onevcat.com", to: "foo@bar.com", subject: "Title", attachments: [html])
         let streamed = mail.streamedContent()
         let expected = mail.concatHeader(with: relatedAttachementsMail)
         XCTAssertEqual(streamed.boundaryUnified, expected)
     }
     
     func testCanStreamNonAscii() {
-        let mail = try! Mail(text: "你好，中国。", from: "onev@onevcat.com", to: "foo@bar.com")
+        let mail = Mail(text: "你好，中国。", from: "onev@onevcat.com", to: "foo@bar.com")
         let streamed = mail.streamedContent()
         let expected = mail.concatHeader(with: nonAsciiMail)
         XCTAssertEqual(streamed, expected)

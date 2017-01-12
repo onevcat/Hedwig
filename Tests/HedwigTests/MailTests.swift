@@ -31,7 +31,7 @@ import Foundation
 class MailTests: XCTestCase {
     
     func testCanInitMail() {
-        _ = try! Mail(text: "Hello", from: "onev@onevcat.com", to: "foo@bar.com", subject: "Hello")
+        _ = Mail(text: "Hello", from: "onev@onevcat.com", to: "foo@bar.com", subject: "Hello")
     }
     
     func testMailPropertiesCorrect() {
@@ -39,10 +39,10 @@ class MailTests: XCTestCase {
         let a1 = Attachment(filePath: "")
         let a2 = Attachment(htmlContent: "<html></html>", alternative: true)
         
-        let mail = try! Mail(text: "Hello", from: "onev@onevcat.com", to: "foo@bar.com", cc: "Wei Wang <hello@world.com>, foo1@bar.com", bcc: "<foo2@bar.com>", subject: "Mail Subject", attachments: [a1, a2], additionalHeaders: ["test-key": "test-value"])
+        let mail = Mail(text: "Hello", from: "onev@onevcat.com", to: "foo@bar.com", cc: "Wei Wang <hello@world.com>, foo1@bar.com", bcc: "<foo2@bar.com>", subject: "Mail Subject", attachments: [a1, a2], additionalHeaders: ["test-key": "test-value"])
         
-        XCTAssertEqual(mail.from.name, "")
-        XCTAssertEqual(mail.from.address, "onev@onevcat.com")
+        XCTAssertEqual(mail.from?.name, "")
+        XCTAssertEqual(mail.from?.address, "onev@onevcat.com")
         
         XCTAssertEqual(mail.to.count, 1)
         XCTAssertEqual(mail.to[0].name, "")
@@ -66,14 +66,12 @@ class MailTests: XCTestCase {
         XCTAssertEqual(mail.additionalHeaders, ["test-key": "test-value"])
     }
     
-    func testMailCreatingFail() {
-        XCTAssertThrowsError(try Mail(text: "", from: "onev@onevcat", to: "", subject: ""), "Should throw noRecipient error") { (error) in
-            XCTAssertEqual(error as? MailError, MailError.noRecipient)
-        }
+    func testMailInvalid() {
+        let mail = Mail(text: "", from: "onev@onevcat", to: "", subject: "")
+        XCTAssertFalse(mail.hasRecipient)
         
-        XCTAssertThrowsError(try Mail(text: "", from: "", to: "onev@onevcat", subject: ""), "Should throw noSender error") { (error) in
-            XCTAssertEqual(error as? MailError, MailError.noSender)
-        }
+        let anotherMail = Mail(text: "", from: "", to: "onev@onevcat", subject: "")
+        XCTAssertFalse(anotherMail.hasSender)
     }
     
     func testHeaderDateFormat() {
@@ -87,7 +85,7 @@ class MailTests: XCTestCase {
         return [
             ("testCanInitMail", testCanInitMail),
             ("testMailPropertiesCorrect", testMailPropertiesCorrect),
-            ("testMailCreatingFail", testMailCreatingFail),
+            ("testMailInvalid", testMailInvalid),
             ("testHeaderDateFormat", testHeaderDateFormat)
         ]
     }

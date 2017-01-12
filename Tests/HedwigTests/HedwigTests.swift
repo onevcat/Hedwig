@@ -38,7 +38,7 @@ class HedwigTests: XCTestCase {
         
         let e = expectation(description: "wait")
 
-        let plainMail = try! Mail(text: "Hello World", from: "onev@onevcat.com", to: "foo@bar.com", subject: "Title")
+        let plainMail = Mail(text: "Hello World", from: "onev@onevcat.com", to: "foo@bar.com", subject: "Title")
         hedwig.send(plainMail) { error in
             if error != nil { XCTFail("Should no error happens, but \(error)") }
             e.fulfill()
@@ -50,7 +50,7 @@ class HedwigTests: XCTestCase {
         let e = expectation(description: "wait")
     
         let attachement = Attachment(htmlContent: "<html></html>")
-        let mail = try! Mail(text: "Hello World", from: "onev@onevcat.com", to: "foo@bar.com", subject: "Title", attachments: [attachement])
+        let mail = Mail(text: "Hello World", from: "onev@onevcat.com", to: "foo@bar.com", subject: "Title", attachments: [attachement])
         hedwig.send(mail) { error in
             if error != nil { XCTFail("Should no error happens, but \(error)") }
             e.fulfill()
@@ -60,14 +60,17 @@ class HedwigTests: XCTestCase {
     
     func testCanSendMultipleMails() {
         let e = expectation(description: "wait")
-        let mail1 = try! Mail(text: "Hello World", from: "onev@onevcat.com", to: "foo@bar.com", subject: "Title")
-        let mail2 = try! Mail(text: "Hello World Again", from: "onev@onevcat.com", to: "foo@bar.com", subject: "Title")
+        let mail1 = Mail(text: "Hello World", from: "onev@onevcat.com", to: "foo@bar.com", subject: "Title")
+        let mail2 = Mail(text: "Hello World Again", from: "onev@onevcat.com", to: "foo@bar.com", subject: "Title")
         
         var count = 0
-        hedwig.send([mail1, mail2], progress: { _ in
+        hedwig.send([mail1, mail2], progress: { result in
+            XCTAssertNil(result.1)
             count += 1
-        }) { error in
-            if error != nil { XCTFail("Should no error happens, but \(error)") }
+        }) { sent, failed in
+            if !failed.isEmpty {
+                XCTFail("Should no error happens, but failed mails: \(failed)")
+            }
             XCTAssertEqual(count, 2)
             e.fulfill()
         }
