@@ -27,27 +27,27 @@
 import Foundation
 import AddressParser
 
-enum MailError: Error {
+public enum MailError: Error {
     case noSender
     case noRecipient
 }
 
-struct Mail {
-    let from: NameAddressPair
-    let to: [NameAddressPair]
-    let cc: [NameAddressPair]?
-    let bcc: [NameAddressPair]?
-    let subject: String
-    let text: String
-    let attachments: [Attachment]
-    let additionalHeaders: [String: String]
+public struct Mail {
+    public let from: NameAddressPair
+    public let to: [NameAddressPair]
+    public let cc: [NameAddressPair]?
+    public let bcc: [NameAddressPair]?
+    public let subject: String
+    public let text: String
+    public let attachments: [Attachment]
+    public let additionalHeaders: [String: String]
 
-    let alternative: Attachment?
+    public let alternative: Attachment?
     
-    let messageId = UUID().uuidString
-    let date = Date()
+    public let messageId = UUID().uuidString
+    public let date = Date()
     
-    init(text: String,
+    public init(text: String,
          from: String,
          to: String,
          cc: String? = nil,
@@ -124,9 +124,14 @@ extension Mail {
     }
 }
 
-struct NameAddressPair {
-    let name: String
-    let address: String
+public struct NameAddressPair {
+    public let name: String
+    public let address: String
+    
+    public init(name: String, address: String) {
+        self.name = name
+        self.address = address
+    }
     
     var mime: String {
         if name.isEmpty {

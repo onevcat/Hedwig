@@ -24,7 +24,7 @@
 //  THE SOFTWARE.
 
 import XCTest
-@testable import Hedwig
+import Hedwig
 
 class HedwigTests: XCTestCase {
     
@@ -40,6 +40,18 @@ class HedwigTests: XCTestCase {
 
         let plainMail = try! Mail(text: "Hello World", from: "onev@onevcat.com", to: "foo@bar.com", subject: "Title")
         hedwig.send(plainMail) { error in
+            if error != nil { XCTFail("Should no error happens, but \(error)") }
+            e.fulfill()
+        }
+        waitForExpectations(timeout: 5)
+    }
+    
+    func testCanSendMailWithAttachment() {
+        let e = expectation(description: "wait")
+    
+        let attachement = Attachment(htmlContent: "<html></html>")
+        let mail = try! Mail(text: "Hello World", from: "onev@onevcat.com", to: "foo@bar.com", subject: "Title", attachments: [attachement])
+        hedwig.send(mail) { error in
             if error != nil { XCTFail("Should no error happens, but \(error)") }
             e.fulfill()
         }
@@ -65,6 +77,7 @@ class HedwigTests: XCTestCase {
     static var allTests : [(String, (HedwigTests) -> () throws -> Void)] {
         return [
             ("testCanSendMail", testCanSendMail),
+            ("testCanSendMailWithAttachment", testCanSendMailWithAttachment),
             ("testCanSendMultipleMails", testCanSendMultipleMails)
         ]
     }

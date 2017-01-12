@@ -39,9 +39,9 @@ private func logWarning(message: String? = nil) {
 }
 
 
-typealias Port = UInt16
+public typealias Port = UInt16
 
-class SMTP {
+public class SMTP {
     let hostName: String
     fileprivate let port: Port
     fileprivate let user: String?
@@ -107,17 +107,23 @@ class SMTP {
 }
 
 extension SMTP {
-    struct Validation {
-        let certificate: Certificates
-        let cipher: Config.Cipher
-        let protocols: [Config.TLSProtocol]
+    public struct Validation {
+        public let certificate: Certificates
+        public let cipher: Config.Cipher
+        public let protocols: [Config.TLSProtocol]
         
-        static let `default` = Validation(certificate: .defaults, cipher: .compat, protocols: [.all])
+        public init(certificate: Certificates, cipher: Config.Cipher, protocols: [Config.TLSProtocol]) {
+            self.certificate = certificate
+            self.cipher = cipher
+            self.protocols = protocols
+        }
+        
+        public static let `default` = Validation(certificate: .defaults, cipher: .compat, protocols: [.all])
     }
 }
 
 extension SMTP {
-    enum SMTPError: Error, CustomStringConvertible {
+    public enum SMTPError: Error, CustomStringConvertible {
         case couldNotConnect
         case timeOut
         case badResponse
@@ -130,7 +136,7 @@ extension SMTP {
         case connectionAuth
         case unknown
         
-        var description: String {
+        public var description: String {
             let message: String
             switch self {
             case .couldNotConnect: message = ""
@@ -151,7 +157,7 @@ extension SMTP {
 }
 
 extension SMTP {
-    enum Secure {
+    public enum Secure {
         case plain
         case ssl
         case tls
@@ -175,7 +181,7 @@ extension SMTP {
 }
 
 extension SMTP {
-    enum AuthMethod: String {
+    public enum AuthMethod: String {
         case plain = "PLAIN"
         case cramMD5 = "CRAM-MD5"
         case login = "LOGIN"

@@ -30,21 +30,21 @@ import Foundation
 import Dispatch
 #endif
 
-class Hedwig {
+public struct Hedwig {
     let config: SMTPConfig
     
-    init(hostName: String, user: String?, password: String?,
+    public init(hostName: String, user: String?, password: String?,
          port: Port? = nil, secure: SMTP.Secure = .tls, validation: SMTP.Validation = .default,
          domainName: String = "localhost", authMethods: [SMTP.AuthMethod] = [.plain, .cramMD5, .login, .xOauth2])
     {
         config = SMTPConfig(hostName: hostName, user: user, password: password, port: port, secure: secure, validation: validation, domainName: domainName, authMethods: authMethods)
     }
     
-    func send(_ mail: Mail, progress: ((Mail) -> Void)? = nil, completion: ((Error?) -> Void)? = nil) {
+    public func send(_ mail: Mail, progress: ((Mail) -> Void)? = nil, completion: ((Error?) -> Void)? = nil) {
         send([mail], progress: progress, completion: completion)
     }
     
-    func send(_ mails: [Mail], progress: ((Mail) -> Void)? = nil, completion: ((Error?) -> Void)? = nil)
+    public func send(_ mails: [Mail], progress: ((Mail) -> Void)? = nil, completion: ((Error?) -> Void)? = nil)
     {
         do {
             let smtp = try SMTP(config: config)

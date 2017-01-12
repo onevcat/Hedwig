@@ -27,39 +27,66 @@
 import Foundation
 import MimeType
 
-struct Attachment {
+public struct Attachment {
     
-    struct FileProperty {
-        let path: String
-        let mime: String
-        let name: String
-        let inline: Bool
+    public struct FileProperty {
+        public let path: String
+        public let mime: String
+        public let name: String
+        public let inline: Bool
+        
+        public init(path: String, mime: String, name: String, inline: Bool) {
+            self.path = path
+            self.mime = mime
+            self.name = name
+            self.inline = inline
+        }
     }
     
-    struct HTMLProperty {
-        let content: String
-        let characterSet: String
-        let alternative: Bool
+    public struct HTMLProperty {
+        public let content: String
+        public let characterSet: String
+        public let alternative: Bool
+        
+        public init(content: String, characterSet: String, alternative: Bool) {
+            self.content = content
+            self.characterSet = characterSet
+            self.alternative = alternative
+        }
     }
     
-    struct DataProperty {
-        let data: Data
-        let mime: String
-        let name: String
-        let inline: Bool
+    public struct DataProperty {
+        public let data: Data
+        public let mime: String
+        public let name: String
+        public let inline: Bool
+        
+        public init(data: Data, mime: String, name: String, inline: Bool) {
+            self.data = data
+            self.mime = mime
+            self.name = name
+            self.inline = inline
+        }
     }
     
-    enum AttachmentType {
+    public enum AttachmentType {
         case file(FileProperty)
         case html(HTMLProperty)
         case data(DataProperty)
     }
     
-    let type: AttachmentType
-    let additionalHeaders: [String: String]
-    let related: [Attachment]
+    public let type: AttachmentType
+    public let additionalHeaders: [String: String]
+    public let related: [Attachment]
     
-    init(filePath: String, mime: String? = nil, name: String? = nil, inline: Bool = false, additionalHeaders: [String: String] = [:], related: [Attachment] = []) {
+    public var isAlternative: Bool {
+        if case .html(let p) = type, p.alternative {
+            return true
+        }
+        return false
+    }
+    
+    public init(filePath: String, mime: String? = nil, name: String? = nil, inline: Bool = false, additionalHeaders: [String: String] = [:], related: [Attachment] = []) {
         
         let mime = mime ??  MimeType(path: filePath).value
         let name = name ?? NSString(string: filePath).lastPathComponent
@@ -67,17 +94,17 @@ struct Attachment {
         self.init(type: .file(fileProperty), additionalHeaders: additionalHeaders, related: related)
     }
     
-    init(data: Data, mime: String, name: String, inline: Bool = false, additionalHeaders: [String: String] = [:], related: [Attachment] = []) {
+    public init(data: Data, mime: String, name: String, inline: Bool = false, additionalHeaders: [String: String] = [:], related: [Attachment] = []) {
         let dataProperty = DataProperty(data: data, mime: mime, name: name, inline: inline)
         self.init(type: .data(dataProperty), additionalHeaders: additionalHeaders, related: related)
     }
     
-    init(htmlContent: String, characterSet: String = "utf-8", alternative: Bool = true, inline: Bool = true, additionalHeaders: [String: String] = [:], related: [Attachment] = []) {
+    public init(htmlContent: String, characterSet: String = "utf-8", alternative: Bool = true, inline: Bool = true, additionalHeaders: [String: String] = [:], related: [Attachment] = []) {
         let htmlProperty = HTMLProperty(content: htmlContent, characterSet: characterSet, alternative: alternative)
         self.init(type: .html(htmlProperty), additionalHeaders: additionalHeaders, related: related)
     }
     
-    init(type: AttachmentType, additionalHeaders: [String: String] = [:], related: [Attachment] = []) {
+    public init(type: AttachmentType, additionalHeaders: [String: String] = [:], related: [Attachment] = []) {
         self.type = type
         self.additionalHeaders = additionalHeaders
         self.related = related
@@ -85,7 +112,7 @@ struct Attachment {
 }
 
 extension Attachment.FileProperty: Equatable {
-    static func ==(lhs: Attachment.FileProperty, rhs: Attachment.FileProperty) -> Bool {
+    public static func ==(lhs: Attachment.FileProperty, rhs: Attachment.FileProperty) -> Bool {
         return lhs.path == rhs.path &&
             lhs.mime == rhs.mime &&
             lhs.name == rhs.name &&
@@ -94,7 +121,7 @@ extension Attachment.FileProperty: Equatable {
 }
 
 extension Attachment.DataProperty: Equatable {
-    static func ==(lhs: Attachment.DataProperty, rhs: Attachment.DataProperty) -> Bool {
+    public static func ==(lhs: Attachment.DataProperty, rhs: Attachment.DataProperty) -> Bool {
         return lhs.data == rhs.data &&
             lhs.mime == rhs.mime &&
             lhs.name == rhs.name &&
@@ -103,7 +130,7 @@ extension Attachment.DataProperty: Equatable {
 }
 
 extension Attachment.HTMLProperty: Equatable {
-    static func ==(lhs: Attachment.HTMLProperty, rhs: Attachment.HTMLProperty) -> Bool {
+    public static func ==(lhs: Attachment.HTMLProperty, rhs: Attachment.HTMLProperty) -> Bool {
         return lhs.content == rhs.content &&
             lhs.characterSet == rhs.characterSet &&
             lhs.alternative == rhs.alternative
@@ -112,7 +139,7 @@ extension Attachment.HTMLProperty: Equatable {
 
 
 extension Attachment: Equatable {
-    static func ==(lhs: Attachment, rhs: Attachment) -> Bool {
+    public static func ==(lhs: Attachment, rhs: Attachment) -> Bool {
         switch (lhs.type, rhs.type) {
         case (.file(let p1), .file(let p2)):
             return p1 == p2 && lhs.additionalHeaders == rhs.additionalHeaders
@@ -127,13 +154,6 @@ extension Attachment: Equatable {
 }
 
 extension Attachment {
-    var isAlternative: Bool {
-        if case .html(let p) = type, p.alternative {
-            return true
-        }
-        return false
-    }
-    
     private var headers: [String: String] {
         var result = [String: String]()
         switch type {
