@@ -1,0 +1,64 @@
+
+fastlane_version "2.7.0"
+
+default_platform :mac
+
+platform :mac do
+  before_all do
+    
+    
+  end
+
+  desc "Runs all the tests"
+  lane :test do
+      scan(scheme: "Hedwig", clean: true, destination: 'platform=macOS')
+  end
+
+  desc "Generate Documentation"
+  lane :doc do
+      
+  end
+
+  desc "Release a new version to GitHub"
+  lane :release do |options|
+    target_version = options[:version]
+    raise "The version is missed. Use `fastlane release version:{version_number}`.`" if target_version.nil?
+    
+    ensure_git_branch
+    ensure_git_status_clean
+    
+    test
+    
+    log = read_changelog(
+        section_identifier: '[Unreleased]',
+        excluded_markdown_elements: ''
+    )
+    
+    stamp_changelog(
+        section_identifier: target_version
+    )
+    
+    git_commit_all(message: "Bump version to #{target_version}")
+    Actions.sh("git tag -s #{target_version} -m ''")
+    push_to_git_remote
+    
+    set_github_release(
+          repository_name: "onevcat/Hedwig",
+          api_token: ENV['GITHUB_TOKEN'],
+          name: target_version,
+          tag_name: target_version,
+          description: log
+    )
+    
+    doc
+    
+  end
+
+  after_all do |lane|
+
+  end
+
+  error do |lane, exception|
+
+  end
+end
