@@ -39,10 +39,12 @@ platform :mac do
                   --author Wei Wang \
                   --author_url https://onev.cat \
                   --github_url https://github.com/onevcat/Hedwig \
+                  --github-file-prefix https://github.com/onevcat/Hedwig/tree/#{target_version}
                   --module-version #{target_version} \
+                  --module Hedwig \
                   --xcodebuild-arguments -scheme,Hedwig \
-                  --root-url https://github.com
-               )
+                  --root-url https://onevcat.github.io/Hedwig/
+               ")
     
     git_commit_all(message: "Bump version to #{target_version}")
     Actions.sh("git tag -s #{target_version} -m ''")

@@ -183,7 +183,7 @@ hedwig.send([mail1, mail2],
 
 ## Help and Questions
 
-Visit the [documentation page](#) for full API reference.
+Visit the [documentation page](https://onevcat.github.io/Hedwig/) for full API reference.
 
 You could also run the tests (`swift test`) to see more examples to know how to use Hedwig.
 
