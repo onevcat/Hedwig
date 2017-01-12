@@ -64,12 +64,15 @@ class HedwigTests: XCTestCase {
         let mail2 = Mail(text: "Hello World Again", from: "onev@onevcat.com", to: "foo@bar.com", subject: "Title")
         
         var count = 0
-        hedwig.send([mail1, mail2], progress: { result in
-            XCTAssertNil(result.1)
+        hedwig.send([mail1, mail2], progress: { mail, error in
+            XCTAssertNil(error)
             count += 1
         }) { sent, failed in
             if !failed.isEmpty {
-                XCTFail("Should no error happens, but failed mails: \(failed)")
+                XCTFail("Should no error happens, but failed")
+                for (mail, error) in failed {
+                    print("Mail \(mail.messageId) errored: \(error)")
+                }
             }
             XCTAssertEqual(count, 2)
             e.fulfill()

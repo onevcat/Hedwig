@@ -54,7 +54,7 @@ public struct Hedwig {
     
     public func send(_ mails: [Mail],
                      progress: ((Mail, Error?) -> Void)? = nil,
-                     completion: ((_ sent: [Mail], _ failed: [(Mail, Error)]) -> Void)? = nil)
+                     completion: ((_ sent: [Mail], _ failed: [(mail: Mail, error: Error)]) -> Void)? = nil)
     {
         do {
             let smtp = try SMTP(config: config)
@@ -102,9 +102,9 @@ class SendingActor {
     var sending = false
     
     fileprivate var progress: ((Mail, Error?) -> Void)?
-    fileprivate var completion: (([Mail], [(Mail, Error)]) -> Void)?
+    fileprivate var completion: (([Mail], [(mail: Mail, error: Error)]) -> Void)?
     
-    init(mails: [Mail], smtp: SMTP, progress: ((Mail, Error?) -> Void)?, completion: (([Mail], [(Mail, Error)]) -> Void)?) {
+    init(mails: [Mail], smtp: SMTP, progress: ((Mail, Error?) -> Void)?, completion: (([Mail], [(mail: Mail, error: Error)]) -> Void)?) {
         self.pendings = mails
         self.smtp = smtp
         self.progress = progress
