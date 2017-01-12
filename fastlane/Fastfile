@@ -27,6 +27,7 @@ platform :mac do
     ensure_git_branch
     ensure_git_status_clean
     
+    Actions.sh("swift package generate-xcodeproj")
     test
     
     log = read_changelog(
