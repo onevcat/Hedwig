@@ -221,7 +221,7 @@ Submit [an issue](https://github.com/onevcat/Hedwig/issues/new) if you find some
 
 You can also follow and contact me on [Twitter](http://twitter.com/onevcat) or [Sina Weibo](http://weibo.com/onevcat).
 
-#### Enjoy sending your emails
+### Enjoy sending your emails
 
 ![](https://cloud.githubusercontent.com/assets/1019875/21879961/8321a0ba-d8df-11e6-968d-41992815d2f6.gif)
 

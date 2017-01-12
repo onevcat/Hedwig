@@ -14,11 +14,6 @@ platform :mac do
       scan(scheme: "Hedwig", clean: true, destination: 'platform=macOS')
   end
 
-  desc "Generate Documentation"
-  lane :doc do
-      
-  end
-
   desc "Release a new version to GitHub"
   lane :release do |options|
     target_version = options[:version]
@@ -39,6 +34,16 @@ platform :mac do
         section_identifier: target_version
     )
     
+    Actions.sh("jazzy \
+                  --clean \
+                  --author Wei Wang \
+                  --author_url https://onev.cat \
+                  --github_url https://github.com/onevcat/Hedwig \
+                  --module-version #{target_version} \
+                  --xcodebuild-arguments -scheme,Hedwig \
+                  --root-url https://github.com
+               )
+    
     git_commit_all(message: "Bump version to #{target_version}")
     Actions.sh("git tag -s #{target_version} -m ''")
     push_to_git_remote
@@ -50,9 +55,7 @@ platform :mac do
           tag_name: target_version,
           description: log
     )
-    
-    doc
-    
+
   end
 
   after_all do |lane|
