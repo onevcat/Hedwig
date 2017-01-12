@@ -76,12 +76,85 @@ class HedwigTests: XCTestCase {
         }
         waitForExpectations(timeout: 5)
     }
+    
+    func testNoSenderMailWillNotBeSent() {
+        let e = expectation(description: "wait")
+        let mailWithoutSender = Mail(text: "Hello", from: "", to: "foo@bar.com")
+        hedwig.send(mailWithoutSender) { (error) in
+            XCTAssertNotNil(error)
+            XCTAssertEqual(error as? MailError, MailError.noSender)
+            e.fulfill()
+        }
+        waitForExpectations(timeout: 5)
+    }
+    
+    func testNoRecipientMailWillNotBeSent() {
+        let e = expectation(description: "wait")
+        let mailWithoutRecipient = Mail(text: "Hello", from: "foo@bar.com", to: "")
+        
+        hedwig.send(mailWithoutRecipient) { (error) in
+            XCTAssertNotNil(error)
+            XCTAssertEqual(error as? MailError, MailError.noRecipient)
+            e.fulfill()
+        }
+        waitForExpectations(timeout: 5)
+    }
+    
+    func testCanContinueSendingMailAfterFailing() {
+        let e = expectation(description: "wait")
+        let failMail = Mail(text: "Hello", from: "", to: "foo@bar.com")
+        let mail = Mail(text: "Hello", from: "foo@bar.com", to: "foo@bar.com")
+        
+        hedwig.send([failMail, mail], progress: { (mail, error) in
+            
+        }) { (sent, failed) in
+            XCTAssertEqual(sent.count, 1)
+            XCTAssertEqual(failed.count, 1)
+            XCTAssertEqual(sent.first!.messageId, mail.messageId)
+            e.fulfill()
+        }
+        
+        waitForExpectations(timeout: 5)
+    }
+    
+    func testCanSendMailsConcurrency() {
+        
+        let e = expectation(description: "wait")
+        
+        let mail1 = Mail(text: "Hello", from: "onev@onevcat.com", to: "foo@bar.com")
+        let mail2 = Mail(text: "World", from: "foo@bar.com", to: "onev@onevcat.com")
+        
+        var mail1Finished = false
+        var mail2Finished = false
+        
+        hedwig.send([mail1]) { (sent, failed) in
+            XCTAssertEqual(sent.first!.messageId, mail1.messageId)
+            mail1Finished = true
+            if mail1Finished && mail2Finished {
+                e.fulfill()
+            }
+        }
+        
+        hedwig.send([mail2]) { (sent, failed) in
+            XCTAssertEqual(sent.first!.messageId, mail2.messageId)
+            mail2Finished = true
+            if mail1Finished && mail2Finished {
+                e.fulfill()
+            }
+        }
+        
+        waitForExpectations(timeout: 5)
+    }
 
     static var allTests : [(String, (HedwigTests) -> () throws -> Void)] {
         return [
             ("testCanSendMail", testCanSendMail),
             ("testCanSendMailWithAttachment", testCanSendMailWithAttachment),
-            ("testCanSendMultipleMails", testCanSendMultipleMails)
+            ("testCanSendMultipleMails", testCanSendMultipleMails),
+            ("testNoSenderMailWillNotBeSent", testNoSenderMailWillNotBeSent),
+            ("testNoRecipientMailWillNotBeSent", testNoRecipientMailWillNotBeSent),
+            ("testCanContinueSendingMailAfterFailing", testCanContinueSendingMailAfterFailing),
+            ("testCanSendMailsConcurrency", testCanSendMailsConcurrency)
         ]
     }
 }
