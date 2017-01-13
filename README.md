@@ -97,8 +97,8 @@ let mail = Mail(
         text: "Across the great wall we can reach every corner in the world.", 
         from: "onev@onevcat.com", 
         to: "foo@bar.com",
-        cc: "Wei Wang <onev@onevcat.com>, tom@example.com" // Addresses will be parsed for you
-        bcc: "My Group: onev@onevcat.com, foo@bar.com;"    // Even with group syntax
+        cc: "Wei Wang <onev@onevcat.com>, tom@example.com", // Addresses will be parsed for you
+        bcc: "My Group: onev@onevcat.com, foo@bar.com;",    // Even with group syntax
         subject: "Hello World"
 )
 hedwig.send(mail) { error in
