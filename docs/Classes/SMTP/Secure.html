@@ -14,7 +14,7 @@
     <a title="Secure Enum Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../../index.html">Hedwig Docs</a> (5% documented)</p>
+        <p><a href="../../index.html">Hedwig Docs</a> (100% documented)</p>
         <p class="header-right"><a href="https://github.com/onevcat/Hedwig"><img src="../../img/gh.png"/>View on GitHub</a></p>
         <p class="header-right"><a href="dash-feed://https%3A%2F%2Fonevcat%2Egithub%2Eio%2FHedwig%2Fdocsets%2FHedwig%2Exml"><img src="../../img/dash.png"/>Install in Dash</a></p>
       </div>
@@ -86,13 +86,27 @@
               </li>
             </ul>
           </li>
+          <li class="nav-group-name">
+            <a href="../../Typealiases.html">Typealiases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../Typealiases.html#/s:6Hedwig4Port">Port</a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <article class="main-content">
         <section>
           <section class="section">
             <h1>Secure</h1>
-            <p>Undocumented</p>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">Secure</span></code></pre>
+
+                </div>
+              </div>
+            <p>Secrity layer used when connencting an SMTP server.</p>
 
           </section>
           <section class="section task-group-section">
@@ -111,8 +125,20 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>No encryped. If the server supports STARTTLS, the layer will be 
+upgraded automatically.</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="n">plain</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/SMTP.swift#L216">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -134,8 +160,19 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Secure Sockets Layer.</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="n">ssl</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/SMTP.swift#L218">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -157,8 +194,20 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Transport Layer Security. If the server supports STARTTLS, the
+layer will be upgraded automatically.</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="n">tls</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/SMTP.swift#L221">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

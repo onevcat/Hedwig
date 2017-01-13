@@ -13,7 +13,7 @@
     <a title="Structs  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">Hedwig Docs</a> (5% documented)</p>
+        <p><a href="index.html">Hedwig Docs</a> (100% documented)</p>
         <p class="header-right"><a href="https://github.com/onevcat/Hedwig"><img src="img/gh.png"/>View on GitHub</a></p>
         <p class="header-right"><a href="dash-feed://https%3A%2F%2Fonevcat%2Egithub%2Eio%2FHedwig%2Fdocsets%2FHedwig%2Exml"><img src="img/dash.png"/>Install in Dash</a></p>
       </div>
@@ -85,6 +85,14 @@
               </li>
             </ul>
           </li>
+          <li class="nav-group-name">
+            <a href="Typealiases.html">Typealiases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:6Hedwig4Port">Port</a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <article class="main-content">
@@ -110,9 +118,20 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Presentation an attachement contained in a <code><a href="Structs/Mail.html">Mail</a></code>.</p>
 
                         <a href="Structs/Attachment.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Attachment</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/Attachment.swift#L31-L270">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -134,9 +153,21 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Hedwig is the manager type of Hedwig framework. You can initialize an 
+instance with common SMTP config and then send an email with it.</p>
 
                         <a href="Structs/Hedwig.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Hedwig</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/Hedwig.swift#L35-L142">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -158,9 +189,23 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Represents an email. It contains necessary information like <code>from</code>, <code>to</code> and
+<code>text</code> with which Hedwig could send it with a connection to some SMTP server.
+The whole type is immutable. You need to create a mail through the initialzer
+and then feed it to a <code><a href="Structs/Hedwig.html">Hedwig</a></code> instance to send.</p>
 
                         <a href="Structs/Mail.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Mail</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/Mail.swift#L47-L143">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -178,9 +223,20 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Name and address used in mail <q>From</q>, <q>To</q>, <q>Cc</q> and <q>Bcc</q> fields.</p>
 
                         <a href="Structs/NameAddressPair.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">NameAddressPair</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/Mail.swift#L180-L205">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

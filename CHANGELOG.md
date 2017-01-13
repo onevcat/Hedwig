@@ -1,6 +1,8 @@
 # Change Log
 
 ## [Unreleased]
+
+## [1.0.0] - 2017-01-13
 ### Added
 - Documentation and product ready release.
 

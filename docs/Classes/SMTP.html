@@ -14,7 +14,7 @@
     <a title="SMTP Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">Hedwig Docs</a> (5% documented)</p>
+        <p><a href="../index.html">Hedwig Docs</a> (100% documented)</p>
         <p class="header-right"><a href="https://github.com/onevcat/Hedwig"><img src="../img/gh.png"/>View on GitHub</a></p>
         <p class="header-right"><a href="dash-feed://https%3A%2F%2Fonevcat%2Egithub%2Eio%2FHedwig%2Fdocsets%2FHedwig%2Exml"><img src="../img/dash.png"/>Install in Dash</a></p>
       </div>
@@ -86,13 +86,28 @@
               </li>
             </ul>
           </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Typealiases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6Hedwig4Port">Port</a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <article class="main-content">
         <section>
           <section class="section">
             <h1>SMTP</h1>
-            <p>Undocumented</p>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">SMTP</span></code></pre>
+
+                </div>
+              </div>
+            <p>Represents an remote SMTP. Do not use this type directly. Use <code><a href="../Structs/Hedwig.html">Hedwig</a></code> to
+send mails instead.</p>
 
           </section>
           <section class="section task-group-section">
@@ -111,9 +126,20 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Represents SMTP validation methods.</p>
 
                         <a href="../Classes/SMTP/Validation.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Validation</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/SMTP.swift#L116-L149">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -135,9 +161,20 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Error while SMTP connecting and communicating.</p>
 
                         <a href="../Classes/SMTP/SMTPError.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">SMTPError</span><span class="p">:</span> <span class="kt">Error</span><span class="p">,</span> <span class="kt">CustomStringConvertible</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/SMTP.swift#L155-L208">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -159,9 +196,20 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Secrity layer used when connencting an SMTP server.</p>
 
                         <a href="../Classes/SMTP/Secure.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">Secure</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/SMTP.swift#L213-L230">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -183,9 +231,27 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Auth method to an SMTP server.</p>
+
+<ul>
+<li>plain: Plain authorization.</li>
+<li>cramMD5: CRAM-MD5 authorization.</li>
+<li>login: Login authorization.</li>
+<li>xOauth2: xOauth2 authorization.</li>
+</ul>
 
                         <a href="../Classes/SMTP/AuthMethod.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">AuthMethod</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/SMTP.swift#L248-L257">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

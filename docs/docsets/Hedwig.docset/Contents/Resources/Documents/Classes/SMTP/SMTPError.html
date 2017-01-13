@@ -14,7 +14,7 @@
     <a title="SMTPError Enum Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../../index.html">Hedwig Docs</a> (5% documented)</p>
+        <p><a href="../../index.html">Hedwig Docs</a> (100% documented)</p>
         <p class="header-right"><a href="https://github.com/onevcat/Hedwig"><img src="../../img/gh.png"/>View on GitHub</a></p>
         <p class="header-right"><a href="dash-feed://https%3A%2F%2Fonevcat%2Egithub%2Eio%2FHedwig%2Fdocsets%2FHedwig%2Exml"><img src="../../img/dash.png"/>Install in Dash</a></p>
       </div>
@@ -86,13 +86,27 @@
               </li>
             </ul>
           </li>
+          <li class="nav-group-name">
+            <a href="../../Typealiases.html">Typealiases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../Typealiases.html#/s:6Hedwig4Port">Port</a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <article class="main-content">
         <section>
           <section class="section">
             <h1>SMTPError</h1>
-            <p>Undocumented</p>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">SMTPError</span><span class="p">:</span> <span class="kt">Error</span><span class="p">,</span> <span class="kt">CustomStringConvertible</span></code></pre>
+
+                </div>
+              </div>
+            <p>Error while SMTP connecting and communicating.</p>
 
           </section>
           <section class="section task-group-section">
@@ -111,8 +125,19 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Could not connect to remote server.</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="n">couldNotConnect</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/SMTP.swift#L157">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -134,8 +159,19 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Connecting to SMTP server time out</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="n">timeOut</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/SMTP.swift#L159">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -157,8 +193,19 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The response of SMTP server is bad and not expected.</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="n">badResponse</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/SMTP.swift#L161">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -180,8 +227,19 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>No connection has been established</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="n">noConnection</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/SMTP.swift#L163">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -203,8 +261,19 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Authorization failed</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="n">authFailed</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/SMTP.swift#L165">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -226,8 +295,19 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Can not authorizate since target server not support EHLO</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="n">authNotSupported</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/SMTP.swift#L167">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -249,8 +329,19 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>No form of authorization methos supported</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="n">authUnadvertised</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/SMTP.swift#L169">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -272,8 +363,19 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Connection is closed by remote</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="n">connectionClosed</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/SMTP.swift#L171">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -295,8 +397,19 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Connection is already ended</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="n">connectionEnded</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/SMTP.swift#L173">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -318,8 +431,19 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Connection auth failed</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="n">connectionAuth</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/SMTP.swift#L175">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -341,8 +465,19 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Unknown error</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="n">unknown</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/SMTP.swift#L177">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -354,9 +489,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vPs23CustomStringConvertible11descriptionSS"></a>
+                    <a name="/s:vOC6Hedwig4SMTP9SMTPError11descriptionSS"></a>
                     <a name="//apple_ref/swift/Property/description" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vPs23CustomStringConvertible11descriptionSS">description</a>
+                    <a class="token" href="#/s:vOC6Hedwig4SMTP9SMTPError11descriptionSS">description</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -364,7 +499,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>A human-readable description of SMTP error.</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -373,6 +509,9 @@
                           <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/SMTP.swift#L180-L207">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

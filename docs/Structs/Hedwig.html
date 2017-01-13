@@ -14,7 +14,7 @@
     <a title="Hedwig Struct Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">Hedwig Docs</a> (5% documented)</p>
+        <p><a href="../index.html">Hedwig Docs</a> (100% documented)</p>
         <p class="header-right"><a href="https://github.com/onevcat/Hedwig"><img src="../img/gh.png"/>View on GitHub</a></p>
         <p class="header-right"><a href="dash-feed://https%3A%2F%2Fonevcat%2Egithub%2Eio%2FHedwig%2Fdocsets%2FHedwig%2Exml"><img src="../img/dash.png"/>Install in Dash</a></p>
       </div>
@@ -86,13 +86,28 @@
               </li>
             </ul>
           </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Typealiases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6Hedwig4Port">Port</a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <article class="main-content">
         <section>
           <section class="section">
             <h1>Hedwig</h1>
-            <p>Undocumented</p>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Hedwig</span></code></pre>
+
+                </div>
+              </div>
+            <p>Hedwig is the manager type of Hedwig framework. You can initialize an 
+instance with common SMTP config and then send an email with it.</p>
 
           </section>
           <section class="section task-group-section">
@@ -111,8 +126,168 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Initialize a Hedwig instance with SMTP config.</p>
 
+<p><li><p>Parameters:</p></p>
+
+<p><ul>
+<li>hostName: Hostname of your SMTP server. 
+      The host name should not include any scheme. For example,
+      <q>smtp.example.com</q> is a valid host name.</li>
+<li>user: User name used to auth with SMTP server. Pass <code>nil</code> to this 
+  parameter if there is no need to auth with your server.</li>
+<li>password: Password used to auth with SMTP server. Pass <code>nil</code> to this
+      parameter if there is no need to auth with your server.</li>
+<li>port: Port number which Hedwig should connect to. Default is <code>nil</code>, 
+  which means Hedwig will determine the port for you according 
+  to <code>secure</code> parameter and use the standard port.</li>
+<li>secure: Security level used when communicating with server. Default
+    is <code>.tls</code>.</li>
+<li>validation: Validation used when setup a secure connection with 
+        server.</li>
+<li>domainName: The clinet domain name used when communicating with
+        server. Default is <code>localhost</code></li>
+<li>authMethods: Auth methods accepted in client when auth with server.
+         By default all auth methods (.plain, .cramMD5, .login, 
+         .xOauth2) in Hedwig are supported.</li>
+</ul></li>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    <p>Initializing a <code>Hedwig</code> instance will not do the actual connecting 
+work. It will not try to connect to server until you send a mail.</p></p>
+
+<p></div></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">hostName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+                <span class="nv">user</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span>
+                <span class="nv">password</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span>
+                <span class="nv">port</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:6Hedwig4Port">Port</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+                <span class="nv">secure</span><span class="p">:</span> <span class="kt"><a href="../Classes/SMTP.html">SMTP</a></span><span class="o">.</span><span class="kt">Secure</span> <span class="o">=</span> <span class="o">.</span><span class="n">tls</span><span class="p">,</span>
+                <span class="nv">validation</span><span class="p">:</span> <span class="kt"><a href="../Classes/SMTP.html">SMTP</a></span><span class="o">.</span><span class="kt">Validation</span> <span class="o">=</span> <span class="o">.</span><span class="k">default</span><span class="p">,</span>
+                <span class="nv">domainName</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">"localhost"</span><span class="p">,</span>
+                <span class="nv">authMethods</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Classes/SMTP.html">SMTP</a></span><span class="o">.</span><span class="kt">AuthMethod</span><span class="p">]</span> <span class="o">=</span>
+                        <span class="p">[</span><span class="o">.</span><span class="n">plain</span><span class="p">,</span> <span class="o">.</span><span class="n">cramMD5</span><span class="p">,</span> <span class="o">.</span><span class="n">login</span><span class="p">,</span> <span class="o">.</span><span class="n">xOauth2</span><span class="p">])</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>hostName</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Hostname of your SMTP server. The host name should not include any scheme. For example, “smtp.example.com” is a valid host name.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>user</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>User name used to auth with SMTP server. Pass <code>nil</code> to this parameter if there is no need to auth with your server.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>password</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Password used to auth with SMTP server. Pass <code>nil</code> to this parameter if there is no need to auth with your server.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>port</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Port number which Hedwig should connect to. Default is <code>nil</code>, which means Hedwig will determine the port for you according to <code>secure</code> parameter and use the standard port.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>secure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Security level used when communicating with server. Default is <code>.tls</code>.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>validation</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Validation used when setup a secure connection with server.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>domainName</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The clinet domain name used when communicating with server. Default is <code>localhost</code></p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>authMethods</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Auth methods accepted in client when auth with server. By default all auth methods (.plain, .cramMD5, .login, .xOauth2) in Hedwig are supported.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/Hedwig.swift#L65-L78">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -130,8 +305,65 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Send a single email.</p>
 
+<ul>
+<li>Parameters:
+
+<ul>
+<li>mail: The email which will be sent.</li>
+<li>completion: Callback when sending finishes, with an optional <code>Error</code>
+        to indicate whether there is an error happened while 
+        sending. If the mail is sent successfully, callback 
+        parameter would be <code>nil</code>.</li>
+</ul></li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">send</span><span class="p">(</span><span class="n">_</span> <span class="nv">mail</span><span class="p">:</span> <span class="kt"><a href="../Structs/Mail.html">Mail</a></span><span class="p">,</span>
+                     <span class="nv">completion</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>mail</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The email which will be sent.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Callback when sending finishes, with an optional <code>Error</code> to indicate whether there is an error happened while sending. If the mail is sent successfully, callback parameter would be <code>nil</code>.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/Hedwig.swift#L88-L98">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -149,8 +381,98 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Send an array of emails.</p>
 
+<p><li><p>Parameters:</p></p>
+
+<ul>
+<li>mails: The emails which will be sent.</li>
+<li>progress: Callback when an email sending finishes.</li>
+<li>completion: Callback when all emails sending finished.</li>
+</ul></li>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    <p>Note:</p>
+
+<ul>
+<li>If a failur is encountered when while sending multiple mails, the 
+whole sending process will not stop until all pending mails are sent.
+Each mail sending will trigger an invocation of <code>progress</code>, and when
+all mails sending finish, <code>completion</code> handler will be called.</li>
+<li>The parameter of <code>progress</code> block contains the mail and an optional
+<code>Error</code>. If the mail is sent successfully, the error parameter would
+be <code>nil</code>. Otherwise, it contains the error type.</li>
+<li>The fisrt parameter of <code>completion</code> is an array of sucessully sent 
+mails, while the second is an array of failed mails and 
+corresponding errors for each.</li>
+<li>This method will quese the <code>mails</code> and send them one by one. If you 
+need to send mails in a concurrency way, call 
+<code>send(_:progress:completion:)</code> again with another array of mails.</li>
+</ul>
+
+<p></div></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">send</span><span class="p">(</span><span class="n">_</span> <span class="nv">mails</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Mail.html">Mail</a></span><span class="p">],</span>
+                     <span class="nv">progress</span><span class="p">:</span> <span class="p">((</span><span class="kt"><a href="../Structs/Mail.html">Mail</a></span><span class="p">,</span> <span class="kt">Error</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+                     <span class="nv">completion</span><span class="p">:</span> <span class="p">(</span>
+                      <span class="p">(</span><span class="n">_</span> <span class="nv">sent</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Mail.html">Mail</a></span><span class="p">],</span>
+                       <span class="n">_</span> <span class="nv">failed</span><span class="p">:</span> <span class="p">[(</span><span class="nv">mail</span><span class="p">:</span> <span class="kt"><a href="../Structs/Mail.html">Mail</a></span><span class="p">,</span> <span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)])</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>mails</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The emails which will be sent.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>progress</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Callback when an email sending finishes.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Callback when all emails sending finished.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/Hedwig.swift#L125-L141">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

@@ -14,7 +14,7 @@
     <a title="Attachment Struct Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">Hedwig Docs</a> (5% documented)</p>
+        <p><a href="../index.html">Hedwig Docs</a> (100% documented)</p>
         <p class="header-right"><a href="https://github.com/onevcat/Hedwig"><img src="../img/gh.png"/>View on GitHub</a></p>
         <p class="header-right"><a href="dash-feed://https%3A%2F%2Fonevcat%2Egithub%2Eio%2FHedwig%2Fdocsets%2FHedwig%2Exml"><img src="../img/dash.png"/>Install in Dash</a></p>
       </div>
@@ -86,13 +86,27 @@
               </li>
             </ul>
           </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Typealiases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6Hedwig4Port">Port</a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <article class="main-content">
         <section>
           <section class="section">
             <h1>Attachment</h1>
-            <p>Undocumented</p>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Attachment</span></code></pre>
+
+                </div>
+              </div>
+            <p>Presentation an attachement contained in a <code><a href="../Structs/Mail.html">Mail</a></code>.</p>
 
           </section>
           <section class="section task-group-section">
@@ -111,9 +125,20 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Properties when the attachment is a file.</p>
 
                         <a href="../Structs/Attachment/FileProperty.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">FileProperty</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/Attachment.swift#L34-L65">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -131,9 +156,20 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Properties when the attachment is an HTML string.</p>
 
                         <a href="../Structs/Attachment/HTMLProperty.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">HTMLProperty</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/Attachment.swift#L68-L91">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -151,9 +187,20 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Properties when the attachment is some raw data.</p>
 
                         <a href="../Structs/Attachment/DataProperty.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DataProperty</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/Attachment.swift#L94-L125">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -171,9 +218,26 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Attachment type.</p>
+
+<ul>
+<li>file: The attachment is a file in local disk.</li>
+<li>html: The attachment is an HTML string.</li>
+<li>data: The attachment is some raw data.</li>
+</ul>
 
                         <a href="../Structs/Attachment/AttachmentType.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">AttachmentType</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/Attachment.swift#L132-L139">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -191,8 +255,19 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The type of current attachment.</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">type</span><span class="p">:</span> <span class="kt"><a href="../Structs/Attachment/AttachmentType.html">AttachmentType</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/Attachment.swift#L142">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -210,8 +285,19 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Additional headers when sending current attachment with a <code><a href="../Structs/Mail.html">Mail</a></code>.</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">additionalHeaders</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/Attachment.swift#L145">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -229,8 +315,20 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Related attachments of current attachment. The <code>related</code> ones will be 
+contained in a <q>related</q> boundary in the mail body.</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">related</span><span class="p">:</span> <span class="p">[</span><span class="kt">Attachment</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/Attachment.swift#L149">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -248,8 +346,19 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Whether this attachment is an alternative one.</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">isAlternative</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/Attachment.swift#L152-L157">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -267,8 +376,133 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Initilize a file attachment.</p>
 
+<ul>
+<li>Parameters:
+
+<ul>
+<li>filePath: Path in the local disk of the file.</li>
+<li>mime: MIME type of the file. Default is <code>nil</code>, which means leave
+  to Hedwig to guess the type from file extension. If Hedwig can
+  not determine the MIME type, a general binary type 
+  <q>application/octet-stream</q> will be used.</li>
+<li>name: File name which will be presented in the mail. Default is the 
+  file name from <code>filePath</code>.</li>
+<li>inline: Whether the file could be inline or not. When set to <code>true</code>,
+    the attachment “Content-Disposition” header will be <code>inline</code>, 
+    otherwise it will be <code>attachment</code>. If you want to embed the 
+    file in mail content, set it to <code>true</code>. Otherwise if you
+    need it to be a standalone attachment, <code>false</code>.</li>
+<li>additionalHeaders: Additional headers when sending current
+               attachment with a <code><a href="../Structs/Mail.html">Mail</a></code>.</li>
+<li>related: Related attachments of current attachment. The <code><a href="../Structs/Attachment.html#/s:vV6Hedwig10Attachment7relatedGSaS0__">related</a></code>
+     ones will be contained in a <q>related</q> boundary in the mail
+     body.</li>
+</ul></li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">filePath</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+                <span class="nv">mime</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+                <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+                <span class="nv">inline</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span>
+                <span class="nv">additionalHeaders</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]</span> <span class="o">=</span> <span class="p">[:],</span>
+                <span class="nv">related</span><span class="p">:</span> <span class="p">[</span><span class="kt">Attachment</span><span class="p">]</span> <span class="o">=</span> <span class="p">[])</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>filePath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Path in the local disk of the file.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>mime</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>MIME type of the file. Default is <code>nil</code>, which means leave to Hedwig to guess the type from file extension. If Hedwig can not determine the MIME type, a general binary type “application/octet-stream” will be used.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>File name which will be presented in the mail. Default is the file name from <code>filePath</code>.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>inline</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Whether the file could be inline or not. When set to <code>true</code>, the attachment “Content-Disposition” header will be <code>inline</code>, otherwise it will be <code>attachment</code>. If you want to embed the file in mail content, set it to <code>true</code>. Otherwise if you need it to be a standalone attachment, <code>false</code>.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>additionalHeaders</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Additional headers when sending current attachment with a <code>Mail</code>.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>related</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Related attachments of current attachment. The <code>related</code> ones will be contained in a “related” boundary in the mail body.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/Attachment.swift#L179-L192">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -286,8 +520,129 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Initilize a data attachment.</p>
 
+<ul>
+<li>Parameters:
+
+<ul>
+<li>data: Raw data will be sent as attachment.</li>
+<li>mime: MIME type of the data.</li>
+<li>name: File name which will be presented in the mail.</li>
+<li>inline: Whether the file could be inline or not. When set to <code>true</code>,
+    the attachment “Content-Disposition” header will be <code>inline</code>,
+    otherwise it will be <code>attachment</code>. If you want to embed the
+    file in mail content, set it to <code>true</code>. Otherwise if you
+    need it to be a standalone attachment, <code>false</code>.</li>
+<li>additionalHeaders: Additional headers when sending current
+               attachment with a <code><a href="../Structs/Mail.html">Mail</a></code>.</li>
+<li>related: Related attachments of current attachment. The <code><a href="../Structs/Attachment.html#/s:vV6Hedwig10Attachment7relatedGSaS0__">related</a></code>
+     ones will be contained in a <q>related</q> boundary in the mail
+     body.</li>
+</ul></li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span>
+                <span class="nv">mime</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+                <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+                <span class="nv">inline</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span>
+                <span class="nv">additionalHeaders</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]</span> <span class="o">=</span> <span class="p">[:],</span>
+                <span class="nv">related</span><span class="p">:</span> <span class="p">[</span><span class="kt">Attachment</span><span class="p">]</span> <span class="o">=</span> <span class="p">[])</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>data</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Raw data will be sent as attachment.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>mime</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>MIME type of the data.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>File name which will be presented in the mail.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>inline</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Whether the file could be inline or not. When set to <code>true</code>, the attachment “Content-Disposition” header will be <code>inline</code>, otherwise it will be <code>attachment</code>. If you want to embed the file in mail content, set it to <code>true</code>. Otherwise if you need it to be a standalone attachment, <code>false</code>.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>additionalHeaders</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Additional headers when sending current attachment with a <code>Mail</code>.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>related</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Related attachments of current attachment. The <code>related</code> ones will be contained in a “related” boundary in the mail body.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/Attachment.swift#L210-L221">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -305,8 +660,128 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Initilize an HTML attachment.</p>
 
+<ul>
+<li>Parameters:
+
+<ul>
+<li>htmlContent: Content string of HTML.</li>
+<li>characterSet: Charater encoding set of <code>htmlContent</code>. Default is 
+          <q>utf-8</q>.</li>
+<li>alternative: Whether this HTML could be alternative for plain text.
+         Default is <code>true</code>, means the HTML content could be
+         alternative for plain text.</li>
+<li>inline: Whether the HTML could be inline or not. Default is <code>true</code>.</li>
+<li>additionalHeaders: Additional headers when sending current
+               attachment with a <code><a href="../Structs/Mail.html">Mail</a></code>.</li>
+<li>related: Related attachments of current attachment. The <code><a href="../Structs/Attachment.html#/s:vV6Hedwig10Attachment7relatedGSaS0__">related</a></code>
+     ones will be contained in a <q>related</q> boundary in the mail
+     body.</li>
+</ul></li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">htmlContent</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+                <span class="nv">characterSet</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">"utf-8"</span><span class="p">,</span>
+                <span class="nv">alternative</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span>
+                <span class="nv">inline</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span>
+                <span class="nv">additionalHeaders</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]</span> <span class="o">=</span> <span class="p">[:],</span>
+                <span class="nv">related</span><span class="p">:</span> <span class="p">[</span><span class="kt">Attachment</span><span class="p">]</span> <span class="o">=</span> <span class="p">[])</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>htmlContent</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Content string of HTML.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>characterSet</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Charater encoding set of <code>htmlContent</code>. Default is “utf-8”.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>alternative</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Whether this HTML could be alternative for plain text. Default is <code>true</code>, means the HTML content could be alternative for plain text.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>inline</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Whether the HTML could be inline or not. Default is <code>true</code>.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>additionalHeaders</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Additional headers when sending current attachment with a <code>Mail</code>.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>related</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Related attachments of current attachment. The <code>related</code> ones will be contained in a “related” boundary in the mail body.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/Attachment.swift#L239-L251">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -324,8 +799,80 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Initilize an attachment with an <code><a href="../Structs/Attachment/AttachmentType.html">AttachmentType</a></code>.</p>
 
+<ul>
+<li>Parameters:
+
+<ul>
+<li>type: The type of attachement.</li>
+<li>additionalHeaders: Additional headers when sending current
+               attachment with a <code><a href="../Structs/Mail.html">Mail</a></code>.</li>
+<li>related: Related attachments of current attachment. The <code><a href="../Structs/Attachment.html#/s:vV6Hedwig10Attachment7relatedGSaS0__">related</a></code>
+     ones will be contained in a <q>related</q> boundary in the mail
+     body.</li>
+</ul></li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="kt"><a href="../Structs/Attachment/AttachmentType.html">AttachmentType</a></span><span class="p">,</span>
+                <span class="nv">additionalHeaders</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]</span> <span class="o">=</span> <span class="p">[:],</span>
+                <span class="nv">related</span><span class="p">:</span> <span class="p">[</span><span class="kt">Attachment</span><span class="p">]</span> <span class="o">=</span> <span class="p">[])</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>type</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The type of attachement.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>additionalHeaders</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Additional headers when sending current attachment with a <code>Mail</code>.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>related</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Related attachments of current attachment. The <code>related</code> ones will be contained in a “related” boundary in the mail body.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/Attachment.swift#L262-L269">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -337,9 +884,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:ZFPs9Equatableoi2eeFTxx_Sb"></a>
+                    <a name="/s:ZFVV6Hedwig10Attachment12FilePropertyoi2eeFTS1_S1__Sb"></a>
                     <a name="//apple_ref/swift/Method/==(_:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:ZFPs9Equatableoi2eeFTxx_Sb">==(_:_:)</a>
+                    <a class="token" href="#/s:ZFVV6Hedwig10Attachment12FilePropertyoi2eeFTS1_S1__Sb">==(_:_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -347,13 +894,29 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>Whether two <code><a href="../Structs/Attachment/FileProperty.html">Attachment.FileProperty</a></code> should equal.
+Two <code><a href="../Structs/Attachment/FileProperty.html">Attachment.FileProperty</a></code> will equal to each other when all 
+members equal.</p>
+
+<p><li>Parameters:</p>
+
+<p><ul>
+<li>lhs: Left hand <code><a href="../Structs/Attachment/FileProperty.html">FileProperty</a></code>.</li>
+<li>rhs: Right hand <code><a href="../Structs/Attachment/FileProperty.html">FileProperty</a></code></li>
+</ul></li>
+<div class="aside aside-returns">
+    <p class="aside-title">Returns</p>
+    <code>true</code> if two file properties equal. Otherwise, <code>false</code>.</p>
+
+<p></div></p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">==</span><span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt">Attachment</span><span class="o">.</span><span class="kt"><a href="../Structs/Attachment/FileProperty.html">FileProperty</a></span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">Attachment</span><span class="o">.</span><span class="kt"><a href="../Structs/Attachment/FileProperty.html">FileProperty</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">==</span><span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt">Attachment</span><span class="o">.</span><span class="kt"><a href="../Structs/Attachment/FileProperty.html">FileProperty</a></span><span class="p">,</span>
+                          <span class="nv">rhs</span><span class="p">:</span> <span class="kt">Attachment</span><span class="o">.</span><span class="kt"><a href="../Structs/Attachment/FileProperty.html">FileProperty</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
                       </div>
@@ -369,7 +932,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>A value to compare.</p>
+                                  <p>Left hand <code>FileProperty</code>.</p>
 
                                 </div>
                               </td>
@@ -382,13 +945,281 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Another value to compare.</p>
+                                  <p>Right hand <code>FileProperty</code></p>
 
                                 </div>
                               </td>
                             </tr>
                           </tbody>
                         </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p><code>true</code> if two file properties equal. Otherwise, <code>false</code>.</p>
+
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/Attachment.swift#L282-L288">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFVV6Hedwig10Attachment12DataPropertyoi2eeFTS1_S1__Sb"></a>
+                    <a name="//apple_ref/swift/Method/==(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFVV6Hedwig10Attachment12DataPropertyoi2eeFTS1_S1__Sb">==(_:_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Whether two <code><a href="../Structs/Attachment/DataProperty.html">Attachment.DataProperty</a></code> should equal.
+Two <code><a href="../Structs/Attachment/DataProperty.html">Attachment.DataProperty</a></code> will equal to each other when all
+members equal.</p>
+
+<p><li>Parameters:</p>
+
+<p><ul>
+<li>lhs: Left hand <code><a href="../Structs/Attachment/DataProperty.html">DataProperty</a></code>.</li>
+<li>rhs: Right hand <code><a href="../Structs/Attachment/DataProperty.html">DataProperty</a></code></li>
+</ul></li>
+<div class="aside aside-returns">
+    <p class="aside-title">Returns</p>
+    <code>true</code> if two data properties equal. Otherwise, <code>false</code>.</p>
+
+<p></div></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">==</span><span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt">Attachment</span><span class="o">.</span><span class="kt"><a href="../Structs/Attachment/DataProperty.html">DataProperty</a></span><span class="p">,</span>
+                          <span class="nv">rhs</span><span class="p">:</span> <span class="kt">Attachment</span><span class="o">.</span><span class="kt"><a href="../Structs/Attachment/DataProperty.html">DataProperty</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>lhs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Left hand <code>DataProperty</code>.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>rhs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Right hand <code>DataProperty</code></p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p><code>true</code> if two data properties equal. Otherwise, <code>false</code>.</p>
+
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/Attachment.swift#L300-L306">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFVV6Hedwig10Attachment12HTMLPropertyoi2eeFTS1_S1__Sb"></a>
+                    <a name="//apple_ref/swift/Method/==(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFVV6Hedwig10Attachment12HTMLPropertyoi2eeFTS1_S1__Sb">==(_:_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Whether two <code><a href="../Structs/Attachment/HTMLProperty.html">Attachment.HTMLProperty</a></code> should equal.
+Two <code><a href="../Structs/Attachment/HTMLProperty.html">Attachment.HTMLProperty</a></code> will equal to each other when all
+members equal.</p>
+
+<p><li>Parameters:</p>
+
+<p><ul>
+<li>lhs: Left hand <code><a href="../Structs/Attachment/HTMLProperty.html">HTMLProperty</a></code>.</li>
+<li>rhs: Right hand <code><a href="../Structs/Attachment/HTMLProperty.html">HTMLProperty</a></code></li>
+</ul></li>
+<div class="aside aside-returns">
+    <p class="aside-title">Returns</p>
+    <code>true</code> if two HTML properties equal. Otherwise, <code>false</code>.</p>
+
+<p></div></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">==</span><span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt">Attachment</span><span class="o">.</span><span class="kt"><a href="../Structs/Attachment/HTMLProperty.html">HTMLProperty</a></span><span class="p">,</span>
+                          <span class="nv">rhs</span><span class="p">:</span> <span class="kt">Attachment</span><span class="o">.</span><span class="kt"><a href="../Structs/Attachment/HTMLProperty.html">HTMLProperty</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>lhs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Left hand <code>HTMLProperty</code>.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>rhs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Right hand <code>HTMLProperty</code></p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p><code>true</code> if two HTML properties equal. Otherwise, <code>false</code>.</p>
+
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/Attachment.swift#L318-L323">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFV6Hedwig10Attachmentoi2eeFTS0_S0__Sb"></a>
+                    <a name="//apple_ref/swift/Method/==(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFV6Hedwig10Attachmentoi2eeFTS0_S0__Sb">==(_:_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Whether two <code>Attachment</code> should equal.
+Two <code>Attachment</code> will equal to each other when all
+members equal.</p>
+
+<p><li>Parameters:</p>
+
+<p><ul>
+<li>lhs: Left hand <code>Attachment</code>.</li>
+<li>rhs: Right hand <code>Attachment</code></li>
+</ul></li>
+<div class="aside aside-returns">
+    <p class="aside-title">Returns</p>
+    <code>true</code> if two attachments equal. Otherwise, <code>false</code>.</p>
+
+<p></div></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">==</span><span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt">Attachment</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">Attachment</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>lhs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Left hand <code>Attachment</code>.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>rhs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Right hand <code>Attachment</code></p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p><code>true</code> if two attachments equal. Otherwise, <code>false</code>.</p>
+
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/Attachment.swift#L336-L347">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

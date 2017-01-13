@@ -14,7 +14,7 @@
     <a title="AuthMethod Enum Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../../index.html">Hedwig Docs</a> (5% documented)</p>
+        <p><a href="../../index.html">Hedwig Docs</a> (100% documented)</p>
         <p class="header-right"><a href="https://github.com/onevcat/Hedwig"><img src="../../img/gh.png"/>View on GitHub</a></p>
         <p class="header-right"><a href="dash-feed://https%3A%2F%2Fonevcat%2Egithub%2Eio%2FHedwig%2Fdocsets%2FHedwig%2Exml"><img src="../../img/dash.png"/>Install in Dash</a></p>
       </div>
@@ -86,13 +86,34 @@
               </li>
             </ul>
           </li>
+          <li class="nav-group-name">
+            <a href="../../Typealiases.html">Typealiases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../Typealiases.html#/s:6Hedwig4Port">Port</a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <article class="main-content">
         <section>
           <section class="section">
             <h1>AuthMethod</h1>
-            <p>Undocumented</p>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">AuthMethod</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                </div>
+              </div>
+            <p>Auth method to an SMTP server.</p>
+
+<ul>
+<li>plain: Plain authorization.</li>
+<li>cramMD5: CRAM-MD5 authorization.</li>
+<li>login: Login authorization.</li>
+<li>xOauth2: xOauth2 authorization.</li>
+</ul>
 
           </section>
           <section class="section task-group-section">
@@ -111,8 +132,19 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Plain authorization.</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="n">plain</span> <span class="o">=</span> <span class="s">"PLAIN"</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/SMTP.swift#L250">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -134,8 +166,19 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>CRAM-MD5 authorization.</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="n">cramMD5</span> <span class="o">=</span> <span class="s">"CRAM-MD5"</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/SMTP.swift#L252">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -157,8 +200,19 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Login authorization.</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="n">login</span> <span class="o">=</span> <span class="s">"LOGIN"</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/SMTP.swift#L254">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -180,8 +234,19 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>xOauth2 authorization.</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="n">xOauth2</span> <span class="o">=</span> <span class="s">"XOAUTH2"</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/SMTP.swift#L256">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

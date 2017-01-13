@@ -14,7 +14,7 @@
     <a title="AttachmentType Enum Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../../index.html">Hedwig Docs</a> (5% documented)</p>
+        <p><a href="../../index.html">Hedwig Docs</a> (100% documented)</p>
         <p class="header-right"><a href="https://github.com/onevcat/Hedwig"><img src="../../img/gh.png"/>View on GitHub</a></p>
         <p class="header-right"><a href="dash-feed://https%3A%2F%2Fonevcat%2Egithub%2Eio%2FHedwig%2Fdocsets%2FHedwig%2Exml"><img src="../../img/dash.png"/>Install in Dash</a></p>
       </div>
@@ -86,13 +86,33 @@
               </li>
             </ul>
           </li>
+          <li class="nav-group-name">
+            <a href="../../Typealiases.html">Typealiases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../Typealiases.html#/s:6Hedwig4Port">Port</a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <article class="main-content">
         <section>
           <section class="section">
             <h1>AttachmentType</h1>
-            <p>Undocumented</p>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">AttachmentType</span></code></pre>
+
+                </div>
+              </div>
+            <p>Attachment type.</p>
+
+<ul>
+<li>file: The attachment is a file in local disk.</li>
+<li>html: The attachment is an HTML string.</li>
+<li>data: The attachment is some raw data.</li>
+</ul>
 
           </section>
           <section class="section task-group-section">
@@ -111,8 +131,19 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The attachment is a file in local disk.</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="nf">file</span><span class="p">(</span><span class="kt"><a href="../../Structs/Attachment/FileProperty.html">FileProperty</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/Attachment.swift#L134">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -134,8 +165,19 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The attachment is an HTML string.</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="nf">html</span><span class="p">(</span><span class="kt"><a href="../../Structs/Attachment/HTMLProperty.html">HTMLProperty</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/Attachment.swift#L136">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -157,8 +199,19 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The attachment is some raw data.</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="nf">data</span><span class="p">(</span><span class="kt"><a href="../../Structs/Attachment/DataProperty.html">DataProperty</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.0/Sources/Attachment.swift#L138">Show on GitHub</a>
                       </div>
                     </section>
                   </div>

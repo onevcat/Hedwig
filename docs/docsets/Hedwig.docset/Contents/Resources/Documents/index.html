@@ -13,7 +13,7 @@
     <a title="Hedwig  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">Hedwig Docs</a> (5% documented)</p>
+        <p><a href="index.html">Hedwig Docs</a> (100% documented)</p>
         <p class="header-right"><a href="https://github.com/onevcat/Hedwig"><img src="img/gh.png"/>View on GitHub</a></p>
         <p class="header-right"><a href="dash-feed://https%3A%2F%2Fonevcat%2Egithub%2Eio%2FHedwig%2Fdocsets%2FHedwig%2Exml"><img src="img/dash.png"/>Install in Dash</a></p>
       </div>
@@ -85,6 +85,14 @@
               </li>
             </ul>
           </li>
+          <li class="nav-group-name">
+            <a href="Typealiases.html">Typealiases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:6Hedwig4Port">Port</a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <article class="main-content">
@@ -139,7 +147,7 @@
 <span class="p">)</span>
 </code></pre>
 
-<p>Then run <code>swift build</code> whenever you get prepared.</p>
+<p>Then run <code>swift build</code> whenever you get prepared. (Also remember to grab a cup of coffee 😄)</p>
 
 <p>You could know more information on how to use Swift Package Manager in Apple&rsquo;s <a href="https://swift.org/package-manager/">official page</a>.</p>
 <a href='#usage' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='usage'>Usage</h2>
@@ -213,7 +221,7 @@
 
 <span class="c1">// You can also create attachment from raw data.</span>
 <span class="k">let</span> <span class="nv">data</span> <span class="o">=</span> <span class="s">"{</span><span class="se">\"</span><span class="s">key</span><span class="se">\"</span><span class="s">: </span><span class="se">\"</span><span class="s">hello world</span><span class="se">\"</span><span class="s">}"</span><span class="o">.</span><span class="nf">data</span><span class="p">(</span><span class="nv">using</span><span class="p">:</span> <span class="o">.</span><span class="n">utf8</span><span class="p">)</span><span class="o">!</span>
-<span class="k">let</span> <span class="nv">jsonFile</span> <span class="o">=</span> <span class="kt">Attachment</span><span class="p">(</span>
+<span class="k">let</span> <span class="nv">json</span> <span class="o">=</span> <span class="kt">Attachment</span><span class="p">(</span>
         <span class="nv">data</span><span class="p">:</span> <span class="n">data</span><span class="p">,</span> 
         <span class="nv">mime</span><span class="p">:</span> <span class="s">"application/json"</span><span class="p">,</span> 
         <span class="nv">name</span><span class="p">:</span> <span class="s">"file.json"</span><span class="p">,</span> 
@@ -225,7 +233,7 @@
         <span class="nv">from</span><span class="p">:</span> <span class="s">"onev@onevcat.com"</span><span class="p">,</span> 
         <span class="nv">to</span><span class="p">:</span> <span class="s">"foo@bar.com"</span><span class="p">,</span> 
         <span class="nv">subject</span><span class="p">:</span> <span class="s">"Check the photo and json file!"</span><span class="p">,</span>
-        <span class="nv">attachments</span><span class="p">:</span> <span class="p">[</span><span class="n">html</span><span class="p">,</span> <span class="n">jsonFile</span><span class="p">]</span>
+        <span class="nv">attachments</span><span class="p">:</span> <span class="p">[</span><span class="n">html</span><span class="p">,</span> <span class="n">json</span><span class="p">]</span>
 <span class="n">hedwig</span><span class="o">.</span><span class="nf">send</span><span class="p">(</span><span class="n">mail</span><span class="p">)</span> <span class="p">{</span> <span class="n">error</span> <span class="k">in</span>
     <span class="k">if</span> <span class="n">error</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span> <span class="cm">/* Error happened */</span> <span class="p">}</span>
 <span class="p">}</span>
@@ -281,14 +289,16 @@
 <blockquote>
 <p>At this time Swift Package Manager has no support for iOS, watchOS, or tvOS platforms. So the answer is no. But this framework is not using anything only in iOS (like UIKit), so as soon as Swift Package Manager supports iOS, you can use it there too.</p>
 </blockquote>
-<a href='#tell-me-about-the-logo-of-hedwig' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='tell-me-about-the-logo-of-hedwig'>Tell me about the logo of Hedwig</h4>
+<a href='#tell-me-about-the-name-and-logo-of-hedwig' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='tell-me-about-the-name-and-logo-of-hedwig'>Tell me about the name and logo of Hedwig</h4>
 
 <blockquote>
 <p>Yes, Hedwig (bird) was Harry Potter&rsquo;s pet Snowy Owl. The logo of Hedwig (this framework) is created by myself and it pays reverence to the novels and movies.</p>
 </blockquote>
 <a href='#other-questions' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='other-questions'>Other questions</h4>
 
+<blockquote>
 <p>Submit <a href="https://github.com/onevcat/Hedwig/issues/new">an issue</a> if you find something wrong. Pull requests are warmly welcome, but I suggest to discuss first.</p>
+</blockquote>
 
 <p>You can also follow and contact me on <a href="http://twitter.com/onevcat">Twitter</a> or <a href="http://weibo.com/onevcat">Sina Weibo</a>.</p>
 <a href='#enjoy-sending-your-emails' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='enjoy-sending-your-emails'>Enjoy sending your emails</h3>
