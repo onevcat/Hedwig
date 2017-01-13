@@ -11,11 +11,6 @@ sudo gem install fastlane
 fastlane mac test
 ```
 Runs all the tests
-### mac doc
-```
-fastlane mac doc
-```
-Generate Documentation
 ### mac release
 ```
 fastlane mac release
