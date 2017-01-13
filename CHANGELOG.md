@@ -1,6 +1,8 @@
 # Change Log
 
 ## [Unreleased]
+
+## [1.0.1] - 2017-01-13
 ### Fixed
 - An issue that CRLF not enough for some SMTP provider implementation. [#1](https://github.com/onevcat/Hedwig/issues/1)
 
