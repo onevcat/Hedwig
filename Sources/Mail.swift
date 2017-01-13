@@ -27,26 +27,79 @@
 import Foundation
 import AddressParser
 
+
+/// Possible errors when validating the mail before sending.
+///
+/// - noSender: The `FROM` field of the mail is not valid or empty.
+/// - noRecipient: The `TO`, `CC` and `BCC` fields of the mail is not valid or
+///                empty.
 public enum MailError: Error {
+    /// The `FROM` field of the mail is not valid or empty.
     case noSender
+    /// The `TO`, `CC` and `BCC` fields of the mail is not valid or empty.
     case noRecipient
 }
 
+/// Represents an email. It contains necessary information like `from`, `to` and
+/// `text` with which Hedwig could send it with a connection to some SMTP server.
+/// The whole type is immutable. You need to create a mail through the initialzer
+/// and then feed it to a `Hedwig` instance to send.
 public struct Mail {
+    
+    /// From name and address.
     public let from: NameAddressPair?
+    
+    /// To names and addresses.
     public let to: [NameAddressPair]
+    
+    /// Carbon copy (Cc) names and addresses.
     public let cc: [NameAddressPair]?
+    
+    /// Blind carbon copy (Bcc) names and addresses.
     public let bcc: [NameAddressPair]?
+    
+    /// The title of current email.
     public let subject: String
+    
+    /// The text content of current email.
     public let text: String
+    
+    /// The attachements contained in the email.
     public let attachments: [Attachment]
+    
+    /// The additional headers will be presented in the mail header.
     public let additionalHeaders: [String: String]
 
+    /// The alternative attachement. The last alternative attachment in
+    /// `attachments` will be the `alternative` attachement of the whole `Mail`.
     public let alternative: Attachment?
     
-    public let messageId = UUID().uuidString
+    /// Message id. It is a UUID string appeneded by `.Hedwig`.
+    public let messageId = UUID().uuidString + ".Hedwig"
+    
+    /// Creating date of the mail.
     public let date = Date()
     
+    /// Initilize an email.
+    ///
+    /// - Parameters:
+    ///   - text: The plain text of the mail.
+    ///   - from: From name and address.
+    ///   - to: To names and addresses.
+    ///   - cc: Carbon copy (Cc) names and addresses. Default is `nil`.
+    ///   - bcc: Blind carbon copy (Bcc) names and addresses. Default is `nil`.
+    ///   - subject: Subject (title) of the email. Default is empty string.
+    ///   - attachments: Attachements of the mail.
+    ///   - additionalHeaders: Additional headers when sending the mail.
+    ///
+    /// - Note:
+    ///   - The `from`, `to`, `cc` and `bcc` parameters accept a email specified
+    ///     string as input. Hedwig will try to parse the string and get email
+    ///     addresses. You can find supported string format
+    ///     [here](https://github.com/onevcat/AddressParser).
+    ///   - If you need to customize the mail header field, pass it with 
+    ///     `additionalHeaders`.
+    ///
     public init(text: String,
          from: String,
          to: String,
@@ -123,11 +176,17 @@ extension Mail {
     }
 }
 
+/// Name and address used in mail "From", "To", "Cc" and "Bcc" fields.
 public struct NameAddressPair {
+    
+    /// The name of the person. It will be an empty string if no name could be
+    /// extracted.
     public let name: String
+    
+    /// The email address of the person.
     public let address: String
     
-    public init(name: String, address: String) {
+    init(name: String, address: String) {
         self.name = name
         self.address = address
     }

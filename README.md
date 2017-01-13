@@ -138,7 +138,7 @@ let html = Attachment(
 
 // You can also create attachment from raw data.
 let data = "{\"key\": \"hello world\"}".data(using: .utf8)!
-let jsonFile = Attachment(
+let json = Attachment(
         data: data, 
         mime: "application/json", 
         name: "file.json", 
@@ -150,7 +150,7 @@ let mail = Mail(
         from: "onev@onevcat.com", 
         to: "foo@bar.com", 
         subject: "Check the photo and json file!",
-        attachments: [html, jsonFile]
+        attachments: [html, json]
 hedwig.send(mail) { error in
     if error != nil { /* Error happened */ }
 }
@@ -211,13 +211,13 @@ Or you are a Bitcoin fan and want to treat me a cup of coffe, here is my wallet 
 
 > At this time Swift Package Manager has no support for iOS, watchOS, or tvOS platforms. So the answer is no. But this framework is not using anything only in iOS (like UIKit), so as soon as Swift Package Manager supports iOS, you can use it there too.
 
-#### Tell me about the logo of Hedwig
+#### Tell me about the name and logo of Hedwig
 
 > Yes, Hedwig (bird) was Harry Potter's pet Snowy Owl. The logo of Hedwig (this framework) is created by myself and it pays reverence to the novels and movies.
 
 #### Other questions
 
-Submit [an issue](https://github.com/onevcat/Hedwig/issues/new) if you find something wrong. Pull requests are warmly welcome, but I suggest to discuss first.
+> Submit [an issue](https://github.com/onevcat/Hedwig/issues/new) if you find something wrong. Pull requests are warmly welcome, but I suggest to discuss first.
 
 You can also follow and contact me on [Twitter](http://twitter.com/onevcat) or [Sina Weibo](http://weibo.com/onevcat).
 

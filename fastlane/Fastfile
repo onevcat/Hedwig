@@ -39,8 +39,8 @@ platform :mac do
                   --author Wei Wang \
                   --author_url https://onev.cat \
                   --github_url https://github.com/onevcat/Hedwig \
-                  --github-file-prefix https://github.com/onevcat/Hedwig/tree/#{target_version}
-                  --module-version #{target_version} \
+                  --github-file-prefix https://github.com/onevcat/Hedwig/tree/0.0.1 \
+                  --module-version 0.0.1 \
                   --module Hedwig \
                   --xcodebuild-arguments -scheme,Hedwig \
                   --root-url https://onevcat.github.io/Hedwig/

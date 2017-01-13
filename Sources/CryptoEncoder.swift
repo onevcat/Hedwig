@@ -28,13 +28,17 @@ import Foundation
 import HMAC
 
 struct CryptoEncoder {
-    static func cramMD5(challenge: String, user: String, password: String) throws -> String {
+    static func cramMD5(challenge: String, user: String, password: String)
+        throws -> String
+    {
         let hmac = HMAC(.md5, challenge.base64DecodedString.toBytes())
         let result = try hmac.authenticate(key: password.toBytes()).hexString
         return (user + " " + result).base64EncodedString
     }
     
-    static func login(user: String, password: String) -> (encodedUser: String, encodedPassword: String) {
+    static func login(user: String, password: String) ->
+        (encodedUser: String, encodedPassword: String)
+    {
         return (user.base64EncodedString, password.base64EncodedString)
     }
     

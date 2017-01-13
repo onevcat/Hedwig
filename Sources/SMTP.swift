@@ -39,8 +39,11 @@ private func logWarning(message: String? = nil) {
 }
 
 
+/// SMTP Port number
 public typealias Port = UInt16
 
+/// Represents an remote SMTP. Do not use this type directly. Use `Hedwig` to
+/// send mails instead.
 public class SMTP {
     let hostName: String
     fileprivate let port: Port
@@ -65,8 +68,9 @@ public class SMTP {
     }
     
     init(hostName: String, user: String?, password: String?,
-         port: Port? = nil, secure: Secure = .tls, validation: Validation = .default,
-         domainName: String = "localhost", authMethods: [AuthMethod] = [.plain, .cramMD5, .login, .xOauth2]) throws
+         port: Port? = nil, secure: Secure = .tls,
+         validation: Validation = .default, domainName: String = "localhost",
+         authMethods: [AuthMethod] = [.plain, .cramMD5, .login, .xOauth2]) throws
     {
         self.hostName = hostName
         self.user = user
@@ -107,49 +111,97 @@ public class SMTP {
 }
 
 extension SMTP {
+    
+    /// Represents SMTP validation methods.
     public struct Validation {
+        
+        /// Certificate used when connecting to 
+        /// SMTP server through a secure layer.
         public let certificate: Certificates
+        
+        /// Cipher used when connecting to SMTP.
         public let cipher: Config.Cipher
+        
+        /// Protocols supported when connecting to SMTP.
         public let protocols: [Config.TLSProtocol]
         
-        public init(certificate: Certificates, cipher: Config.Cipher, protocols: [Config.TLSProtocol]) {
+        /// Initilize a validation instance.
+        ///
+        /// - Parameters:
+        ///   - certificate: Certificate used when connecting to
+        ///                  SMTP server through a secure layer.
+        ///   - cipher: Cipher used when connecting to SMTP.
+        ///   - protocols: Protocols supported when connecting to SMTP.
+        public init(certificate: Certificates,
+                    cipher: Config.Cipher,
+                    protocols: [Config.TLSProtocol])
+        {
             self.certificate = certificate
             self.cipher = cipher
             self.protocols = protocols
         }
         
-        public static let `default` = Validation(certificate: .defaults, cipher: .compat, protocols: [.all])
+        /// Default `Validation` instance, with default certificate, 
+        /// compat cipher and all protocols supporting.
+        public static let `default` = Validation(certificate: .defaults,
+                                                 cipher: .compat,
+                                                 protocols: [.all])
     }
 }
 
 extension SMTP {
+    
+    /// Error while SMTP connecting and communicating.
     public enum SMTPError: Error, CustomStringConvertible {
+        /// Could not connect to remote server.
         case couldNotConnect
+        /// Connecting to SMTP server time out
         case timeOut
+        /// The response of SMTP server is bad and not expected.
         case badResponse
+        /// No connection has been established
         case noConnection
+        /// Authorization failed
         case authFailed
+        /// Can not authorizate since target server not support EHLO
         case authNotSupported
+        /// No form of authorization methos supported
         case authUnadvertised
+        /// Connection is closed by remote
         case connectionClosed
+        /// Connection is already ended
         case connectionEnded
+        /// Connection auth failed
         case connectionAuth
+        /// Unknown error
         case unknown
         
+        /// A human-readable description of SMTP error.
         public var description: String {
             let message: String
             switch self {
-            case .couldNotConnect: message = ""
-            case .timeOut: message = ""
-            case .badResponse: message = "bad response"
-            case .noConnection: message = "no connection has been established"
-            case .authFailed: message = "authorization failed"
-            case .authUnadvertised: message = "can not authorizate since target server not support EHLO"
-            case .authNotSupported: message = "no form of authorization supported"
-            case .connectionClosed: message = ""
-            case .connectionEnded: message = ""
-            case .connectionAuth: message = ""
-            case .unknown: message = ""
+            case .couldNotConnect:
+                message = "could not connect to SMTP server"
+            case .timeOut:
+                message = "connecting to SMTP server time out"
+            case .badResponse:
+                message = "bad response"
+            case .noConnection:
+                message = "no connection has been established"
+            case .authFailed:
+                message = "authorization failed"
+            case .authUnadvertised:
+                message = "can not authorizate since target server not support EHLO"
+            case .authNotSupported:
+                message = "no form of authorization supported"
+            case .connectionClosed:
+                message = "connection is closed by remote"
+            case .connectionEnded:
+                message = "connection is ended"
+            case .connectionAuth:
+                message = "connection auth failed"
+            case .unknown:
+                message = "unknown error"
             }
             return message
         }
@@ -157,9 +209,15 @@ extension SMTP {
 }
 
 extension SMTP {
+    /// Secrity layer used when connencting an SMTP server.
     public enum Secure {
+        /// No encryped. If the server supports STARTTLS, the layer will be 
+        /// upgraded automatically.
         case plain
+        /// Secure Sockets Layer.
         case ssl
+        /// Transport Layer Security. If the server supports STARTTLS, the
+        /// layer will be upgraded automatically.
         case tls
         
         var port: Port {
@@ -181,10 +239,20 @@ extension SMTP {
 }
 
 extension SMTP {
+    /// Auth method to an SMTP server.
+    ///
+    /// - plain: Plain authorization.
+    /// - cramMD5: CRAM-MD5 authorization.
+    /// - login: Login authorization.
+    /// - xOauth2: xOauth2 authorization.
     public enum AuthMethod: String {
+        /// Plain authorization.
         case plain = "PLAIN"
+        /// CRAM-MD5 authorization.
         case cramMD5 = "CRAM-MD5"
+        /// Login authorization.
         case login = "LOGIN"
+        /// xOauth2 authorization.
         case xOauth2 = "XOAUTH2"
     }
 }

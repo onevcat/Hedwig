@@ -34,7 +34,10 @@ import Foundation
 
 extension Regex {
     func groups(in string: String) -> [String] {
-        let matches = self.matches(in: string, options: [], range: NSRange(location: 0, length: string.utf16.count))
+        let matches = self.matches(in: string,
+                                   options: [],
+                                   range: NSRange(location: 0,
+                                                  length: string.utf16.count))
         guard matches.count == 1 else { return [] }
 
         let s = NSString(string: string)

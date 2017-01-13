@@ -131,7 +131,9 @@ class MailStream: NSObject {
         }
     }
     
-    func streamAttachments(_ attachments: [Attachment], boundary: String) throws {
+    func streamAttachments(_ attachments: [Attachment], boundary: String)
+        throws
+    {
         for attachement in attachments {
             send(boundary.startLine)
             try streamAttachment(attachment: attachement)
@@ -141,7 +143,8 @@ class MailStream: NSObject {
     
     func streamFile(at path: String) throws {
         var isDirectory: ObjCBool = false
-        let fileExist = FileManager.default.fileExists(atPath: path, isDirectory: &isDirectory)
+        let fileExist = FileManager.default
+            .fileExists(atPath: path, isDirectory: &isDirectory)
         
         #if os(Linux)
         let directory: Bool = isDirectory
@@ -204,7 +207,9 @@ class MailStream: NSObject {
 
 extension InputStream {
     convenience init(text: String) throws {
-        guard let data =  text.data(using: .utf8, allowLossyConversion: false) else {
+        guard let data =
+            text.data(using: .utf8, allowLossyConversion: false) else
+        {
             throw MailStreamError.encoding
         }
         self.init(data: data)

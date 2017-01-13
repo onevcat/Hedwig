@@ -30,16 +30,61 @@ import Foundation
 import Dispatch
 #endif
 
+/// Hedwig is the manager type of Hedwig framework. You can initialize an 
+/// instance with common SMTP config and then send an email with it.
 public struct Hedwig {
     let config: SMTPConfig
     
-    public init(hostName: String, user: String?, password: String?,
-         port: Port? = nil, secure: SMTP.Secure = .tls, validation: SMTP.Validation = .default,
-         domainName: String = "localhost", authMethods: [SMTP.AuthMethod] = [.plain, .cramMD5, .login, .xOauth2])
+    /// Initialize a Hedwig instance with SMTP config.
+    ///
+    /// - Parameters:
+    ///   - hostName: Hostname of your SMTP server. 
+    ///               The host name should not include any scheme. For example,
+    ///               "smtp.example.com" is a valid host name.
+    ///   - user: User name used to auth with SMTP server. Pass `nil` to this 
+    ///           parameter if there is no need to auth with your server.
+    ///   - password: Password used to auth with SMTP server. Pass `nil` to this
+    ///               parameter if there is no need to auth with your server.
+    ///   - port: Port number which Hedwig should connect to. Default is `nil`, 
+    ///           which means Hedwig will determine the port for you according 
+    ///           to `secure` parameter and use the standard port.
+    ///   - secure: Security level used when communicating with server. Default
+    ///             is `.tls`.
+    ///   - validation: Validation used when setup a secure connection with 
+    ///                 server.
+    ///   - domainName: The clinet domain name used when communicating with
+    ///                 server. Default is `localhost`
+    ///   - authMethods: Auth methods accepted in client when auth with server.
+    ///                  By default all auth methods (.plain, .cramMD5, .login, 
+    ///                  .xOauth2) in Hedwig are supported.
+    ///
+    /// - Note:
+    ///     Initializing a `Hedwig` instance will not do the actual connecting 
+    ///     work. It will not try to connect to server until you send a mail.
+    ///
+    public init(hostName: String,
+                user: String?,
+                password: String?,
+                port: Port? = nil,
+                secure: SMTP.Secure = .tls,
+                validation: SMTP.Validation = .default,
+                domainName: String = "localhost",
+                authMethods: [SMTP.AuthMethod] =
+                        [.plain, .cramMD5, .login, .xOauth2])
     {
-        config = SMTPConfig(hostName: hostName, user: user, password: password, port: port, secure: secure, validation: validation, domainName: domainName, authMethods: authMethods)
+        config = SMTPConfig(hostName: hostName, user: user, password: password,
+                            port: port, secure: secure, validation: validation,
+                            domainName: domainName, authMethods: authMethods)
     }
     
+    /// Send a single email.
+    ///
+    /// - Parameters:
+    ///   - mail: The email which will be sent.
+    ///   - completion: Callback when sending finishes, with an optional `Error`
+    ///                 to indicate whether there is an error happened while 
+    ///                 sending. If the mail is sent successfully, callback 
+    ///                 parameter would be `nil`.
     public func send(_ mail: Mail,
                      completion: ((Error?) -> Void)? = nil)
     {
@@ -52,13 +97,43 @@ public struct Hedwig {
         }
     }
     
+    /// Send an array of emails.
+    ///
+    /// - Parameters:
+    ///   - mails: The emails which will be sent.
+    ///   - progress: Callback when an email sending finishes.
+    ///   - completion: Callback when all emails sending finished.
+    ///
+    /// - Note:
+    ///   - If a failur is encountered when while sending multiple mails, the 
+    ///     whole sending process will not stop until all pending mails are sent.
+    ///     Each mail sending will trigger an invocation of `progress`, and when
+    ///     all mails sending finish, `completion` handler will be called.
+    ///
+    ///   - The parameter of `progress` block contains the mail and an optional
+    ///     `Error`. If the mail is sent successfully, the error parameter would
+    ///     be `nil`. Otherwise, it contains the error type.
+    ///
+    ///   - The fisrt parameter of `completion` is an array of sucessully sent 
+    ///     mails, while the second is an array of failed mails and 
+    ///     corresponding errors for each.
+    ///
+    ///   - This method will quese the `mails` and send them one by one. If you 
+    ///     need to send mails in a concurrency way, call 
+    ///     `send(_:progress:completion:)` again with another array of mails.
+    ///
     public func send(_ mails: [Mail],
                      progress: ((Mail, Error?) -> Void)? = nil,
-                     completion: ((_ sent: [Mail], _ failed: [(mail: Mail, error: Error)]) -> Void)? = nil)
+                     completion: (
+                      (_ sent: [Mail],
+                       _ failed: [(mail: Mail, error: Error)]) -> Void)? = nil)
     {
         do {
             let smtp = try SMTP(config: config)
-            let actor = SendingActor(mails: mails, smtp: smtp, progress: progress, completion: completion)
+            let actor = SendingActor(mails: mails,
+                                     smtp: smtp,
+                                     progress: progress,
+                                     completion: completion)
             actor.resume()
         } catch {
             completion?([], mails.map { ($0, error) })
@@ -104,7 +179,11 @@ class SendingActor {
     fileprivate var progress: ((Mail, Error?) -> Void)?
     fileprivate var completion: (([Mail], [(mail: Mail, error: Error)]) -> Void)?
     
-    init(mails: [Mail], smtp: SMTP, progress: ((Mail, Error?) -> Void)?, completion: (([Mail], [(mail: Mail, error: Error)]) -> Void)?) {
+    init(mails: [Mail],
+         smtp: SMTP,
+         progress: ((Mail, Error?) -> Void)?,
+         completion: (([Mail], [(mail: Mail, error: Error)]) -> Void)?)
+    {
         self.pendings = mails
         self.smtp = smtp
         self.progress = progress
