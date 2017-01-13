@@ -1,6 +1,6 @@
 <p align="center">
 
-<img src="https://cloud.githubusercontent.com/assets/1019875/21842117/b1104ad8-d828-11e6-9ee2-add121afc78e.png"/>
+<img src="https://cloud.githubusercontent.com/assets/1019875/21935666/b7f8af46-d9f1-11e6-85d7-1cb4bc025226.png"/>
 
 </p>
 
@@ -10,7 +10,7 @@
 
 <a href="https://travis-ci.org/onevcat/Hedwig"><img src="https://img.shields.io/travis/onevcat/Hedwig/master.svg"></a>
 
-<a href="https://swift.org/package-manager/"><img src="https://img.shields.io/badge/platform-macos%20|%20Linux-red.svg"/></a>
+<a href="https://swift.org/package-manager/"><img src="https://img.shields.io/badge/platform-macos%20|%20Linux-blue.svg"/></a>
 
 <a href="https://codecov.io/gh/onevcat/Hedwig"><img src="https://codecov.io/gh/onevcat/Hedwig/branch/master/graph/badge.svg"/></a>
 
