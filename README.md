@@ -48,7 +48,7 @@ let package = Package(
 )
 ```
 
-Then run `swift build` whenever you get prepared.
+Then run `swift build` whenever you get prepared. (Also remember to grab a cup of coffee 😄)
 
 You could know more information on how to use Swift Package Manager in Apple's [official page](https://swift.org/package-manager/).
 
