@@ -10,7 +10,7 @@
 
 <a href="https://travis-ci.org/onevcat/Hedwig"><img src="https://img.shields.io/travis/onevcat/Hedwig/master.svg"></a>
 
-<a href="https://swift.org/package-manager/"><img src="https://img.shields.io/badge/macos|linux-ready-brightgreen.svg"/></a>
+<a href="https://swift.org/package-manager/"><img src="https://img.shields.io/badge/platform-macos%20|%20Linux-red.svg"/></a>
 
 <a href="https://codecov.io/gh/onevcat/Hedwig"><img src="https://codecov.io/gh/onevcat/Hedwig/branch/master/graph/badge.svg"/></a>
 
