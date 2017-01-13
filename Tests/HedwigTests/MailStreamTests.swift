@@ -218,7 +218,9 @@ let htmlAttachmentMail = [
     "CONTENT-DISPOSITION": "inline",
     "CONTENT-TRANSFER-ENCODING": "BASE64"
     ].toString(),
+    "",
     "PGh0bWw+PC9odG1sPg==",
+    "",
     "--X0--",
     CRLF
 ].joined(separator: CRLF)
@@ -241,7 +243,9 @@ let fileAttachementMail = [
     "HEADER-KEY": "header-value",
     
     ].toString(),
+    "",
     "eyJrZXkiOiAiaGVsbG8gd29ybGQifQ==",
+    "",
     "--X0--",
     CRLF
 ].joined(separator: CRLF)
@@ -262,7 +266,9 @@ let dataAttachementMail = [
     "CONTENT-DISPOSITION": "inline; filename=\"=?UTF-8?Q?file.zip?=\"",
     "CONTENT-TRANSFER-ENCODING": "BASE64"
     ].toString(),
+    "",
     "eyJrZXkiOiAiaGVsbG8gd29ybGQifQ==",
+    "",
     "--X0--",
     CRLF
     ].joined(separator: CRLF)
@@ -286,7 +292,9 @@ let alternativeHtmlAttachmentMail = [
     "CONTENT-DISPOSITION": "inline",
     "CONTENT-TRANSFER-ENCODING": "BASE64"
     ].toString(),
+    "",
     "PGh0bWw+PC9odG1sPg==",
+    "",
     "--X1--",
     "",
     "",
@@ -313,7 +321,9 @@ let multipleAttachementsMail = [
     "CONTENT-DISPOSITION": "inline",
     "CONTENT-TRANSFER-ENCODING": "BASE64"
     ].toString(),
+    "",
     "PGh0bWw+PC9odG1sPg==",
+    "",
     "--X1--",
     "",
     "--X0",
@@ -322,7 +332,9 @@ let multipleAttachementsMail = [
     "CONTENT-DISPOSITION": "attachment; filename=\"=?UTF-8?Q?file.json?=\"",
     "CONTENT-TRANSFER-ENCODING": "BASE64"
     ].toString(),
+    "",
     "eyJrZXkiOiAiaGVsbG8gd29ybGQifQ==",
+    "",
     "--X0--",
     CRLF
 ].joined(separator: CRLF)
@@ -349,7 +361,9 @@ let relatedAttachementsMail = [
     "CONTENT-DISPOSITION": "inline",
     "CONTENT-TRANSFER-ENCODING": "BASE64"
     ].toString(),
+    "",
     "PGh0bWw+PGJvZHk+PGgyPkhlbGxvIEhlZHdpZzwvaD5BIHBob3RvIDxpbWcgc3JjPSJjaWQ6aGVkd2lnLWltYWdlIi8+LiBTZW5kIHRoZSBtYWlsIHRvIDxhIGhyZWY9Imh0dHBzOi8vb25ldmNhdC5jb20iPm1lPC9hPiBwbGVhc2UuPC9ib2R5PjwvaHRtbD4=",
+    "",
     "",
     "--X2",
     [
@@ -358,7 +372,9 @@ let relatedAttachementsMail = [
     "CONTENT-TRANSFER-ENCODING": "BASE64",
     "CONTENT-ID": "hedwig-image"
     ].toString(),
+    "",
     imageInBase64,
+    "",
     "--X2--",
     "",
     "",

@@ -116,7 +116,7 @@ class MailStream: NSObject {
             relatedBoundary = ""
         }
         
-        let attachmentHeader = attachment.headerString  + CRLF
+        let attachmentHeader = attachment.headerString  + CRLF + CRLF
         send(attachmentHeader)
         
         switch attachment.type {
@@ -124,6 +124,8 @@ class MailStream: NSObject {
         case .html(let html): try streamHTML(text: html.content)
         case .data(let data): try streamData(data: data.data)
         }
+        
+        send(CRLF)
         
         if hasRelated {
             send("\(CRLF)\(CRLF)")
