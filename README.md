@@ -32,7 +32,7 @@ Hedwig is a Swift package which supplies a set of high level APIs to allow you s
 - [x] Customize validation method and mail header, to track your mail campaign.
 - [x] Queued mail sending, without blocking your app. You can even send mails in concurrency way.
 - [x] Work with Swift Package Manager, in latest Swift syntax and cross-platform.
-- [x] Fully tests and documented.
+- [x] Fully tests and [documented](https://onevcat.github.io/Hedwig/).
 
 ## Installation
 
