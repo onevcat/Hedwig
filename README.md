@@ -76,13 +76,13 @@ hedwig.send(mail) { error in
 
 ```swift
 let hedwig = Hedwig(hostName: "smtp.example.com", user: "foo@bar.com", password: "password")
-let attachement = Attachment(htmlContent: "<html><body><h1>Title</h1><p>Content</p></body></html>")
+let attachment = Attachment(htmlContent: "<html><body><h1>Title</h1><p>Content</p></body></html>")
 let mail = Mail(
         text: "Fallback text", 
         from: "onev@onevcat.com", 
         to: "foo@bar.com", 
         subject: "Title", 
-        attachments: [attachement]
+        attachments: [attachment]
 )
 hedwig.send(mail) { error in
     if error != nil { /* Error happened */ }
