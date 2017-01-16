@@ -30,9 +30,9 @@ Hedwig is a Swift package which supplies a set of high level APIs to allow you s
 - [x] Authentication with `PLAIN`, `CRAM-MD5`, `LOGIN` or `XOAUTH2`.
 - [x] Send email with HTML body and attachments.
 - [x] Customize validation method and mail header, to track your mail campaign.
-- [x] Queued mail sending, without blocking your app. You can even send mails in concurrency way.
-- [x] Work with Swift Package Manager, in latest Swift syntax and cross-platform.
-- [x] Fully tests and [documented](https://onevcat.github.io/Hedwig/).
+- [x] Queued mail sending, without blocking your app. You can even send mails concurrently.
+- [x] Works with Swift Package Manager, in the latest Swift syntax and cross-platform.
+- [x] Fully tested and [documented](https://onevcat.github.io/Hedwig/).
 
 ## Installation
 
@@ -52,7 +52,7 @@ let package = Package(
 
 Then run `swift build` whenever you get prepared. (Also remember to grab a cup of coffee 😄)
 
-You could know more information on how to use Swift Package Manager in Apple's [official page](https://swift.org/package-manager/).
+You can find more information on how to use Swift Package Manager in Apple's [official page](https://swift.org/package-manager/).
 
 ## Usage
 
@@ -203,11 +203,11 @@ Or you are a Bitcoin fan and want to treat me a cup of coffe, here is my wallet 
 
 #### I cannot send mails with Gmail SMTP.
 
-> Gamil uses an application specific password. You need to create one and use the specified password when auth. See [this](https://support.google.com/accounts/answer/185833?hl=en).
+> Gmail uses an application specific password. You need to create one and use the specified password when auth. See [this](https://support.google.com/accounts/answer/185833?hl=en).
 
 #### I need to add/set some additonal header in the mail.
 
-> Both `Mail` and `Attachment` accpects customizing header fields. Pass your headers as `additionalHeaders` when creating the mail or attachment and Hedwig will handle it.
+> Both `Mail` and `Attachment` accept customizing header fields. Pass your headers as `additionalHeaders` when creating the mail or attachment and Hedwig will handle it.
 
 #### Can I use it in iOS?
 
