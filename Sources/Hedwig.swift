@@ -105,7 +105,7 @@ public struct Hedwig {
     ///   - completion: Callback when all emails sending finished.
     ///
     /// - Note:
-    ///   - If a failur is encountered when while sending multiple mails, the 
+    ///   - If a failure is encountered when while sending multiple mails, the 
     ///     whole sending process will not stop until all pending mails are sent.
     ///     Each mail sending will trigger an invocation of `progress`, and when
     ///     all mails sending finish, `completion` handler will be called.
@@ -114,12 +114,12 @@ public struct Hedwig {
     ///     `Error`. If the mail is sent successfully, the error parameter would
     ///     be `nil`. Otherwise, it contains the error type.
     ///
-    ///   - The fisrt parameter of `completion` is an array of sucessully sent 
+    ///   - The first parameter of `completion` is an array of sucessully sent 
     ///     mails, while the second is an array of failed mails and 
     ///     corresponding errors for each.
     ///
-    ///   - This method will quese the `mails` and send them one by one. If you 
-    ///     need to send mails in a concurrency way, call 
+    ///   - This method will queue the `mails` and send them one by one. If you 
+    ///     need to send mails in a concurrent way, call 
     ///     `send(_:progress:completion:)` again with another array of mails.
     ///
     public func send(_ mails: [Mail],
