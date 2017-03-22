@@ -5,19 +5,12 @@
 </p>
 
 <p align="center">
-
 <a href="https://swift.org/package-manager/"><img src="https://img.shields.io/badge/swift-3.0-brightgreen.svg"/></a>
-
 <a href="https://travis-ci.org/onevcat/Hedwig"><img src="https://img.shields.io/travis/onevcat/Hedwig/master.svg"></a>
-
 <a href="https://swift.org/package-manager/"><img src="https://img.shields.io/badge/platform-macos%20|%20Linux-blue.svg"/></a>
-
 <a href="https://codecov.io/gh/onevcat/Hedwig"><img src="https://codecov.io/gh/onevcat/Hedwig/branch/master/graph/badge.svg"/></a>
-
 <a href="https://codebeat.co/projects/github-com-onevcat-hedwig"><img alt="codebeat badge" src="https://codebeat.co/badges/87196d17-29e4-4152-b24e-20eaab8d718b" /></a>
-
 <a href="https://raw.githubusercontent.com/onevcat/Hedwig/master/LICENSE"><img src="https://img.shields.io/cocoapods/l/Hedwig.svg?style=flat"/></a>
-
 </p>
 
 ---
