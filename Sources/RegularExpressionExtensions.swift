@@ -27,7 +27,11 @@
 import Foundation
 
 #if os(Linux)
+    #if swift(>=3.1)
+    typealias Regex = NSRegularExpression
+    #else
     typealias Regex = RegularExpression
+    #endif
 #else
     typealias Regex = NSRegularExpression
 #endif

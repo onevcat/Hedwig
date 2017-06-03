@@ -197,7 +197,7 @@ class MailStream: NSObject {
             let count = stream.read(&buffer, maxLength: bufferLength)
             if count != 0 {
                 let toSend = Array(buffer.dropLast(bufferLength - count))
-                onData?( shouldEncode ? toSend.base64Data : toSend )
+                onData?( shouldEncode ? toSend.base64Encoded : toSend )
             }
         }
         
