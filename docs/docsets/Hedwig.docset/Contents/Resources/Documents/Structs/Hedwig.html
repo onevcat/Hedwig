@@ -127,36 +127,12 @@ instance with common SMTP config and then send an email with it.</p>
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Initialize a Hedwig instance with SMTP config.</p>
-
-<p><li><p>Parameters:</p></p>
-
-<p><ul>
-<li>hostName: Hostname of your SMTP server. 
-      The host name should not include any scheme. For example,
-      <q>smtp.example.com</q> is a valid host name.</li>
-<li>user: User name used to auth with SMTP server. Pass <code>nil</code> to this 
-  parameter if there is no need to auth with your server.</li>
-<li>password: Password used to auth with SMTP server. Pass <code>nil</code> to this
-      parameter if there is no need to auth with your server.</li>
-<li>port: Port number which Hedwig should connect to. Default is <code>nil</code>, 
-  which means Hedwig will determine the port for you according 
-  to <code>secure</code> parameter and use the standard port.</li>
-<li>secure: Security level used when communicating with server. Default
-    is <code>.tls</code>.</li>
-<li>validation: Validation used when setup a secure connection with 
-        server.</li>
-<li>domainName: The clinet domain name used when communicating with
-        server. Default is <code>localhost</code></li>
-<li>authMethods: Auth methods accepted in client when auth with server.
-         By default all auth methods (.plain, .cramMD5, .login, 
-         .xOauth2) in Hedwig are supported.</li>
-</ul></li>
 <div class="aside aside-note">
     <p class="aside-title">Note</p>
     <p>Initializing a <code>Hedwig</code> instance will not do the actual connecting 
-work. It will not try to connect to server until you send a mail.</p></p>
+work. It will not try to connect to server until you send a mail.</p>
 
-<p></div></p>
+</div>
 
                       </div>
                       <div class="declaration">
@@ -187,8 +163,9 @@ work. It will not try to connect to server until you send a mail.</p></p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Hostname of your SMTP server. The host name should not include any scheme. For example, “smtp.example.com” is a valid host name.</p>
-
+                                  <p>Hostname of your SMTP server. 
+      The host name should not include any scheme. For example,
+      <q>smtp.example.com</q> is a valid host name.</p>
                                 </div>
                               </td>
                             </tr>
@@ -200,8 +177,8 @@ work. It will not try to connect to server until you send a mail.</p></p>
                               </td>
                               <td>
                                 <div>
-                                  <p>User name used to auth with SMTP server. Pass <code>nil</code> to this parameter if there is no need to auth with your server.</p>
-
+                                  <p>User name used to auth with SMTP server. Pass <code>nil</code> to this 
+  parameter if there is no need to auth with your server.</p>
                                 </div>
                               </td>
                             </tr>
@@ -213,8 +190,8 @@ work. It will not try to connect to server until you send a mail.</p></p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Password used to auth with SMTP server. Pass <code>nil</code> to this parameter if there is no need to auth with your server.</p>
-
+                                  <p>Password used to auth with SMTP server. Pass <code>nil</code> to this
+      parameter if there is no need to auth with your server.</p>
                                 </div>
                               </td>
                             </tr>
@@ -226,8 +203,9 @@ work. It will not try to connect to server until you send a mail.</p></p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Port number which Hedwig should connect to. Default is <code>nil</code>, which means Hedwig will determine the port for you according to <code>secure</code> parameter and use the standard port.</p>
-
+                                  <p>Port number which Hedwig should connect to. Default is <code>nil</code>, 
+  which means Hedwig will determine the port for you according 
+  to <code>secure</code> parameter and use the standard port.</p>
                                 </div>
                               </td>
                             </tr>
@@ -239,8 +217,8 @@ work. It will not try to connect to server until you send a mail.</p></p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Security level used when communicating with server. Default is <code>.tls</code>.</p>
-
+                                  <p>Security level used when communicating with server. Default
+    is <code>.tls</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -252,8 +230,8 @@ work. It will not try to connect to server until you send a mail.</p></p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Validation used when setup a secure connection with server.</p>
-
+                                  <p>Validation used when setup a secure connection with 
+        server.</p>
                                 </div>
                               </td>
                             </tr>
@@ -265,8 +243,8 @@ work. It will not try to connect to server until you send a mail.</p></p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The clinet domain name used when communicating with server. Default is <code>localhost</code></p>
-
+                                  <p>The clinet domain name used when communicating with
+        server. Default is <code>localhost</code></p>
                                 </div>
                               </td>
                             </tr>
@@ -278,8 +256,9 @@ work. It will not try to connect to server until you send a mail.</p></p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Auth methods accepted in client when auth with server. By default all auth methods (.plain, .cramMD5, .login, .xOauth2) in Hedwig are supported.</p>
-
+                                  <p>Auth methods accepted in client when auth with server.
+         By default all auth methods (.plain, .cramMD5, .login, 
+         .xOauth2) in Hedwig are supported.</p>
                                 </div>
                               </td>
                             </tr>
@@ -287,7 +266,7 @@ work. It will not try to connect to server until you send a mail.</p></p>
                         </table>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.1/Sources/Hedwig.swift#L65-L78">Show on GitHub</a>
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.1.0/Sources/Hedwig.swift#L65-L78">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -306,18 +285,6 @@ work. It will not try to connect to server until you send a mail.</p></p>
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Send a single email.</p>
-
-<ul>
-<li>Parameters:
-
-<ul>
-<li>mail: The email which will be sent.</li>
-<li>completion: Callback when sending finishes, with an optional <code>Error</code>
-        to indicate whether there is an error happened while 
-        sending. If the mail is sent successfully, callback 
-        parameter would be <code>nil</code>.</li>
-</ul></li>
-</ul>
 
                       </div>
                       <div class="declaration">
@@ -342,7 +309,6 @@ work. It will not try to connect to server until you send a mail.</p></p>
                               <td>
                                 <div>
                                   <p>The email which will be sent.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -354,8 +320,10 @@ work. It will not try to connect to server until you send a mail.</p></p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Callback when sending finishes, with an optional <code>Error</code> to indicate whether there is an error happened while sending. If the mail is sent successfully, callback parameter would be <code>nil</code>.</p>
-
+                                  <p>Callback when sending finishes, with an optional <code>Error</code>
+        to indicate whether there is an error happened while 
+        sending. If the mail is sent successfully, callback 
+        parameter would be <code>nil</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -363,7 +331,7 @@ work. It will not try to connect to server until you send a mail.</p></p>
                         </table>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.1/Sources/Hedwig.swift#L88-L98">Show on GitHub</a>
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.1.0/Sources/Hedwig.swift#L88-L98">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -382,35 +350,27 @@ work. It will not try to connect to server until you send a mail.</p></p>
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Send an array of emails.</p>
-
-<p><li><p>Parameters:</p></p>
-
-<ul>
-<li>mails: The emails which will be sent.</li>
-<li>progress: Callback when an email sending finishes.</li>
-<li>completion: Callback when all emails sending finished.</li>
-</ul></li>
 <div class="aside aside-note">
     <p class="aside-title">Note</p>
     <p>Note:</p>
 
 <ul>
-<li>If a failur is encountered when while sending multiple mails, the 
+<li>If a failure is encountered when while sending multiple mails, the 
 whole sending process will not stop until all pending mails are sent.
 Each mail sending will trigger an invocation of <code>progress</code>, and when
 all mails sending finish, <code>completion</code> handler will be called.</li>
 <li>The parameter of <code>progress</code> block contains the mail and an optional
 <code>Error</code>. If the mail is sent successfully, the error parameter would
 be <code>nil</code>. Otherwise, it contains the error type.</li>
-<li>The fisrt parameter of <code>completion</code> is an array of sucessully sent 
+<li>The first parameter of <code>completion</code> is an array of sucessully sent 
 mails, while the second is an array of failed mails and 
 corresponding errors for each.</li>
-<li>This method will quese the <code>mails</code> and send them one by one. If you 
-need to send mails in a concurrency way, call 
+<li>This method will queue the <code>mails</code> and send them one by one. If you 
+need to send mails in a concurrent way, call 
 <code>send(_:progress:completion:)</code> again with another array of mails.</li>
 </ul>
 
-<p></div></p>
+</div>
 
                       </div>
                       <div class="declaration">
@@ -438,7 +398,6 @@ need to send mails in a concurrency way, call
                               <td>
                                 <div>
                                   <p>The emails which will be sent.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -451,7 +410,6 @@ need to send mails in a concurrency way, call
                               <td>
                                 <div>
                                   <p>Callback when an email sending finishes.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -464,7 +422,6 @@ need to send mails in a concurrency way, call
                               <td>
                                 <div>
                                   <p>Callback when all emails sending finished.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -472,7 +429,7 @@ need to send mails in a concurrency way, call
                         </table>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.1/Sources/Hedwig.swift#L125-L141">Show on GitHub</a>
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.1.0/Sources/Hedwig.swift#L125-L141">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -482,8 +439,8 @@ need to send mails in a concurrency way, call
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="https://onev.cat" target="_blank" rel="external">Wei</a>. All rights reserved. (Last updated: 2017-01-13)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2017 <a class="link" href="https://onev.cat" target="_blank" rel="external">Wei</a>. All rights reserved. (Last updated: 2017-06-03)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

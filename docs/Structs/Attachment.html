@@ -138,7 +138,7 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.1/Sources/Attachment.swift#L34-L65">Show on GitHub</a>
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.1.0/Sources/Attachment.swift#L34-L65">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -169,7 +169,7 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.1/Sources/Attachment.swift#L68-L91">Show on GitHub</a>
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.1.0/Sources/Attachment.swift#L68-L91">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -200,7 +200,7 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.1/Sources/Attachment.swift#L94-L125">Show on GitHub</a>
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.1.0/Sources/Attachment.swift#L94-L125">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -237,7 +237,7 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.1/Sources/Attachment.swift#L132-L139">Show on GitHub</a>
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.1.0/Sources/Attachment.swift#L132-L139">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -267,7 +267,7 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.1/Sources/Attachment.swift#L142">Show on GitHub</a>
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.1.0/Sources/Attachment.swift#L142">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -297,7 +297,7 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.1/Sources/Attachment.swift#L145">Show on GitHub</a>
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.1.0/Sources/Attachment.swift#L145">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -328,7 +328,7 @@ contained in a <q>related</q> boundary in the mail body.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.1/Sources/Attachment.swift#L149">Show on GitHub</a>
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.1.0/Sources/Attachment.swift#L149">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -358,7 +358,7 @@ contained in a <q>related</q> boundary in the mail body.</p>
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.1/Sources/Attachment.swift#L152-L157">Show on GitHub</a>
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.1.0/Sources/Attachment.swift#L152-L157">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -377,30 +377,6 @@ contained in a <q>related</q> boundary in the mail body.</p>
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Initilize a file attachment.</p>
-
-<ul>
-<li>Parameters:
-
-<ul>
-<li>filePath: Path in the local disk of the file.</li>
-<li>mime: MIME type of the file. Default is <code>nil</code>, which means leave
-  to Hedwig to guess the type from file extension. If Hedwig can
-  not determine the MIME type, a general binary type 
-  <q>application/octet-stream</q> will be used.</li>
-<li>name: File name which will be presented in the mail. Default is the 
-  file name from <code>filePath</code>.</li>
-<li>inline: Whether the file could be inline or not. When set to <code>true</code>,
-    the attachment “Content-Disposition” header will be <code>inline</code>, 
-    otherwise it will be <code>attachment</code>. If you want to embed the 
-    file in mail content, set it to <code>true</code>. Otherwise if you
-    need it to be a standalone attachment, <code>false</code>.</li>
-<li>additionalHeaders: Additional headers when sending current
-               attachment with a <code><a href="../Structs/Mail.html">Mail</a></code>.</li>
-<li>related: Related attachments of current attachment. The <code><a href="../Structs/Attachment.html#/s:vV6Hedwig10Attachment7relatedGSaS0__">related</a></code>
-     ones will be contained in a <q>related</q> boundary in the mail
-     body.</li>
-</ul></li>
-</ul>
 
                       </div>
                       <div class="declaration">
@@ -429,7 +405,6 @@ contained in a <q>related</q> boundary in the mail body.</p>
                               <td>
                                 <div>
                                   <p>Path in the local disk of the file.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -441,8 +416,10 @@ contained in a <q>related</q> boundary in the mail body.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>MIME type of the file. Default is <code>nil</code>, which means leave to Hedwig to guess the type from file extension. If Hedwig can not determine the MIME type, a general binary type “application/octet-stream” will be used.</p>
-
+                                  <p>MIME type of the file. Default is <code>nil</code>, which means leave
+  to Hedwig to guess the type from file extension. If Hedwig can
+  not determine the MIME type, a general binary type 
+  <q>application/octet-stream</q> will be used.</p>
                                 </div>
                               </td>
                             </tr>
@@ -454,8 +431,8 @@ contained in a <q>related</q> boundary in the mail body.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>File name which will be presented in the mail. Default is the file name from <code>filePath</code>.</p>
-
+                                  <p>File name which will be presented in the mail. Default is the 
+  file name from <code>filePath</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -467,8 +444,11 @@ contained in a <q>related</q> boundary in the mail body.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Whether the file could be inline or not. When set to <code>true</code>, the attachment “Content-Disposition” header will be <code>inline</code>, otherwise it will be <code>attachment</code>. If you want to embed the file in mail content, set it to <code>true</code>. Otherwise if you need it to be a standalone attachment, <code>false</code>.</p>
-
+                                  <p>Whether the file could be inline or not. When set to <code>true</code>,
+    the attachment “Content-Disposition” header will be <code>inline</code>, 
+    otherwise it will be <code>attachment</code>. If you want to embed the 
+    file in mail content, set it to <code>true</code>. Otherwise if you
+    need it to be a standalone attachment, <code>false</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -480,8 +460,8 @@ contained in a <q>related</q> boundary in the mail body.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Additional headers when sending current attachment with a <code>Mail</code>.</p>
-
+                                  <p>Additional headers when sending current
+               attachment with a <code>Mail</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -493,8 +473,9 @@ contained in a <q>related</q> boundary in the mail body.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Related attachments of current attachment. The <code>related</code> ones will be contained in a “related” boundary in the mail body.</p>
-
+                                  <p>Related attachments of current attachment. The <code>related</code>
+     ones will be contained in a <q>related</q> boundary in the mail
+     body.</p>
                                 </div>
                               </td>
                             </tr>
@@ -502,7 +483,7 @@ contained in a <q>related</q> boundary in the mail body.</p>
                         </table>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.1/Sources/Attachment.swift#L179-L192">Show on GitHub</a>
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.1.0/Sources/Attachment.swift#L179-L192">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -521,26 +502,6 @@ contained in a <q>related</q> boundary in the mail body.</p>
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Initilize a data attachment.</p>
-
-<ul>
-<li>Parameters:
-
-<ul>
-<li>data: Raw data will be sent as attachment.</li>
-<li>mime: MIME type of the data.</li>
-<li>name: File name which will be presented in the mail.</li>
-<li>inline: Whether the file could be inline or not. When set to <code>true</code>,
-    the attachment “Content-Disposition” header will be <code>inline</code>,
-    otherwise it will be <code>attachment</code>. If you want to embed the
-    file in mail content, set it to <code>true</code>. Otherwise if you
-    need it to be a standalone attachment, <code>false</code>.</li>
-<li>additionalHeaders: Additional headers when sending current
-               attachment with a <code><a href="../Structs/Mail.html">Mail</a></code>.</li>
-<li>related: Related attachments of current attachment. The <code><a href="../Structs/Attachment.html#/s:vV6Hedwig10Attachment7relatedGSaS0__">related</a></code>
-     ones will be contained in a <q>related</q> boundary in the mail
-     body.</li>
-</ul></li>
-</ul>
 
                       </div>
                       <div class="declaration">
@@ -569,7 +530,6 @@ contained in a <q>related</q> boundary in the mail body.</p>
                               <td>
                                 <div>
                                   <p>Raw data will be sent as attachment.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -582,7 +542,6 @@ contained in a <q>related</q> boundary in the mail body.</p>
                               <td>
                                 <div>
                                   <p>MIME type of the data.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -595,7 +554,6 @@ contained in a <q>related</q> boundary in the mail body.</p>
                               <td>
                                 <div>
                                   <p>File name which will be presented in the mail.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -607,8 +565,11 @@ contained in a <q>related</q> boundary in the mail body.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Whether the file could be inline or not. When set to <code>true</code>, the attachment “Content-Disposition” header will be <code>inline</code>, otherwise it will be <code>attachment</code>. If you want to embed the file in mail content, set it to <code>true</code>. Otherwise if you need it to be a standalone attachment, <code>false</code>.</p>
-
+                                  <p>Whether the file could be inline or not. When set to <code>true</code>,
+    the attachment “Content-Disposition” header will be <code>inline</code>,
+    otherwise it will be <code>attachment</code>. If you want to embed the
+    file in mail content, set it to <code>true</code>. Otherwise if you
+    need it to be a standalone attachment, <code>false</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -620,8 +581,8 @@ contained in a <q>related</q> boundary in the mail body.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Additional headers when sending current attachment with a <code>Mail</code>.</p>
-
+                                  <p>Additional headers when sending current
+               attachment with a <code>Mail</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -633,8 +594,9 @@ contained in a <q>related</q> boundary in the mail body.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Related attachments of current attachment. The <code>related</code> ones will be contained in a “related” boundary in the mail body.</p>
-
+                                  <p>Related attachments of current attachment. The <code>related</code>
+     ones will be contained in a <q>related</q> boundary in the mail
+     body.</p>
                                 </div>
                               </td>
                             </tr>
@@ -642,7 +604,7 @@ contained in a <q>related</q> boundary in the mail body.</p>
                         </table>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.1/Sources/Attachment.swift#L210-L221">Show on GitHub</a>
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.1.0/Sources/Attachment.swift#L210-L221">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -661,25 +623,6 @@ contained in a <q>related</q> boundary in the mail body.</p>
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Initilize an HTML attachment.</p>
-
-<ul>
-<li>Parameters:
-
-<ul>
-<li>htmlContent: Content string of HTML.</li>
-<li>characterSet: Charater encoding set of <code>htmlContent</code>. Default is 
-          <q>utf-8</q>.</li>
-<li>alternative: Whether this HTML could be alternative for plain text.
-         Default is <code>true</code>, means the HTML content could be
-         alternative for plain text.</li>
-<li>inline: Whether the HTML could be inline or not. Default is <code>true</code>.</li>
-<li>additionalHeaders: Additional headers when sending current
-               attachment with a <code><a href="../Structs/Mail.html">Mail</a></code>.</li>
-<li>related: Related attachments of current attachment. The <code><a href="../Structs/Attachment.html#/s:vV6Hedwig10Attachment7relatedGSaS0__">related</a></code>
-     ones will be contained in a <q>related</q> boundary in the mail
-     body.</li>
-</ul></li>
-</ul>
 
                       </div>
                       <div class="declaration">
@@ -708,7 +651,6 @@ contained in a <q>related</q> boundary in the mail body.</p>
                               <td>
                                 <div>
                                   <p>Content string of HTML.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -720,8 +662,8 @@ contained in a <q>related</q> boundary in the mail body.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Charater encoding set of <code>htmlContent</code>. Default is “utf-8”.</p>
-
+                                  <p>Charater encoding set of <code>htmlContent</code>. Default is 
+          <q>utf-8</q>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -733,8 +675,9 @@ contained in a <q>related</q> boundary in the mail body.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Whether this HTML could be alternative for plain text. Default is <code>true</code>, means the HTML content could be alternative for plain text.</p>
-
+                                  <p>Whether this HTML could be alternative for plain text.
+         Default is <code>true</code>, means the HTML content could be
+         alternative for plain text.</p>
                                 </div>
                               </td>
                             </tr>
@@ -747,7 +690,6 @@ contained in a <q>related</q> boundary in the mail body.</p>
                               <td>
                                 <div>
                                   <p>Whether the HTML could be inline or not. Default is <code>true</code>.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -759,8 +701,8 @@ contained in a <q>related</q> boundary in the mail body.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Additional headers when sending current attachment with a <code>Mail</code>.</p>
-
+                                  <p>Additional headers when sending current
+               attachment with a <code>Mail</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -772,8 +714,9 @@ contained in a <q>related</q> boundary in the mail body.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Related attachments of current attachment. The <code>related</code> ones will be contained in a “related” boundary in the mail body.</p>
-
+                                  <p>Related attachments of current attachment. The <code>related</code>
+     ones will be contained in a <q>related</q> boundary in the mail
+     body.</p>
                                 </div>
                               </td>
                             </tr>
@@ -781,7 +724,7 @@ contained in a <q>related</q> boundary in the mail body.</p>
                         </table>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.1/Sources/Attachment.swift#L239-L251">Show on GitHub</a>
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.1.0/Sources/Attachment.swift#L239-L251">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -800,19 +743,6 @@ contained in a <q>related</q> boundary in the mail body.</p>
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Initilize an attachment with an <code><a href="../Structs/Attachment/AttachmentType.html">AttachmentType</a></code>.</p>
-
-<ul>
-<li>Parameters:
-
-<ul>
-<li>type: The type of attachement.</li>
-<li>additionalHeaders: Additional headers when sending current
-               attachment with a <code><a href="../Structs/Mail.html">Mail</a></code>.</li>
-<li>related: Related attachments of current attachment. The <code><a href="../Structs/Attachment.html#/s:vV6Hedwig10Attachment7relatedGSaS0__">related</a></code>
-     ones will be contained in a <q>related</q> boundary in the mail
-     body.</li>
-</ul></li>
-</ul>
 
                       </div>
                       <div class="declaration">
@@ -838,7 +768,6 @@ contained in a <q>related</q> boundary in the mail body.</p>
                               <td>
                                 <div>
                                   <p>The type of attachement.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -850,8 +779,8 @@ contained in a <q>related</q> boundary in the mail body.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Additional headers when sending current attachment with a <code>Mail</code>.</p>
-
+                                  <p>Additional headers when sending current
+               attachment with a <code>Mail</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -863,8 +792,9 @@ contained in a <q>related</q> boundary in the mail body.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Related attachments of current attachment. The <code>related</code> ones will be contained in a “related” boundary in the mail body.</p>
-
+                                  <p>Related attachments of current attachment. The <code>related</code>
+     ones will be contained in a <q>related</q> boundary in the mail
+     body.</p>
                                 </div>
                               </td>
                             </tr>
@@ -872,7 +802,7 @@ contained in a <q>related</q> boundary in the mail body.</p>
                         </table>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.1/Sources/Attachment.swift#L262-L269">Show on GitHub</a>
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.1.0/Sources/Attachment.swift#L262-L269">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -898,18 +828,6 @@ contained in a <q>related</q> boundary in the mail body.</p>
 Two <code><a href="../Structs/Attachment/FileProperty.html">Attachment.FileProperty</a></code> will equal to each other when all 
 members equal.</p>
 
-<p><li>Parameters:</p>
-
-<p><ul>
-<li>lhs: Left hand <code><a href="../Structs/Attachment/FileProperty.html">FileProperty</a></code>.</li>
-<li>rhs: Right hand <code><a href="../Structs/Attachment/FileProperty.html">FileProperty</a></code></li>
-</ul></li>
-<div class="aside aside-returns">
-    <p class="aside-title">Returns</p>
-    <code>true</code> if two file properties equal. Otherwise, <code>false</code>.</p>
-
-<p></div></p>
-
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -933,7 +851,6 @@ members equal.</p>
                               <td>
                                 <div>
                                   <p>Left hand <code>FileProperty</code>.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -946,7 +863,6 @@ members equal.</p>
                               <td>
                                 <div>
                                   <p>Right hand <code>FileProperty</code></p>
-
                                 </div>
                               </td>
                             </tr>
@@ -956,10 +872,9 @@ members equal.</p>
                       <div>
                         <h4>Return Value</h4>
                         <p><code>true</code> if two file properties equal. Otherwise, <code>false</code>.</p>
-
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.1/Sources/Attachment.swift#L282-L288">Show on GitHub</a>
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.1.0/Sources/Attachment.swift#L282-L288">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -985,18 +900,6 @@ members equal.</p>
 Two <code><a href="../Structs/Attachment/DataProperty.html">Attachment.DataProperty</a></code> will equal to each other when all
 members equal.</p>
 
-<p><li>Parameters:</p>
-
-<p><ul>
-<li>lhs: Left hand <code><a href="../Structs/Attachment/DataProperty.html">DataProperty</a></code>.</li>
-<li>rhs: Right hand <code><a href="../Structs/Attachment/DataProperty.html">DataProperty</a></code></li>
-</ul></li>
-<div class="aside aside-returns">
-    <p class="aside-title">Returns</p>
-    <code>true</code> if two data properties equal. Otherwise, <code>false</code>.</p>
-
-<p></div></p>
-
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -1020,7 +923,6 @@ members equal.</p>
                               <td>
                                 <div>
                                   <p>Left hand <code>DataProperty</code>.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -1033,7 +935,6 @@ members equal.</p>
                               <td>
                                 <div>
                                   <p>Right hand <code>DataProperty</code></p>
-
                                 </div>
                               </td>
                             </tr>
@@ -1043,10 +944,9 @@ members equal.</p>
                       <div>
                         <h4>Return Value</h4>
                         <p><code>true</code> if two data properties equal. Otherwise, <code>false</code>.</p>
-
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.1/Sources/Attachment.swift#L300-L306">Show on GitHub</a>
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.1.0/Sources/Attachment.swift#L300-L306">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1072,18 +972,6 @@ members equal.</p>
 Two <code><a href="../Structs/Attachment/HTMLProperty.html">Attachment.HTMLProperty</a></code> will equal to each other when all
 members equal.</p>
 
-<p><li>Parameters:</p>
-
-<p><ul>
-<li>lhs: Left hand <code><a href="../Structs/Attachment/HTMLProperty.html">HTMLProperty</a></code>.</li>
-<li>rhs: Right hand <code><a href="../Structs/Attachment/HTMLProperty.html">HTMLProperty</a></code></li>
-</ul></li>
-<div class="aside aside-returns">
-    <p class="aside-title">Returns</p>
-    <code>true</code> if two HTML properties equal. Otherwise, <code>false</code>.</p>
-
-<p></div></p>
-
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -1107,7 +995,6 @@ members equal.</p>
                               <td>
                                 <div>
                                   <p>Left hand <code>HTMLProperty</code>.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -1120,7 +1007,6 @@ members equal.</p>
                               <td>
                                 <div>
                                   <p>Right hand <code>HTMLProperty</code></p>
-
                                 </div>
                               </td>
                             </tr>
@@ -1130,10 +1016,9 @@ members equal.</p>
                       <div>
                         <h4>Return Value</h4>
                         <p><code>true</code> if two HTML properties equal. Otherwise, <code>false</code>.</p>
-
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.1/Sources/Attachment.swift#L318-L323">Show on GitHub</a>
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.1.0/Sources/Attachment.swift#L318-L323">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1159,18 +1044,6 @@ members equal.</p>
 Two <code>Attachment</code> will equal to each other when all
 members equal.</p>
 
-<p><li>Parameters:</p>
-
-<p><ul>
-<li>lhs: Left hand <code>Attachment</code>.</li>
-<li>rhs: Right hand <code>Attachment</code></li>
-</ul></li>
-<div class="aside aside-returns">
-    <p class="aside-title">Returns</p>
-    <code>true</code> if two attachments equal. Otherwise, <code>false</code>.</p>
-
-<p></div></p>
-
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -1193,7 +1066,6 @@ members equal.</p>
                               <td>
                                 <div>
                                   <p>Left hand <code>Attachment</code>.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -1206,7 +1078,6 @@ members equal.</p>
                               <td>
                                 <div>
                                   <p>Right hand <code>Attachment</code></p>
-
                                 </div>
                               </td>
                             </tr>
@@ -1216,10 +1087,9 @@ members equal.</p>
                       <div>
                         <h4>Return Value</h4>
                         <p><code>true</code> if two attachments equal. Otherwise, <code>false</code>.</p>
-
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/onevcat/Hedwig/tree/1.0.1/Sources/Attachment.swift#L336-L347">Show on GitHub</a>
+                        <a href="https://github.com/onevcat/Hedwig/tree/1.1.0/Sources/Attachment.swift#L336-L347">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1229,8 +1099,8 @@ members equal.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="https://onev.cat" target="_blank" rel="external">Wei</a>. All rights reserved. (Last updated: 2017-01-13)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2017 <a class="link" href="https://onev.cat" target="_blank" rel="external">Wei</a>. All rights reserved. (Last updated: 2017-06-03)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

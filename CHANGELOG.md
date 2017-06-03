@@ -1,6 +1,8 @@
 # Change Log
 
 ## [Unreleased]
+
+## [1.1.0] - 2017-06-03
 ### Added
 - Swift 3.1 support for Linux platform.
 

@@ -101,41 +101,34 @@
             
             <p align="center">
 
-<img src="https://cloud.githubusercontent.com/assets/1019875/21842117/b1104ad8-d828-11e6-9ee2-add121afc78e.png"/>
+<img src="https://cloud.githubusercontent.com/assets/1019875/21935666/b7f8af46-d9f1-11e6-85d7-1cb4bc025226.png"/>
 
 </p>
 
 <p align="center">
-
 <a href="https://swift.org/package-manager/"><img src="https://img.shields.io/badge/swift-3.0-brightgreen.svg"/></a>
-
 <a href="https://travis-ci.org/onevcat/Hedwig"><img src="https://img.shields.io/travis/onevcat/Hedwig/master.svg"></a>
-
-<a href="https://swift.org/package-manager/"><img src="https://img.shields.io/badge/platform-macos%20|%20Linux-red.svg"/></a>
-
+<a href="https://swift.org/package-manager/"><img src="https://img.shields.io/badge/platform-macos%20|%20Linux-blue.svg"/></a>
 <a href="https://codecov.io/gh/onevcat/Hedwig"><img src="https://codecov.io/gh/onevcat/Hedwig/branch/master/graph/badge.svg"/></a>
-
 <a href="https://codebeat.co/projects/github-com-onevcat-hedwig"><img alt="codebeat badge" src="https://codebeat.co/badges/87196d17-29e4-4152-b24e-20eaab8d718b" /></a>
-
 <a href="https://raw.githubusercontent.com/onevcat/Hedwig/master/LICENSE"><img src="https://img.shields.io/cocoapods/l/Hedwig.svg?style=flat"/></a>
-
 </p>
 
 <hr>
 
 <p>Hedwig is a Swift package which supplies a set of high level APIs to allow you sending email to an SMTP server easily. If you are planning to send emails from your next amazing Swift server app, Hedwig might be a good choice.</p>
-<a href='#features' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='features'>Features</h2>
+<h2 id='features' class='heading'>Features</h2>
 
 <ul>
 <li>[x] Connect to all SMTP servers, through whether plain, SSL or TLS (STARTTLS) port.</li>
 <li>[x] Authentication with <code>PLAIN</code>, <code>CRAM-MD5</code>, <code>LOGIN</code> or <code>XOAUTH2</code>.</li>
 <li>[x] Send email with HTML body and attachments.</li>
 <li>[x] Customize validation method and mail header, to track your mail campaign.</li>
-<li>[x] Queued mail sending, without blocking your app. You can even send mails in concurrency way.</li>
-<li>[x] Work with Swift Package Manager, in latest Swift syntax and cross-platform.</li>
-<li>[x] Fully tests and <a href="https://onevcat.github.io/Hedwig/">documented</a>.</li>
+<li>[x] Queued mail sending, without blocking your app. You can even send mails concurrently.</li>
+<li>[x] Works with Swift Package Manager, in the latest Swift syntax and cross-platform.</li>
+<li>[x] Fully tested and <a href="https://onevcat.github.io/Hedwig/">documented</a>.</li>
 </ul>
-<a href='#installation' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='installation'>Installation</h2>
+<h2 id='installation' class='heading'>Installation</h2>
 
 <p>Add the url of this repo to your Package.swift:</p>
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">PackageDescription</span>
@@ -151,9 +144,9 @@
 
 <p>Then run <code>swift build</code> whenever you get prepared. (Also remember to grab a cup of coffee 😄)</p>
 
-<p>You could know more information on how to use Swift Package Manager in Apple&rsquo;s <a href="https://swift.org/package-manager/">official page</a>.</p>
-<a href='#usage' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='usage'>Usage</h2>
-<a href='#sending-text-only-email' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='sending-text-only-email'>Sending text only email</h3>
+<p>You can find more information on how to use Swift Package Manager in Apple&rsquo;s <a href="https://swift.org/package-manager/">official page</a>.</p>
+<h2 id='usage' class='heading'>Usage</h2>
+<h3 id='sending-text-only-email' class='heading'>Sending text only email</h3>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">hedwig</span> <span class="o">=</span> <span class="kt">Hedwig</span><span class="p">(</span><span class="nv">hostName</span><span class="p">:</span> <span class="s">"smtp.example.com"</span><span class="p">,</span> <span class="nv">user</span><span class="p">:</span> <span class="s">"foo@bar.com"</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="s">"password"</span><span class="p">)</span>
 <span class="k">let</span> <span class="nv">mail</span> <span class="o">=</span> <span class="kt">Mail</span><span class="p">(</span>
         <span class="nv">text</span><span class="p">:</span> <span class="s">"Across the great wall we can reach every corner in the world."</span><span class="p">,</span> 
@@ -166,35 +159,35 @@
     <span class="k">if</span> <span class="n">error</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span> <span class="cm">/* Error happened */</span> <span class="p">}</span>
 <span class="p">}</span>
 </code></pre>
-<a href='#sending-html-email' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='sending-html-email'>Sending HTML email</h3>
+<h3 id='sending-html-email' class='heading'>Sending HTML email</h3>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">hedwig</span> <span class="o">=</span> <span class="kt">Hedwig</span><span class="p">(</span><span class="nv">hostName</span><span class="p">:</span> <span class="s">"smtp.example.com"</span><span class="p">,</span> <span class="nv">user</span><span class="p">:</span> <span class="s">"foo@bar.com"</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="s">"password"</span><span class="p">)</span>
-<span class="k">let</span> <span class="nv">attachement</span> <span class="o">=</span> <span class="kt">Attachment</span><span class="p">(</span><span class="nv">htmlContent</span><span class="p">:</span> <span class="s">"&lt;html&gt;&lt;body&gt;&lt;h1&gt;Title&lt;/h1&gt;&lt;p&gt;Content&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;"</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">attachment</span> <span class="o">=</span> <span class="kt">Attachment</span><span class="p">(</span><span class="nv">htmlContent</span><span class="p">:</span> <span class="s">"&lt;html&gt;&lt;body&gt;&lt;h1&gt;Title&lt;/h1&gt;&lt;p&gt;Content&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;"</span><span class="p">)</span>
 <span class="k">let</span> <span class="nv">mail</span> <span class="o">=</span> <span class="kt">Mail</span><span class="p">(</span>
         <span class="nv">text</span><span class="p">:</span> <span class="s">"Fallback text"</span><span class="p">,</span> 
         <span class="nv">from</span><span class="p">:</span> <span class="s">"onev@onevcat.com"</span><span class="p">,</span> 
         <span class="nv">to</span><span class="p">:</span> <span class="s">"foo@bar.com"</span><span class="p">,</span> 
         <span class="nv">subject</span><span class="p">:</span> <span class="s">"Title"</span><span class="p">,</span> 
-        <span class="nv">attachments</span><span class="p">:</span> <span class="p">[</span><span class="n">attachement</span><span class="p">]</span>
+        <span class="nv">attachments</span><span class="p">:</span> <span class="p">[</span><span class="n">attachment</span><span class="p">]</span>
 <span class="p">)</span>
 <span class="n">hedwig</span><span class="o">.</span><span class="nf">send</span><span class="p">(</span><span class="n">mail</span><span class="p">)</span> <span class="p">{</span> <span class="n">error</span> <span class="k">in</span>
     <span class="k">if</span> <span class="n">error</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span> <span class="cm">/* Error happened */</span> <span class="p">}</span>
 <span class="p">}</span>
 </code></pre>
-<a href='#cc-and-bcc' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='cc-and-bcc'>CC and BCC</h3>
+<h3 id='cc-and-bcc' class='heading'>CC and BCC</h3>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">hedwig</span> <span class="o">=</span> <span class="kt">Hedwig</span><span class="p">(</span><span class="nv">hostName</span><span class="p">:</span> <span class="s">"smtp.example.com"</span><span class="p">,</span> <span class="nv">user</span><span class="p">:</span> <span class="s">"foo@bar.com"</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="s">"password"</span><span class="p">)</span>
 <span class="k">let</span> <span class="nv">mail</span> <span class="o">=</span> <span class="kt">Mail</span><span class="p">(</span>
         <span class="nv">text</span><span class="p">:</span> <span class="s">"Across the great wall we can reach every corner in the world."</span><span class="p">,</span> 
         <span class="nv">from</span><span class="p">:</span> <span class="s">"onev@onevcat.com"</span><span class="p">,</span> 
         <span class="nv">to</span><span class="p">:</span> <span class="s">"foo@bar.com"</span><span class="p">,</span>
-        <span class="nv">cc</span><span class="p">:</span> <span class="s">"Wei Wang &lt;onev@onevcat.com&gt;, tom@example.com"</span> <span class="c1">// Addresses will be parsed for you</span>
-        <span class="nv">bcc</span><span class="p">:</span> <span class="s">"My Group: onev@onevcat.com, foo@bar.com;"</span>    <span class="c1">// Even with group syntax</span>
+        <span class="nv">cc</span><span class="p">:</span> <span class="s">"Wei Wang &lt;onev@onevcat.com&gt;, tom@example.com"</span><span class="p">,</span> <span class="c1">// Addresses will be parsed for you</span>
+        <span class="nv">bcc</span><span class="p">:</span> <span class="s">"My Group: onev@onevcat.com, foo@bar.com;"</span><span class="p">,</span>    <span class="c1">// Even with group syntax</span>
         <span class="nv">subject</span><span class="p">:</span> <span class="s">"Hello World"</span>
 <span class="p">)</span>
 <span class="n">hedwig</span><span class="o">.</span><span class="nf">send</span><span class="p">(</span><span class="n">mail</span><span class="p">)</span> <span class="p">{</span> <span class="n">error</span> <span class="k">in</span>
     <span class="k">if</span> <span class="n">error</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span> <span class="cm">/* Error happened */</span> <span class="p">}</span>
 <span class="p">}</span>
 </code></pre>
-<a href='#using-different-smtp-settings-security-layer-auth-method-and-etc' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='using-different-smtp-settings-security-layer-auth-method-and-etc'>Using different SMTP settings (security layer, auth method and etc.)</h3>
+<h3 id='using-different-smtp-settings-security-layer-auth-method-and-etc' class='heading'>Using different SMTP settings (security layer, auth method and etc.)</h3>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">hedwig</span> <span class="o">=</span> <span class="kt">Hedwig</span><span class="p">(</span>
         <span class="nv">hostName</span><span class="p">:</span> <span class="s">"smtp.example.com"</span><span class="p">,</span> 
         <span class="nv">user</span><span class="p">:</span> <span class="s">"foo@bar.com"</span><span class="p">,</span> 
@@ -206,7 +199,7 @@
         <span class="nv">authMethods</span><span class="p">:</span> <span class="p">[</span><span class="o">.</span><span class="n">plain</span><span class="p">,</span> <span class="o">.</span><span class="n">login</span><span class="p">]</span> <span class="c1">// Default: [.plain, .cramMD5, .login, .xOauth2]        </span>
 <span class="p">)</span>
 </code></pre>
-<a href='#send-mails-with-inline-image-and-other-attachment' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='send-mails-with-inline-image-and-other-attachment'>Send mails with inline image and other attachment</h3>
+<h3 id='send-mails-with-inline-image-and-other-attachment' class='heading'>Send mails with inline image and other attachment</h3>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">imagePath</span> <span class="o">=</span> <span class="s">"/tmp/image.png"</span>
 <span class="c1">// You can create an attachment from a local file path.</span>
 <span class="k">let</span> <span class="nv">imageAttachment</span> <span class="o">=</span> <span class="kt">Attachment</span><span class="p">(</span>
@@ -240,7 +233,7 @@
     <span class="k">if</span> <span class="n">error</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span> <span class="cm">/* Error happened */</span> <span class="p">}</span>
 <span class="p">}</span>
 </code></pre>
-<a href='#send-multiple-mails' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='send-multiple-mails'>Send multiple mails</h3>
+<h3 id='send-multiple-mails' class='heading'>Send multiple mails</h3>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">mail1</span><span class="p">:</span> <span class="kt">Mail</span> <span class="o">=</span> <span class="c1">//...</span>
 <span class="k">let</span> <span class="nv">mail2</span><span class="p">:</span> <span class="kt">Mail</span> <span class="o">=</span> <span class="c1">//...</span>
 
@@ -262,7 +255,7 @@
 <span class="p">)</span>
 
 </code></pre>
-<a href='#help-and-questions' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='help-and-questions'>Help and Questions</h2>
+<h2 id='help-and-questions' class='heading'>Help and Questions</h2>
 
 <p>Visit the <a href="https://onevcat.github.io/Hedwig/">documentation page</a> for full API reference.</p>
 
@@ -275,46 +268,46 @@
 <p>Or you are a Bitcoin fan and want to treat me a cup of coffe, here is my wallet address:</p>
 <pre class="highlight plaintext"><code>1MqwfsxBJ5pJX4Qd2sRVhK3dKTQrWYooG5
 </code></pre>
-<a href='#faq' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='faq'>FAQ</h3>
-<a href='#i-cannot-send-mails-with-gmail-smtp' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='i-cannot-send-mails-with-gmail-smtp'>I cannot send mails with Gmail SMTP.</h4>
+<h3 id='faq' class='heading'>FAQ</h3>
+<h4 id='i-cannot-send-mails-with-gmail-smtp' class='heading'>I cannot send mails with Gmail SMTP.</h4>
 
 <blockquote>
-<p>Gamil uses an application specific password. You need to create one and use the specified password when auth. See <a href="https://support.google.com/accounts/answer/185833?hl=en">this</a>.</p>
+<p>Gmail uses an application specific password. You need to create one and use the specified password when auth. See <a href="https://support.google.com/accounts/answer/185833?hl=en">this</a>.</p>
 </blockquote>
-<a href='#i-need-to-add-set-some-additonal-header-in-the-mail' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='i-need-to-add-set-some-additonal-header-in-the-mail'>I need to add/set some additonal header in the mail.</h4>
+<h4 id='i-need-to-add-set-some-additonal-header-in-the-mail' class='heading'>I need to add/set some additonal header in the mail.</h4>
 
 <blockquote>
-<p>Both <code>Mail</code> and <code>Attachment</code> accpects customizing header fields. Pass your headers as <code>additionalHeaders</code> when creating the mail or attachment and Hedwig will handle it.</p>
+<p>Both <code>Mail</code> and <code>Attachment</code> accept customizing header fields. Pass your headers as <code>additionalHeaders</code> when creating the mail or attachment and Hedwig will handle it.</p>
 </blockquote>
-<a href='#can-i-use-it-in-ios' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='can-i-use-it-in-ios'>Can I use it in iOS?</h4>
+<h4 id='can-i-use-it-in-ios' class='heading'>Can I use it in iOS?</h4>
 
 <blockquote>
 <p>At this time Swift Package Manager has no support for iOS, watchOS, or tvOS platforms. So the answer is no. But this framework is not using anything only in iOS (like UIKit), so as soon as Swift Package Manager supports iOS, you can use it there too.</p>
 </blockquote>
-<a href='#tell-me-about-the-name-and-logo-of-hedwig' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='tell-me-about-the-name-and-logo-of-hedwig'>Tell me about the name and logo of Hedwig</h4>
+<h4 id='tell-me-about-the-name-and-logo-of-hedwig' class='heading'>Tell me about the name and logo of Hedwig</h4>
 
 <blockquote>
 <p>Yes, Hedwig (bird) was Harry Potter&rsquo;s pet Snowy Owl. The logo of Hedwig (this framework) is created by myself and it pays reverence to the novels and movies.</p>
 </blockquote>
-<a href='#other-questions' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='other-questions'>Other questions</h4>
+<h4 id='other-questions' class='heading'>Other questions</h4>
 
 <blockquote>
 <p>Submit <a href="https://github.com/onevcat/Hedwig/issues/new">an issue</a> if you find something wrong. Pull requests are warmly welcome, but I suggest to discuss first.</p>
 </blockquote>
 
 <p>You can also follow and contact me on <a href="http://twitter.com/onevcat">Twitter</a> or <a href="http://weibo.com/onevcat">Sina Weibo</a>.</p>
-<a href='#enjoy-sending-your-emails' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='enjoy-sending-your-emails'>Enjoy sending your emails</h3>
+<h3 id='enjoy-sending-your-emails' class='heading'>Enjoy sending your emails</h3>
 
 <p><img src="https://cloud.githubusercontent.com/assets/1019875/21879961/8321a0ba-d8df-11e6-968d-41992815d2f6.gif" alt=""></p>
-<a href='#license' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='license'>License</h3>
+<h3 id='license' class='heading'>License</h3>
 
 <p>Hedwig is released under the MIT license. See LICENSE for details.</p>
 
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="https://onev.cat" target="_blank" rel="external">Wei</a>. All rights reserved. (Last updated: 2017-01-13)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2017 <a class="link" href="https://onev.cat" target="_blank" rel="external">Wei</a>. All rights reserved. (Last updated: 2017-06-03)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>
