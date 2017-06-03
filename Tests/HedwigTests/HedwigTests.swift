@@ -40,7 +40,7 @@ class HedwigTests: XCTestCase {
 
         let plainMail = Mail(text: "Hello World", from: "onev@onevcat.com", to: "foo@bar.com", subject: "Title")
         hedwig.send(plainMail) { error in
-            if error != nil { XCTFail("Should no error happens, but \(error)") }
+            if let error = error { XCTFail("Should no error happens, but \(error)") }
             e.fulfill()
         }
         waitForExpectations(timeout: 5)
@@ -52,7 +52,7 @@ class HedwigTests: XCTestCase {
         let attachement = Attachment(htmlContent: "<html></html>")
         let mail = Mail(text: "Hello World", from: "onev@onevcat.com", to: "foo@bar.com", subject: "Title", attachments: [attachement])
         hedwig.send(mail) { error in
-            if error != nil { XCTFail("Should no error happens, but \(error)") }
+            if let error = error { XCTFail("Should no error happens, but \(error)") }
             e.fulfill()
         }
         waitForExpectations(timeout: 5)

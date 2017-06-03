@@ -31,7 +31,7 @@ struct CryptoEncoder {
     static func cramMD5(challenge: String, user: String, password: String)
         throws -> String
     {
-        let hmac = HMAC(.md5, challenge.base64DecodedString.toBytes())
+        let hmac = HMAC(.md5, challenge.bytes.base64Decoded.string.toBytes())
         let result = try hmac.authenticate(key: password.toBytes()).hexString
         return (user + " " + result).base64EncodedString
     }

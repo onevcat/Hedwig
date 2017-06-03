@@ -1,0 +1,48 @@
+{
+  "autoPin": true,
+  "pins": [
+    {
+      "package": "AddressParser",
+      "reason": null,
+      "repositoryURL": "https://github.com/onevcat/AddressParser.git",
+      "version": "1.1.0"
+    },
+    {
+      "package": "CLibreSSL",
+      "reason": null,
+      "repositoryURL": "https://github.com/vapor/clibressl.git",
+      "version": "1.0.0"
+    },
+    {
+      "package": "Core",
+      "reason": null,
+      "repositoryURL": "https://github.com/vapor/core.git",
+      "version": "1.1.2"
+    },
+    {
+      "package": "Crypto",
+      "reason": null,
+      "repositoryURL": "https://github.com/vapor/crypto.git",
+      "version": "1.1.0"
+    },
+    {
+      "package": "MimeType",
+      "reason": null,
+      "repositoryURL": "https://github.com/onevcat/MimeType.git",
+      "version": "1.0.0"
+    },
+    {
+      "package": "Socks",
+      "reason": null,
+      "repositoryURL": "https://github.com/vapor/socks.git",
+      "version": "1.2.7"
+    },
+    {
+      "package": "TLS",
+      "reason": null,
+      "repositoryURL": "https://github.com/vapor/tls.git",
+      "version": "1.1.2"
+    }
+  ],
+  "version": 1
+}
