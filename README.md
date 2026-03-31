@@ -27,6 +27,33 @@ Hedwig is a Swift package which supplies a set of high level APIs to allow you s
 - [x] Works with Swift Package Manager, in the latest Swift syntax and cross-platform.
 - [x] Fully tested and [documented](https://onevcat.github.io/Hedwig/).
 
+## Using Forward Email
+
+[Forward Email](https://forwardemail.net) is a 100% open-source and privacy-focused email service. It works out of the box with Hedwig via SMTP.
+
+> Use coupon code `GITHUB` at <https://forwardemail.net> for 100% off.
+
+```swift
+let hedwig = Hedwig(
+    hostName: "smtp.forwardemail.net",
+    user: "you@yourdomain.com",
+    password: "your-generated-password",
+    port: 465,
+    secure: .ssl
+)
+let mail = Mail(
+    text: "Hello from Hedwig + Forward Email!",
+    from: "you@yourdomain.com",
+    to: "recipient@example.com",
+    subject: "Hello World"
+)
+hedwig.send(mail) { error in
+    if error != nil { /* Error happened */ }
+}
+```
+
+Replace `you@yourdomain.com` with your alias and `your-generated-password` with the password generated in your [Forward Email dashboard](https://forwardemail.net/my-account/domains). See the [Forward Email FAQ](https://forwardemail.net/en/faq) and [source code](https://github.com/forwardemail) for more details.
+
 ## Installation
 
 Add the url of this repo to your Package.swift:
